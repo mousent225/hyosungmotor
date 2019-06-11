@@ -1,0 +1,108 @@
+﻿<!-- BEGIN FORM MODAL EMPLOYEE INFOR -->
+<div class="modal fade" id="mdDetail" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:90%">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				
+				<span class="text-lg text-bold text-primary">Detail Infomation</span>
+				<input type="hidden" id="hdfMasterId" />
+			</div>
+			<div class="modal-body">
+				<form class="form" role="form" id="frmMainInfor">
+					<div class="col-md-8 col-xs-12">
+						<div class="card card-underline">
+							<div class="card-head">
+								<ul class="nav nav-tabs pull-left" data-toggle="tabs">
+									<li class="active"><a href="#divEng" name="tabLang">English</a></li>
+									<li><a href="#divKor" name="tabLang">Korean</a></li>
+									<li><a href="#divVie" name="tabLang">Vietnam</a></li>
+								</ul>
+								<div class="tools">
+								</div>
+							</div>
+							<div class="card-body tab-content">
+								<div class="tab-pane active" id="divEng" name="tabLangContent" style="padding:3px">
+									<div class="form-group floating-label">
+										<input type="text" class="form-control" name="detail-value" id="txtHeading">
+										<label for="txtHeading" class="label-require">Heading</label>
+										<input type="hidden" id="hdfId" value="0"/>
+									</div>
+									<div class="form-group floating-label">
+										<input type="text" class="form-control" name="detail-value" id="txtSubHeading">
+										<label for="txtSubHeading" class="label-require">Sub Heading</label>
+									</div>
+									<div class="form-group floating-label">
+										<textarea name="detail-value" id="txtDesc" class="form-control" rows="3" placeholder=""></textarea>
+										<label for="txtDesc" class="label-require">Description</label>
+									</div>
+								</div>
+								<div class="tab-pane" id="divKor" name="tabLangContent" style="padding:3px">
+									<div class="form-group floating-label">
+										<input type="text" name="detail-value" class="form-control" id="txtHeadingKor">
+										<label for="txtHeadingKor">Heading</label>
+										<input type="hidden" id="hdfKorId" />
+									</div>
+									<div class="form-group floating-label">
+										<input type="text" name="detail-value" class="form-control" id="txtSubHeadingKor">
+										<label for="txtSubHeadingKor">Sub Heading</label>
+									</div>
+									<div class="form-group floating-label">
+										<textarea name="detail-value" id="txtDescKor" class="form-control" rows="3" placeholder=""></textarea>
+										<label for="txtDescKor">Description</label>
+									</div>
+								</div>
+								<div class="tab-pane" id="divVie" name="tabLangContent" style="padding:3px">
+									<div class="form-group floating-label">
+										<input type="text" name="detail-value" class="form-control" id="txtHeadingVie">
+										<label for="txtHeadingVie">Heading</label>
+										<input type="hidden" id="hdfVieId" />
+									</div>
+									<div class="form-group floating-label">
+										<input type="text" name="detail-value" class="form-control" id="txtSubHeadingVie">
+										<label for="txtSubHeadingVie">Sub Heading</label>
+									</div>
+									<div class="form-group floating-label">
+										<textarea name="detail-value" id="txtDescVie" class="form-control" rows="3" placeholder=""></textarea>
+										<label for="txtDescVie">Description</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<div class="form-group floating-label">
+							<div class="input-group">
+								<div class="input-group-content">
+									<input type="text" name="detail-value" class="form-control" id="txtImageUrl" readonly>
+									<input type="file" id="fileInputImage" style="display:none" />
+									<label for="txtImageUrl">Image URL</label>
+								</div>
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="button" id="btnImage">Browser</button>
+								</div>
+							</div>
+						</div><!--end .form-group -->
+						<div class="form-group floating-label">
+							<select id="cbStatus" name="detail-value" class="form-control">
+								
+							</select>
+							<label for="cbStatus">Status</label>
+						</div>
+						<div class="form-group floating-label">
+							<select id="cbPublish" name="detail-value" class="form-control">
+								
+							</select>
+							<label for="cbPublish">Publish</label>
+						</div>
+					</div>
+				</form>
+				<div style="clear:both"></div>
+			</div>
+			<div class="modal-footer">
+				<button id="btnModalSave" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

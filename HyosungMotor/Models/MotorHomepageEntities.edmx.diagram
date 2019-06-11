@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9bab8cf743b2457ea92f2814d33ab3a2" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="MotorHomepageModel.PostKos" Width="1.5" PointX="5.25" PointY="13.125" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Posts" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="MotorHomepageModel.PostVis" Width="1.5" PointX="5.25" PointY="10" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysCategories" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysCategoryValues" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysDictionnary" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysMenus" Width="1.5" PointX="12.75" PointY="2.125" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysRoles" Width="1.5" PointX="5.75" PointY="3.5" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysUser" Width="1.5" PointX="5.75" PointY="16.375" />
+        <AssociationConnector Association="MotorHomepageModel.FK_PostKos_Posts_MasterId" />
+        <AssociationConnector Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" />
+        <AssociationConnector Association="MotorHomepageModel.FK_PostVis_Posts_MasterId" />
+        <AssociationConnector Association="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" />
+        <AssociationConnector Association="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Attachments" Width="1.5" PointX="12.375" PointY="10.75" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysUserRoleMapping" Width="1.5" PointX="11" PointY="7.75" />
+        <AssociationConnector Association="MotorHomepageModel.FK_SysUserRoleMapping_SysRoles" />
+        <AssociationConnector Association="MotorHomepageModel.FK_SysUserRoleMapping_SysUser" />
+        <EntityTypeShape EntityType="MotorHomepageModel.SysRoleMapping" Width="1.5" PointX="8" PointY="4" />
+        <AssociationConnector Association="MotorHomepageModel.FK_SysRoleMapping_SysRoles" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Banners" Width="1.5" PointX="7.75" PointY="10.75" />
+        <EntityTypeShape EntityType="MotorHomepageModel.BannerKos" Width="1.5" PointX="10" PointY="11.5" />
+        <EntityTypeShape EntityType="MotorHomepageModel.BannerVis" Width="1.5" PointX="10" PointY="14.375" />
+        <AssociationConnector Association="MotorHomepageModel.FK_BannerKos_Banners_MasterId" />
+        <AssociationConnector Association="MotorHomepageModel.FK_BannerVis_Banners_MasterId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

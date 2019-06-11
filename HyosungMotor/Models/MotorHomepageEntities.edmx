@@ -1,0 +1,1359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MotorHomepageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar(max)" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BannerKos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PublishStatus" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+          <Property Name="HasKo" Type="bit" />
+          <Property Name="HasVi" Type="bit" />
+        </EntityType>
+        <EntityType Name="BannerVis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostKos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Thumbnail" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
+          <Property Name="PublishedDate" Type="datetime" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PublishStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostVis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="SysCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysCategoryValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DictionaryId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysDictionnary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Language2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Language3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Language4" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Language5" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysMenus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ParentId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IconCss" Type="nvarchar(max)" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserCreated" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime2" Precision="7" />
+          <Property Name="UserDeleted" Type="uniqueidentifier" />
+          <Property Name="UserModified" Type="uniqueidentifier" />
+          <Property Name="DateModified" Type="datetime2" Precision="7" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRoleMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ControllerId" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActionId" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActionName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsAllow" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUid" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SystemId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateUser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateUser" Type="varchar" MaxLength="20" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="DeleteUser" Type="varchar" MaxLength="20" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="200" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreateUid" Type="varchar" MaxLength="20" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateUid" Type="varchar" MaxLength="20" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteUid" Type="varchar" MaxLength="20" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="DeleteDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysUserRoleMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="20" />
+          <Property Name="RoleId" Type="varchar" MaxLength="20" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_BannerKos_Banners_MasterId">
+          <End Role="Banners" Type="Self.Banners" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BannerKos" Type="Self.BannerKos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerKos">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BannerVis_Banners_MasterId">
+          <End Role="Banners" Type="Self.Banners" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BannerVis" Type="Self.BannerVis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerVis">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostKos_Posts_MasterId">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PostKos" Type="Self.PostKos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostKos">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_SysCategories_CategoryId">
+          <End Role="SysCategories" Type="Self.SysCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostVis_Posts_MasterId">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PostVis" Type="Self.PostVis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostVis">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysCategoryValues_SysCategories_CategoryId">
+          <End Role="SysCategories" Type="Self.SysCategories" Multiplicity="0..1" />
+          <End Role="SysCategoryValues" Type="Self.SysCategoryValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysCategoryValues_SysDictionnary_DictionaryId">
+          <End Role="SysDictionnary" Type="Self.SysDictionnary" Multiplicity="0..1" />
+          <End Role="SysCategoryValues" Type="Self.SysCategoryValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDictionnary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleMapping_SysRoles">
+          <End Role="SysRoles" Type="Self.SysRoles" Multiplicity="1" />
+          <End Role="SysRoleMapping" Type="Self.SysRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="SysRoleMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRoleMapping_SysRoles">
+          <End Role="SysRoles" Type="Self.SysRoles" Multiplicity="0..1" />
+          <End Role="SysUserRoleMapping" Type="Self.SysUserRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="SysUserRoleMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRoleMapping_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysUserRoleMapping" Type="Self.SysUserRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SysUserRoleMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_BANNER_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="totalRow" Type="int" Mode="InOut" />
+          <Parameter Name="langCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_BANNER_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="heading" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeading" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="nvarchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="publishStatus" Type="int" Mode="In" />
+          <Parameter Name="hasKo" Type="bit" Mode="In" />
+          <Parameter Name="headingKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeadingKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hasVi" Type="bit" Mode="In" />
+          <Parameter Name="headingVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeadingVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionVi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_BANNER_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="heading" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeading" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="nvarchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="publishStatus" Type="int" Mode="In" />
+          <Parameter Name="hasKo" Type="bit" Mode="In" />
+          <Parameter Name="headingKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeadingKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionKo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hasVi" Type="bit" Mode="In" />
+          <Parameter Name="headingVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="subHeadingVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionVi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="User" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_SYS_ATTACHMENT_GET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODULEID" Type="int" Mode="In" />
+          <Parameter Name="MASTERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SYS_ATTACHMENT_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODULEID" Type="int" Mode="In" />
+          <Parameter Name="MASTERID" Type="int" Mode="In" />
+          <Parameter Name="FILENAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="FILEPATH" Type="nvarchar" Mode="In" />
+          <Parameter Name="FILETYPE" Type="varchar" Mode="In" />
+          <Parameter Name="FILESIZE" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SYS_USER_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USERID" Type="varchar" Mode="In" />
+          <Parameter Name="PASSWORD" Type="nvarchar" Mode="In" />
+          <Parameter Name="SYSTEM" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="MotorHomepageModelStoreContainer">
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannerKos" EntityType="Self.BannerKos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannerVis" EntityType="Self.BannerVis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostKos" EntityType="Self.PostKos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostVis" EntityType="Self.PostVis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysCategories" EntityType="Self.SysCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysCategoryValues" EntityType="Self.SysCategoryValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysDictionnary" EntityType="Self.SysDictionnary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysMenus" EntityType="Self.SysMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRoleMapping" EntityType="Self.SysRoleMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRoles" EntityType="Self.SysRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserRoleMapping" EntityType="Self.SysUserRoleMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BannerKos_Banners_MasterId" Association="Self.FK_BannerKos_Banners_MasterId">
+            <End Role="Banners" EntitySet="Banners" />
+            <End Role="BannerKos" EntitySet="BannerKos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BannerVis_Banners_MasterId" Association="Self.FK_BannerVis_Banners_MasterId">
+            <End Role="Banners" EntitySet="Banners" />
+            <End Role="BannerVis" EntitySet="BannerVis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostKos_Posts_MasterId" Association="Self.FK_PostKos_Posts_MasterId">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostKos" EntitySet="PostKos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="Self.FK_Posts_SysCategories_CategoryId">
+            <End Role="SysCategories" EntitySet="SysCategories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostVis_Posts_MasterId" Association="Self.FK_PostVis_Posts_MasterId">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostVis" EntitySet="PostVis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysCategoryValues_SysCategories_CategoryId" Association="Self.FK_SysCategoryValues_SysCategories_CategoryId">
+            <End Role="SysCategories" EntitySet="SysCategories" />
+            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysCategoryValues_SysDictionnary_DictionaryId" Association="Self.FK_SysCategoryValues_SysDictionnary_DictionaryId">
+            <End Role="SysDictionnary" EntitySet="SysDictionnary" />
+            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleMapping_SysRoles" Association="Self.FK_SysRoleMapping_SysRoles">
+            <End Role="SysRoles" EntitySet="SysRoles" />
+            <End Role="SysRoleMapping" EntitySet="SysRoleMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRoleMapping_SysRoles" Association="Self.FK_SysUserRoleMapping_SysRoles">
+            <End Role="SysRoles" EntitySet="SysRoles" />
+            <End Role="SysUserRoleMapping" EntitySet="SysUserRoleMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRoleMapping_SysUser" Association="Self.FK_SysUserRoleMapping_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRoleMapping" EntitySet="SysUserRoleMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MotorHomepageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MotorHomepageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PostKos" EntityType="MotorHomepageModel.PostKos" />
+          <EntitySet Name="Posts" EntityType="MotorHomepageModel.Posts" />
+          <EntitySet Name="PostVis" EntityType="MotorHomepageModel.PostVis" />
+          <EntitySet Name="SysCategories" EntityType="MotorHomepageModel.SysCategories" />
+          <EntitySet Name="SysCategoryValues" EntityType="MotorHomepageModel.SysCategoryValues" />
+          <EntitySet Name="SysDictionnary" EntityType="MotorHomepageModel.SysDictionnary" />
+          <EntitySet Name="SysMenus" EntityType="MotorHomepageModel.SysMenus" />
+          <EntitySet Name="SysRoles" EntityType="MotorHomepageModel.SysRoles" />
+          <EntitySet Name="SysUser" EntityType="MotorHomepageModel.SysUser" />
+          <AssociationSet Name="FK_PostKos_Posts_MasterId" Association="MotorHomepageModel.FK_PostKos_Posts_MasterId">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostKos" EntitySet="PostKos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId">
+            <End Role="SysCategories" EntitySet="SysCategories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostVis_Posts_MasterId" Association="MotorHomepageModel.FK_PostVis_Posts_MasterId">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostVis" EntitySet="PostVis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysCategoryValues_SysCategories_CategoryId" Association="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId">
+            <End Role="SysCategories" EntitySet="SysCategories" />
+            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysCategoryValues_SysDictionnary_DictionaryId" Association="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId">
+            <End Role="SysDictionnary" EntitySet="SysDictionnary" />
+            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <EntitySet Name="Attachments" EntityType="MotorHomepageModel.Attachments" />
+          <FunctionImport Name="SP_SYS_ATTACHMENT_GET">
+            <Parameter Name="MODULEID" Mode="In" Type="Int32" />
+            <Parameter Name="MASTERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SYS_ATTACHMENT_INSERT">
+            <Parameter Name="MODULEID" Mode="In" Type="Int32" />
+            <Parameter Name="MASTERID" Mode="In" Type="Int32" />
+            <Parameter Name="FILENAME" Mode="In" Type="String" />
+            <Parameter Name="FILEPATH" Mode="In" Type="String" />
+            <Parameter Name="FILETYPE" Mode="In" Type="String" />
+            <Parameter Name="FILESIZE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SYS_USER_LOGIN" ReturnType="Collection(MotorHomepageModel.SP_SYS_USER_LOGIN_Result)">
+            <Parameter Name="USERID" Mode="In" Type="String" />
+            <Parameter Name="PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="SYSTEM" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GETMENU" ReturnType="Collection(MotorHomepageModel.SP_GETMENU_Result)">
+          <Parameter Name="User" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SysUserRoleMapping" EntityType="MotorHomepageModel.SysUserRoleMapping" />
+          <AssociationSet Name="FK_SysUserRoleMapping_SysRoles" Association="MotorHomepageModel.FK_SysUserRoleMapping_SysRoles">
+            <End Role="SysRoles" EntitySet="SysRoles" />
+            <End Role="SysUserRoleMapping" EntitySet="SysUserRoleMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRoleMapping_SysUser" Association="MotorHomepageModel.FK_SysUserRoleMapping_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRoleMapping" EntitySet="SysUserRoleMapping" />
+          </AssociationSet>
+          <EntitySet Name="SysRoleMapping" EntityType="MotorHomepageModel.SysRoleMapping" />
+          <AssociationSet Name="FK_SysRoleMapping_SysRoles" Association="MotorHomepageModel.FK_SysRoleMapping_SysRoles">
+            <End Role="SysRoles" EntitySet="SysRoles" />
+            <End Role="SysRoleMapping" EntitySet="SysRoleMapping" />
+          </AssociationSet>
+          <FunctionImport Name="SP_BANNER_GETALL" ReturnType="Collection(MotorHomepageModel.SP_BANNER_GETALL_Result)">
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+            <Parameter Name="langCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_BANNER_INSERT">
+            <Parameter Name="heading" Mode="In" Type="String" />
+            <Parameter Name="subHeading" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="publishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="hasKo" Mode="In" Type="Boolean" />
+            <Parameter Name="headingKo" Mode="In" Type="String" />
+            <Parameter Name="subHeadingKo" Mode="In" Type="String" />
+            <Parameter Name="descriptionKo" Mode="In" Type="String" />
+            <Parameter Name="hasVi" Mode="In" Type="Boolean" />
+            <Parameter Name="headingVi" Mode="In" Type="String" />
+            <Parameter Name="subHeadingVi" Mode="In" Type="String" />
+            <Parameter Name="descriptionVi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_BANNER_UPDATE">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="heading" Mode="In" Type="String" />
+            <Parameter Name="subHeading" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="publishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="hasKo" Mode="In" Type="Boolean" />
+            <Parameter Name="headingKo" Mode="In" Type="String" />
+            <Parameter Name="subHeadingKo" Mode="In" Type="String" />
+            <Parameter Name="descriptionKo" Mode="In" Type="String" />
+            <Parameter Name="hasVi" Mode="In" Type="Boolean" />
+            <Parameter Name="headingVi" Mode="In" Type="String" />
+            <Parameter Name="subHeadingVi" Mode="In" Type="String" />
+            <Parameter Name="descriptionVi" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Banners" EntityType="MotorHomepageModel.Banners" />
+          <EntitySet Name="BannerKos" EntityType="MotorHomepageModel.BannerKos" />
+          <EntitySet Name="BannerVis" EntityType="MotorHomepageModel.BannerVis" />
+          <AssociationSet Name="FK_BannerKos_Banners_MasterId" Association="MotorHomepageModel.FK_BannerKos_Banners_MasterId">
+            <End Role="Banners" EntitySet="Banners" />
+            <End Role="BannerKos" EntitySet="BannerKos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BannerVis_Banners_MasterId" Association="MotorHomepageModel.FK_BannerVis_Banners_MasterId">
+            <End Role="Banners" EntitySet="Banners" />
+            <End Role="BannerVis" EntitySet="BannerVis" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="PostKos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostKos_Posts_MasterId" FromRole="PostKos" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PublishStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostKos" Relationship="MotorHomepageModel.FK_PostKos_Posts_MasterId" FromRole="Posts" ToRole="PostKos" />
+          <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="Posts" ToRole="SysCategories" />
+          <NavigationProperty Name="PostVis" Relationship="MotorHomepageModel.FK_PostVis_Posts_MasterId" FromRole="Posts" ToRole="PostVis" />
+        </EntityType>
+        <EntityType Name="PostVis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostVis_Posts_MasterId" FromRole="PostVis" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="SysCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="SysCategories" ToRole="Posts" />
+          <NavigationProperty Name="SysCategoryValues" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" FromRole="SysCategories" ToRole="SysCategoryValues" />
+        </EntityType>
+        <EntityType Name="SysCategoryValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DictionaryId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" FromRole="SysCategoryValues" ToRole="SysCategories" />
+          <NavigationProperty Name="SysDictionnary" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysCategoryValues" ToRole="SysDictionnary" />
+        </EntityType>
+        <EntityType Name="SysDictionnary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysCategoryValues" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysDictionnary" ToRole="SysCategoryValues" />
+        </EntityType>
+        <EntityType Name="SysMenus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IconCss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserCreated" Type="Guid" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="7" />
+          <Property Name="UserDeleted" Type="Guid" />
+          <Property Name="UserModified" Type="Guid" />
+          <Property Name="DateModified" Type="DateTime" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SystemId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysUserRoleMapping" Relationship="MotorHomepageModel.FK_SysUserRoleMapping_SysRoles" FromRole="SysRoles" ToRole="SysUserRoleMapping" />
+          <NavigationProperty Name="SysRoleMapping" Relationship="MotorHomepageModel.FK_SysRoleMapping_SysRoles" FromRole="SysRoles" ToRole="SysRoleMapping" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteUid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysUserRoleMapping" Relationship="MotorHomepageModel.FK_SysUserRoleMapping_SysUser" FromRole="SysUser" ToRole="SysUserRoleMapping" />
+        </EntityType>
+        <Association Name="FK_PostKos_Posts_MasterId">
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.PostKos" Role="PostKos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostKos">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_SysCategories_CategoryId">
+          <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostVis_Posts_MasterId">
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.PostVis" Role="PostVis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostVis">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysCategoryValues_SysCategories_CategoryId">
+          <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysCategoryValues" Role="SysCategoryValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysCategoryValues_SysDictionnary_DictionaryId">
+          <End Type="MotorHomepageModel.SysDictionnary" Role="SysDictionnary" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysCategoryValues" Role="SysCategoryValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDictionnary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="SP_SYS_USER_LOGIN_Result">
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="RoleId" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="SP_GETMENU_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="450" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ParentId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="IconCss" Nullable="true" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+          <Property Type="Guid" Name="UserCreated" Nullable="false" />
+          <Property Type="DateTime" Name="DateDeleted" Nullable="true" />
+          <Property Type="Guid" Name="UserDeleted" Nullable="true" />
+          <Property Type="Guid" Name="UserModified" Nullable="true" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="SysUserRoleMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysRoles" Relationship="MotorHomepageModel.FK_SysUserRoleMapping_SysRoles" FromRole="SysUserRoleMapping" ToRole="SysRoles" />
+          <NavigationProperty Name="SysUser" Relationship="MotorHomepageModel.FK_SysUserRoleMapping_SysUser" FromRole="SysUserRoleMapping" ToRole="SysUser" />
+        </EntityType>
+        <Association Name="FK_SysUserRoleMapping_SysRoles">
+          <End Type="MotorHomepageModel.SysRoles" Role="SysRoles" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysUserRoleMapping" Role="SysUserRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="SysUserRoleMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRoleMapping_SysUser">
+          <End Type="MotorHomepageModel.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysUserRoleMapping" Role="SysUserRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SysUserRoleMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SysRoleMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ControllerId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ActionId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ActionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsAllow" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateUid" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SysRoles" Relationship="MotorHomepageModel.FK_SysRoleMapping_SysRoles" FromRole="SysRoleMapping" ToRole="SysRoles" />
+        </EntityType>
+        <Association Name="FK_SysRoleMapping_SysRoles">
+          <End Type="MotorHomepageModel.SysRoles" Role="SysRoles" Multiplicity="1" />
+          <End Type="MotorHomepageModel.SysRoleMapping" Role="SysRoleMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="SysRoleMapping">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_BANNER_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Heading" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SubHeading" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="HasKo" Nullable="true" />
+          <Property Type="Boolean" Name="HasVi" Nullable="true" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreated" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserModified" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="PublishStatus" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PublishStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HasKo" Type="Boolean" />
+          <Property Name="HasVi" Type="Boolean" />
+          <NavigationProperty Name="BannerKos" Relationship="MotorHomepageModel.FK_BannerKos_Banners_MasterId" FromRole="Banners" ToRole="BannerKos" />
+          <NavigationProperty Name="BannerVis" Relationship="MotorHomepageModel.FK_BannerVis_Banners_MasterId" FromRole="Banners" ToRole="BannerVis" />
+          </EntityType>
+        <EntityType Name="BannerKos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerKos_Banners_MasterId" FromRole="BannerKos" ToRole="Banners" />
+        </EntityType>
+        <EntityType Name="BannerVis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerVis_Banners_MasterId" FromRole="BannerVis" ToRole="Banners" />
+        </EntityType>
+        <Association Name="FK_BannerKos_Banners_MasterId">
+          <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.BannerKos" Role="BannerKos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerKos">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BannerVis_Banners_MasterId">
+          <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.BannerVis" Role="BannerVis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BannerVis">
+              <PropertyRef Name="MasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MotorHomepageModelStoreContainer" CdmEntityContainer="MotorHomepageEntities">
+          <EntitySetMapping Name="PostKos">
+            <EntityTypeMapping TypeName="MotorHomepageModel.PostKos">
+              <MappingFragment StoreEntitySet="PostKos">
+                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostVis">
+            <EntityTypeMapping TypeName="MotorHomepageModel.PostVis">
+              <MappingFragment StoreEntitySet="PostVis">
+                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysCategories">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysCategories">
+              <MappingFragment StoreEntitySet="SysCategories">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysCategoryValues">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysCategoryValues">
+              <MappingFragment StoreEntitySet="SysCategoryValues">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="DictionaryId" ColumnName="DictionaryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysDictionnary">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysDictionnary">
+              <MappingFragment StoreEntitySet="SysDictionnary">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Language5" ColumnName="Language5" />
+                <ScalarProperty Name="Language4" ColumnName="Language4" />
+                <ScalarProperty Name="Language3" ColumnName="Language3" />
+                <ScalarProperty Name="Language2" ColumnName="Language2" />
+                <ScalarProperty Name="Language1" ColumnName="Language1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysMenus">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysMenus">
+              <MappingFragment StoreEntitySet="SysMenus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IconCss" ColumnName="IconCss" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRoles">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysRoles">
+              <MappingFragment StoreEntitySet="SysRoles">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="DeleteUser" ColumnName="DeleteUser" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUser">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysUser">
+              <MappingFragment StoreEntitySet="SysUser">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="DeleteUid" ColumnName="DeleteUid" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUid" ColumnName="UpdateUid" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Attachments">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_SYS_ATTACHMENT_GET" FunctionName="MotorHomepageModel.Store.SP_SYS_ATTACHMENT_GET" />
+          <FunctionImportMapping FunctionImportName="SP_SYS_ATTACHMENT_INSERT" FunctionName="MotorHomepageModel.Store.SP_SYS_ATTACHMENT_INSERT" />
+          <FunctionImportMapping FunctionImportName="SP_SYS_USER_LOGIN" FunctionName="MotorHomepageModel.Store.SP_SYS_USER_LOGIN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_SYS_USER_LOGIN_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GETMENU" FunctionName="MotorHomepageModel.Store.SP_GETMENU">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_GETMENU_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IconCss" ColumnName="IconCss" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="SysUserRoleMapping">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysUserRoleMapping">
+              <MappingFragment StoreEntitySet="SysUserRoleMapping">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRoleMapping">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysRoleMapping">
+              <MappingFragment StoreEntitySet="SysRoleMapping">
+                <ScalarProperty Name="CreateUid" ColumnName="CreateUid" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsAllow" ColumnName="IsAllow" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="ControllerId" ColumnName="ControllerId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_BANNER_GETALL" FunctionName="MotorHomepageModel.Store.SP_BANNER_GETALL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_BANNER_GETALL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
+                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
+                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_BANNER_INSERT" FunctionName="MotorHomepageModel.Store.SP_BANNER_INSERT" />
+          <FunctionImportMapping FunctionImportName="SP_BANNER_UPDATE" FunctionName="MotorHomepageModel.Store.SP_BANNER_UPDATE" />
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Banners">
+              <MappingFragment StoreEntitySet="Banners">
+                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
+                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerKos">
+            <EntityTypeMapping TypeName="MotorHomepageModel.BannerKos">
+              <MappingFragment StoreEntitySet="BannerKos">
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerVis">
+            <EntityTypeMapping TypeName="MotorHomepageModel.BannerVis">
+              <MappingFragment StoreEntitySet="BannerVis">
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

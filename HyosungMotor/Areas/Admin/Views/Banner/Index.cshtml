@@ -1,0 +1,141 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+	<link href="~/wwwroot/assets/jquery-easyui-1.7.5/themes/material/easyui.css" rel="stylesheet" />
+	<link href="~/wwwroot/assets/jquery-easyui-1.7.5/themes/icon.css" rel="stylesheet" />
+}
+
+@section Scripts{
+	<script src="~/wwwroot/assets/jquery-easyui-1.7.5/jquery.easyui.min.js"></script>
+	<script src="~/wwwroot/app/controllers/banner/index.js"></script>
+	<script>
+		var banner = new bannerController();
+		banner.initialize();
+	</script>
+}
+
+<!-- BEGIN RESPONSIVE TABLE 1 -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card no-margin">
+			<div class="card-body">
+
+				<div class="row form">
+					<div class="col-md-2 col-xs-12">
+						<ol class="breadcrumb">
+							<li class="active">Banner Mangement</li>
+						</ol>
+					</div>
+					@*<div class="col-md-3 col-xs-6">
+						<div class="input-daterange input-group" id="txtCreateDateRange" style="float:left; padding-right:10px" name="divHide">
+							<div class="form-group" style="padding:0">
+								<div class="input-group-content">
+									<input type="text" class="form-control contain-sm input-date" name="start" value="@string.Format("{0:yyyy.MM.dd}", new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1))" />
+									<label>Create Date</label>
+								</div>
+								<span class="input-group-addon">to</span>
+								<div class="input-group-content">
+									<input type="text" class="form-control contain-sm input-date" name="end" value="@string.Format("{0:yyyy.MM.dd}", DateTime.Now)" />
+									<div class="form-control-line"></div>
+								</div>
+							</div>
+						</div>
+					</div>*@
+					<div class="col-md-6 col-xs-6">
+						<div class="form-group floating-label">
+							<div class="input-group">
+								<div class="input-group-content">
+									<input type="text" class="form-control contain-sm" id="txtKeyword">
+									<label for="groupbutton10">Keyword</label>
+								</div>
+								<div class="input-group-btn">
+									<button class="btn btn-primary" type="button" id="btnGo">Go!</button>
+								</div>
+							</div>
+						</div><!--end .form-group -->
+					</div>
+					<div class="col-md-1 col-sm-12 form-group text-right">
+						<button id="btnCreate" class="btn">Create</button>
+					</div>
+					@*<div class="col-md-3 col-xs-6 pull-right">
+							<div class="form-group floating-label">
+								<select id="cbCategory" class="form-control">
+									<option value=""></option>
+								</select>
+								<label for="cbCategory">Category</label>
+							</div>
+						</div>*@
+
+
+				</div>
+				<div class="divider"></div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-responsive bag">
+							<table class="table no-margin table-hover table-striped">
+								<thead>
+									<tr>
+										<th class="col-seq">#</th>
+										<th>Heading</th>
+										<th>Sub Heading</th>
+										<th class="text-center" style="width:110px">Language</th>
+										<th class="col-userinfor">User Create</th>
+										<th class="col-date">Created Date</th>
+										<th class="col-status">Status</th>
+										<th class="col-publish-status">Publish Status</th>
+										<th class="col-action">Action</th>
+									</tr>
+								</thead>
+								<tbody id="tbl-content"></tbody>
+							</table>
+							<div class="row no-margin">
+								<div class="col-md-3 col-xs-5">
+									<div class="dataTables_info form" id="datatable-checkbox_info" role="status" aria-live="polite">
+										<div class="form-group">
+											<select id="ddlShowPage" class="form-control">
+												<option value="10" selected="selected">10</option>
+												<option value="20">20</option>
+												<option value="30">30</option>
+												<option value="50">50</option>
+											</select>
+											<label for="select1">Items/page, Total items: <strong id="lblTotalRecord"></strong></label>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 col-xs-1"></div>
+								<div class="col-md-7 col-xs-6">
+									<div class="dataTables_paginate paging_simple_numbers text-right" id="datatable-checkbox_paginate">
+										<ul id="paginationUl"></ul>
+									</div>
+								</div>
+							</div>
+						</div><!--end .table-responsive -->
+					</div>
+				</div>
+			</div><!--end .card-body -->
+		</div><!--end .card -->
+	</div><!--end .col -->
+</div><!--end .row -->
+<!-- END RESPONSIVE TABLE 1 -->
+
+@Html.Partial("~/Areas/Admin/Views/Banner/_AddEditModal.cshtml")
+
+<script id="table-template" type="x-tmpl-mustache">
+	<tr>
+		<td class="col-seq">{{Sequence}}</td>
+		<td>{{{Heading}}}</td>
+		<td>{{SubHeading}}</td>
+		<td class="text-center">{{{Language}}}</td>
+		<td>{{UserCreate}}</td>
+		<td class="text-right">{{CreatedDate}}</td>
+		<td class="text-center">{{{Status}}}</td>
+		<td>{{PublishStatus}}</td>
+		<td class="text-center" scope="row">
+			<button class="btn  btn-sm btn-edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></button>
+			<button class="btn  btn-sm btn-delete" data-id="{{Id}}"><i class="fa fa-trash" style="color:red"></i></button>
+		</td>
+	</tr>
+</script>
