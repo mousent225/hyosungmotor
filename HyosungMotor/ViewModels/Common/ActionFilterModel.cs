@@ -9,11 +9,13 @@ namespace HyosungMotor.ViewModels
         public string Controller { get; set; }
         public string Action { get; set; }
     }
+
     public class ControllerModel
     {
         public string ControllerId { get; set; }
         public string ControllerName { get; set; }
     }
+
     public class ActionModel
     {
         public string RoleId { get; set; }

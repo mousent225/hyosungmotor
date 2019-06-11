@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace HyosungMotor.Utilities
 {
@@ -22,7 +19,6 @@ namespace HyosungMotor.Utilities
             var hashmd5 = new MD5CryptoServiceProvider();
             keyArray = hashmd5.ComputeHash(Encoding.UTF8.GetBytes(key));
             hashmd5.Clear();
-
 
             var tdes = new TripleDESCryptoServiceProvider();
             tdes.Key = keyArray;
@@ -55,7 +51,6 @@ namespace HyosungMotor.Utilities
             keyArray = hashmd5.ComputeHash(Encoding.UTF8.GetBytes(key));
             hashmd5.Clear();
 
-
             var tdes = new TripleDESCryptoServiceProvider();
             tdes.Key = keyArray;
             tdes.Mode = CipherMode.ECB;
@@ -67,7 +62,6 @@ namespace HyosungMotor.Utilities
             tdes.Clear();
             return Encoding.UTF8.GetString(resultArray);
         }
-
 
         public static string ConvertStringToHex(String input, System.Text.Encoding encoding)
         {

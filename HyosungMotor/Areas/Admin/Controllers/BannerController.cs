@@ -16,20 +16,25 @@ namespace HyosungMotor.Areas.Admin.Controllers
         {
             return View();
         }
+
         #region GET
+
         [HttpGet]
         public JsonResult GetAllPaging(string keyword, int page, int pageSize)
         {
             var data = _re.GetAll(page, pageSize, string.IsNullOrEmpty(keyword) ? null : keyword, null);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public JsonResult GetById(int id)
         {
             var data = _re.GetDetail(id);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-        #endregion
+
+        #endregion GET
+
         [HttpPost]
         public JsonResult SaveEntity(BannerViewModel model)
         {
@@ -41,14 +46,14 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 mess = _re.Insert(model);
             else
                 mess = _re.Update(model);
-            
+
             return Json(new { Message = mess });
         }
+
         [HttpPost]
         public JsonResult Delete(int id)
         {
             return Json(new { mess = _re.Delete(id, User.GetClaimValue(ClaimTypes.Sid)) });
         }
-
     }
 }

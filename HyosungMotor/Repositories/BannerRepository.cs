@@ -4,16 +4,15 @@ using HyosungMotor.Models;
 using HyosungMotor.Utilities;
 using HyosungMotor.ViewModels.Banner;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Web;
 
 namespace HyosungMotor.Repositories
 {
     public class BannerRepository
     {
-        MotorHomepageEntities _db = new MotorHomepageEntities();
+        private MotorHomepageEntities _db = new MotorHomepageEntities();
+
         public PagedResult<BannerViewModel> GetAll(int pageIndex, int pageSize, string keyword, string langCode)
         {
             try
@@ -48,14 +47,17 @@ namespace HyosungMotor.Repositories
                 return null;
             }
         }
+
         public BannerViewModel GetDetail(int id)
         {
             try
             {
                 var item = (from i in _db.Banners
-                            from ii in _db.BannerKos.Where(x=>x.MasterId == i.Id).DefaultIfEmpty()
+                            from ii in _db.BannerKos.Where(x => x.MasterId == i.Id).DefaultIfEmpty()
                             from iii in _db.BannerVis.Where(x => x.MasterId == i.Id).DefaultIfEmpty()
-                            where i.Id == id select new BannerViewModel {
+                            where i.Id == id
+                            select new BannerViewModel
+                            {
                                 Id = i.Id,
                                 Heading = i.Heading,
                                 SubHeading = i.SubHeading,
@@ -79,7 +81,6 @@ namespace HyosungMotor.Repositories
                                     SubHeading = iii.SubHeading,
                                     Description = iii.Description
                                 }
-
                             }).FirstOrDefault();
 
                 //item.BannerVi = (from i in _db.BannerVis where i.MasterId == id select new BannerViViewModel { Id = i.Id, MasterId = i.MasterId, Heading = i.Heading, SubHeading = i.SubHeading, Description = i.Description }).FirstOrDefault();
@@ -92,6 +93,7 @@ namespace HyosungMotor.Repositories
                 return null;
             }
         }
+
         public string Insert(BannerViewModel model)
         {
             try
@@ -110,6 +112,7 @@ namespace HyosungMotor.Repositories
                 return "Message" + ex.Message + " Inner Exception: " + ex.InnerException.Message;
             }
         }
+
         public string Update(BannerViewModel model)
         {
             try
@@ -128,6 +131,7 @@ namespace HyosungMotor.Repositories
                 return "Message" + ex.Message + " Inner Exception: " + ex.InnerException.Message;
             }
         }
+
         public string Delete(int id, string userId)
         {
             if (id == 0)

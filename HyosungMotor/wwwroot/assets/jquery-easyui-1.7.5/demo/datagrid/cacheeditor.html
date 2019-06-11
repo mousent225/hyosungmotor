@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -13,7 +13,7 @@
 	<h2>Cache Editor for DataGrid</h2>
 	<p>This example shows how to cache the editors for datagrid to improve the editing speed.</p>
 	<div style="margin:20px 0;"></div>
-	
+
 	<table id="dg" class="easyui-datagrid" title="Cache Editor for DataGrid" style="width:700px;height:auto"
 			data-options="
 				iconCls: 'icon-edit',
@@ -53,7 +53,7 @@
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="getChanges()">GetChanges</a>
 	</div>
-	
+
 	<script type="text/javascript">
 		(function($){
 			function getCacheContainer(t){
@@ -74,7 +74,7 @@
 				var e = $('<div class="datagrid-editor-cache-' + field + '"></div>').appendTo(c);
 				e.append(editor);
 			}
-			
+
 			var editors = $.fn.datagrid.defaults.editors;
 			for(var editor in editors){
 				var opts = editors[editor];

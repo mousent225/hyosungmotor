@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -41,16 +41,16 @@
 	<script type="text/javascript">
 		(function($){
 			function pagerFilter(data){
-		        if ($.isArray(data)){    // is array  
-		            data = {  
-		                total: data.length,  
-		                rows: data  
-		            }  
+		        if ($.isArray(data)){    // is array
+		            data = {
+		                total: data.length,
+		                rows: data
+		            }
 		        }
 		        var target = this;
-		        var tg = $(target);  
+		        var tg = $(target);
 				var state = tg.data('treegrid');
-		        var opts = tg.treegrid('options');  
+		        var opts = tg.treegrid('options');
 		        if (!state.allRows){
 		        	state.allRows = data.rows;
 		        }
@@ -87,8 +87,8 @@
 		        	pageNumber: opts.pageNumber
 		        });
 		        opts.pageNumber = pager.pagination('options').pageNumber || 1;
-		        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);  
-		        var end = start + parseInt(opts.pageSize);  
+		        var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+		        var end = start + parseInt(opts.pageSize);
 				data.rows = topRows.slice(start, end).concat(childRows);
 				return data;
 			}
@@ -180,7 +180,7 @@
 		    	return '';
 	    	}
 		}
-		
+
 		$(function(){
 			$('#tg').treegrid().treegrid('clientPaging');
 		})

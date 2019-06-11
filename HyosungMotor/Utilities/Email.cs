@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -13,6 +12,7 @@ namespace HyosungMotor.Utilities
     {
         //properties
         public string Subject { get; set; }
+
         public string Body { get; set; }
         public string From { get; set; }
         public string Password { get; set; }
@@ -71,7 +71,7 @@ namespace HyosungMotor.Utilities
             }
             catch (Exception ex)
             {
-                LogHelper.Error("Send Email Error: " + ex.Message+" Inner Exception: "+ex.InnerException.Message);
+                LogHelper.Error("Send Email Error: " + ex.Message + " Inner Exception: " + ex.InnerException.Message);
                 return;
             }
         }

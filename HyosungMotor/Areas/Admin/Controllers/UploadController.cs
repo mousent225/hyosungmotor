@@ -1,10 +1,7 @@
 ﻿using HyosungMotor.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Claims;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HyosungMotor.Areas.Admin.Controllers
@@ -16,6 +13,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public JsonResult UploadImage()
         {
@@ -66,7 +64,6 @@ namespace HyosungMotor.Areas.Admin.Controllers
             {
                 return Json(new { Result = "Error", Message = "Error in saving file" });
             }
-
         }
     }
 }

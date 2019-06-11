@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -19,7 +19,7 @@
 	<script>
 		function myLoadFilter(data, parent){
 			var state = $.data(this, 'tree');
-			
+
 		    function setData(){
 		    	var serno = 1;
 		        var todo = [];
@@ -56,9 +56,9 @@
 		    	}
 		    	return null;
 		    }
-		    
+
 		    setData();
-		    
+
 		    var t = $(this);
 		    var opts = t.tree('options');
 		    opts.onBeforeExpand = function(node){

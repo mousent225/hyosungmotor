@@ -1,11 +1,9 @@
 ﻿var loginController = function () {
-
     this.initialize = function () {
         registerEvents();
     };
 
     var registerEvents = function () {
-
         $("#frmLogin").validate({
             errorClass: "red",
             ignore: [],
@@ -50,5 +48,4 @@
             }
         });
     };
-
 };

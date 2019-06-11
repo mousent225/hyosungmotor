@@ -2924,6 +2924,7 @@
     <Content Include="wwwroot\css\site-admin.min.css" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
+    <Content Include="wwwroot\database\motor-script-db.sql" />
     <Content Include="wwwroot\flexpack\css\components\flexpack.css" />
     <Content Include="wwwroot\flexpack\css\flexpack-blue.css" />
     <Content Include="wwwroot\flexpack\css\flexpack-blue.min.css" />

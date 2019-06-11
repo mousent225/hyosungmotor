@@ -2,15 +2,14 @@
 using HyosungMotor.Utilities;
 using HyosungMotor.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace HyosungMotor.Repositories
 {
     public class UserRepository
     {
-        MotorHomepageEntities _db = new MotorHomepageEntities();
+        private MotorHomepageEntities _db = new MotorHomepageEntities();
+
         public UserModel Login(LoginModel model)
         {
             try
@@ -52,7 +51,6 @@ namespace HyosungMotor.Repositories
                             }).FirstOrDefault();
 
                 return item;
-
             }
             catch (Exception ex)
             {
@@ -60,7 +58,6 @@ namespace HyosungMotor.Repositories
                 return null;
             }
         }
-
 
         public bool CheckExists(UserModel model)
         {
@@ -75,7 +72,6 @@ namespace HyosungMotor.Repositories
             {
                 var user = new SysUser()
                 {
-
                     UserId = model.UserId,
                     Password = ED5Helper.Encrypt(model.Password),
                     UserName = model.UserName,
@@ -89,7 +85,6 @@ namespace HyosungMotor.Repositories
                 _db.SysUser.Add(user);
                 _db.SaveChanges();
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -104,7 +99,6 @@ namespace HyosungMotor.Repositories
                 return false;
             try
             {
-
                 var user = (from u in _db.SysUser where u.UserId == model.UserId select u).FirstOrDefault();
                 user.UserName = model.UserName;
                 user.Email = model.Email;
@@ -116,7 +110,6 @@ namespace HyosungMotor.Repositories
                 //    user.Password = ED5Helper.Encrypt(model.PasswordNew); ;
                 _db.SaveChanges();
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -130,7 +123,6 @@ namespace HyosungMotor.Repositories
             var list = loginId.Split(';');
             try
             {
-
                 foreach (var login in list)
                 {
                     if (string.IsNullOrEmpty(login))
@@ -172,7 +164,6 @@ namespace HyosungMotor.Repositories
 
         public string GetPassword(string userId)
         {
-
             var user = (from u in _db.SysUser where u.UserId.ToLower() == userId.ToLower() select u).FirstOrDefault();
             if (user == null)
                 return "";
@@ -213,6 +204,5 @@ namespace HyosungMotor.Repositories
         //        return false;
         //    }
         //}
-       
     }
 }

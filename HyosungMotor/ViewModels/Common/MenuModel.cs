@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 
 namespace HyosungMotor.ViewModels.Common
 {
     public class MenuModel
     {
         public string Id { get; set; }
+
         [Required(ErrorMessage = "Required!")]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
         public string URL { get; set; }
         public string Icon { get; set; }
         public string ParentId { get; set; }
@@ -22,6 +23,7 @@ namespace HyosungMotor.ViewModels.Common
         public string ModifyUID { get; set; }
         public DateTime? ModifyDate { get; set; }
     }
+
     public class MenuTreeViewModel
     {
         public string Id { get; set; }
@@ -64,6 +66,5 @@ namespace HyosungMotor.ViewModels.Common
             }
             set { _Children = value; }
         }
-
     }
 }

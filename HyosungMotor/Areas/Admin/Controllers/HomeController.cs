@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -20,7 +19,9 @@ namespace HyosungMotor.Areas.Admin.Controllers
         {
             return View();
         }
+
         #region Menu
+
         [AllowAnonymous]
         public ActionResult NavigationBar()
         {
@@ -28,6 +29,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
             ViewBag.Navigation = menus;
             return PartialView("_NavigationBar");
         }
+
         [NonAction]
         private IEnumerable<MenuModel> GetMenus()
         {
@@ -43,6 +45,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 return null;
             }
         }
+
         [NonAction]
         private string GenerateMenu()
         {
@@ -85,7 +88,6 @@ namespace HyosungMotor.Areas.Admin.Controllers
                         result = swriter.ToString();
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -94,6 +96,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
             }
             return result;
         }
+
         [NonAction]
         private HtmlGenericControl GenerateControl(string url, string icon, string title)
         {
@@ -112,6 +115,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
             tagA.Controls.Add(span);
             return tagA;
         }
+
         [NonAction]
         private IEnumerable<MenuModel> GetChildrenMenu(string parent, IEnumerable<MenuModel> source)
         {
@@ -157,7 +161,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
             }
             return null;
         }
-        #endregion
-    }
 
+        #endregion Menu
+    }
 }

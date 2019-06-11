@@ -1,9 +1,8 @@
-﻿
+﻿using Microsoft.Owin.Security;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
-using Microsoft.Owin.Security;
 
 namespace HyosungMotor.Utilities
 {
@@ -38,7 +37,6 @@ namespace HyosungMotor.Utilities
                 return identity.Claims.First(c => c.Type == key).Value;
             return null;
             //var claim = identity.Claims.First(c => c.Type == key);
-
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace HyosungMotor.ViewModels.Common
+﻿namespace HyosungMotor.ViewModels.Common
 {
     public class AttachmentModel
     {

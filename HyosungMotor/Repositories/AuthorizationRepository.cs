@@ -1,5 +1,4 @@
-﻿using HyosungMotor;
-using HyosungMotor.Models;
+﻿using HyosungMotor.Models;
 using HyosungMotor.Utilities;
 using HyosungMotor.ViewModels;
 using System;
@@ -7,14 +6,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HyosungMotor.Repositories
 {
     public class AuthorizationRepository
     {
-        MotorHomepageEntities _db = new MotorHomepageEntities();
+        private MotorHomepageEntities _db = new MotorHomepageEntities();
+
         public IEnumerable<AuthorizationModel> GetControllerAction(string id)
         {
             var asm = Assembly.GetAssembly(typeof(MvcApplication));
@@ -31,12 +30,11 @@ namespace HyosungMotor.Repositories
                     item.Owner = id;
             }
             var removeDuplicate = RemoveDuplicates(controlleractionlist);
-            
+
             return removeDuplicate;
         }
 
-       
-        static List<AuthorizationModel> RemoveDuplicates(IEnumerable<AuthorizationModel> inputList)
+        private static List<AuthorizationModel> RemoveDuplicates(IEnumerable<AuthorizationModel> inputList)
         {
             var finalList = new List<AuthorizationModel>();
             foreach (var currValue in inputList.Where(currValue => !Contains(finalList, currValue)))
@@ -45,7 +43,8 @@ namespace HyosungMotor.Repositories
             }
             return finalList;
         }
-        static bool Contains(IEnumerable<AuthorizationModel> list, AuthorizationModel comparedValue)
+
+        private static bool Contains(IEnumerable<AuthorizationModel> list, AuthorizationModel comparedValue)
         {
             return list.Any(listValue => listValue.Controller == comparedValue.Controller && listValue.Action == comparedValue.Action);
         }
@@ -56,15 +55,13 @@ namespace HyosungMotor.Repositories
                 return false;
             try
             {
-                
-                    var item = (from u in 
-                                    _db.SysRoleMapping
-                                where
-                                    u.RoleId.ToString() == model.ID && u.ControllerId == model.Controller &&
-                                    u.ActionId == model.Action
-                                select u).FirstOrDefault();
-                    return item != null && item.IsAllow;
-               
+                var item = (from u in
+                                _db.SysRoleMapping
+                            where
+                                u.RoleId.ToString() == model.ID && u.ControllerId == model.Controller &&
+                                u.ActionId == model.Action
+                            select u).FirstOrDefault();
+                return item != null && item.IsAllow;
             }
             catch (Exception ex)
             {
@@ -78,16 +75,15 @@ namespace HyosungMotor.Repositories
             var actionList = "";
             try
             {
-               
-                    var list = (from u in _db.SysRoleMapping
-                                where u.RoleId == roleId && u.ControllerId == controllerId
-                                select u).ToList();
-                    if (list == null) return "";
-                    foreach (var action in list)
-                    {
-                        actionList = (actionList == "" ? action.ActionId : (actionList + "|" + action.ActionId));
-                    }
-                
+                var list = (from u in _db.SysRoleMapping
+                            where u.RoleId == roleId && u.ControllerId == controllerId
+                            select u).ToList();
+                if (list == null) return "";
+                foreach (var action in list)
+                {
+                    actionList = (actionList == "" ? action.ActionId : (actionList + "|" + action.ActionId));
+                }
+
                 return actionList;
             }
             catch (Exception ex)
@@ -151,6 +147,5 @@ namespace HyosungMotor.Repositories
                         IsAllow = false
                     }).ToList();
         }
-
     }
 }

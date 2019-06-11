@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(HyosungMotor.Startup))]
+
 namespace HyosungMotor
 {
     public partial class Startup

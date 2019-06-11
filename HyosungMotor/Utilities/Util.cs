@@ -37,6 +37,7 @@ namespace HyosungMotor.Utilities
             }
             return str2;
         }
+
         public static string RemoveSign4VietnameseString(string str)
         {
             for (int i = 1; i < ApplicationStatic.vietnameseSigns.Length; i++)

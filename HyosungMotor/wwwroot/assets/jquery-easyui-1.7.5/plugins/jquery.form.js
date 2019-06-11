@@ -1,6 +1,6 @@
 /**
  * EasyUI for jQuery 1.7.5
- * 
+ *
  * Copyright (c) 2009-2019 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the freeware license: http://www.jeasyui.com/license_freeware.php
@@ -411,4 +411,3 @@ return $(this).form("validate");
 },onChange:function(_5a){
 }};
 })(jQuery);
-

@@ -4,17 +4,18 @@ using HyosungMotor.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace HyosungMotor.Repositories
 {
     public class MenuRepository
     {
-        MotorHomepageEntities _db = new MotorHomepageEntities();
+        private MotorHomepageEntities _db = new MotorHomepageEntities();
+
         public IEnumerable<MenuModel> GetAllMenuViaMasterMenu(string id)
         {
             throw new NotImplementedException();
         }
+
         public MenuModel GetAll()
         {
             try
@@ -32,7 +33,6 @@ namespace HyosungMotor.Repositories
                              }).FirstOrDefault();
 
                 return model;
-
             }
             catch (Exception ex)
             {
@@ -45,7 +45,6 @@ namespace HyosungMotor.Repositories
         {
             try
             {
-
                 var list = (from u in _db.SP_GETMENU(role)
                             select new MenuModel
                             {
@@ -57,7 +56,6 @@ namespace HyosungMotor.Repositories
                                 Sequence = u.SortOrder
                             }).ToList();
                 return list;
-
             }
             catch (Exception ex)
             {
@@ -85,7 +83,6 @@ namespace HyosungMotor.Repositories
                                  Icon = u.IconCss
                              }).FirstOrDefault();
                 return model;
-
             }
             catch (Exception ex)
             {
@@ -98,7 +95,6 @@ namespace HyosungMotor.Repositories
         {
             try
             {
-
                 var mn = new SysMenus
                 {
                     Id = model.Id,
@@ -111,7 +107,6 @@ namespace HyosungMotor.Repositories
                 _db.SysMenus.Add(mn);
                 _db.SaveChanges();
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -124,7 +119,6 @@ namespace HyosungMotor.Repositories
         {
             try
             {
-
                 var mn = _db.SysMenus.FirstOrDefault(m => m.Id == model.Id);
                 mn.Name = model.Name;
                 mn.SortOrder = model.Sequence ?? 0;
@@ -133,7 +127,6 @@ namespace HyosungMotor.Repositories
                 mn.ParentId = model.ParentId;
                 _db.SaveChanges();
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -146,12 +139,10 @@ namespace HyosungMotor.Repositories
         {
             try
             {
-
                 var mn = _db.SysMenus.FirstOrDefault(m => m.Id == id);
                 _db.SysMenus.Remove(mn);
                 _db.SaveChanges();
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -164,7 +155,6 @@ namespace HyosungMotor.Repositories
         {
             try
             {
-
                 var list = (from u in _db.SysMenus
                             where u.ParentId == null //&& u.MasterMenu.ToString() == id
                             from mm in _db.SysMenus.Where(m => m.Id == u.ParentId).DefaultIfEmpty()
@@ -180,7 +170,6 @@ namespace HyosungMotor.Repositories
                                 ParentName = mm.Name
                             }).ToList();
                 return list;
-
             }
             catch (Exception ex)
             {
@@ -188,6 +177,5 @@ namespace HyosungMotor.Repositories
                 return null;
             }
         }
-
     }
 }

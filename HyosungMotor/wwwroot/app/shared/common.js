@@ -4,7 +4,7 @@
         pageIndex: 1
     },
     notify: function (feeownTitle, feeownMess, feeownStyle) {
-        //STYLE:   smokey, gray, osx, simple    
+        //STYLE:   smokey, gray, osx, simple
         //OPTION: autoHide_bool, autoHideDelay_int_ms, classes_array, prepend_bool
         var title = feeownTitle;
         var message = feeownMess;
@@ -198,7 +198,6 @@
         }
         else expires = "";
         document.cookie = name + "=" + value + expires + "; path=/";
-
     },
     readCookie: function (name) {
         var nameEQ = name + "=";
@@ -221,9 +220,7 @@
     }
 };
 
-
 $(document).ajaxSend(function (e, xhr, options) {
-    
     if (options.type.toUpperCase() === "POST" || options.type.toUpperCase() === "PUT") {
         var token = $("form").find("input[name='__RequestVerificationToken']").val();
         xhr.setRequestHeader("RequestVerificationToken", token);

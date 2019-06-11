@@ -19,6 +19,7 @@ namespace HyosungMotor.Utilities
             }
             return stringIpAddress;
         }
+
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
             var httpContext = filterContext.HttpContext;
@@ -26,7 +27,6 @@ namespace HyosungMotor.Utilities
                 && !httpContext.Request.IsAjaxRequest()
                 && filterContext.IsChildAction == false) // do no overwrite if we do child action.
             {
-
                 HttpContext.Session["PrevUrl"] = HttpContext.Session["CurUrl"] ?? httpContext.Request.Url;
                 HttpContext.Session["CurUrl"] = httpContext.Request.Url;
             }

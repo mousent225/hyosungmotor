@@ -4,13 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HyosungMotor.Utilities
 {
-    public class KSControllerFactory:DefaultControllerFactory
+    public class KSControllerFactory : DefaultControllerFactory
     {
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
@@ -21,7 +20,7 @@ namespace HyosungMotor.Utilities
                 {
                     var identity = (ClaimsIdentity)requestContext.HttpContext.User.Identity;
                     IEnumerable<Claim> claims = identity.Claims;
-                    lang = claims.FirstOrDefault(x => x.Type == "Lang").Value??ApplicationStatic.defaultLanguage;
+                    lang = claims.FirstOrDefault(x => x.Type == "Lang").Value ?? ApplicationStatic.defaultLanguage;
                 }
                 else
                 {
@@ -32,11 +31,11 @@ namespace HyosungMotor.Utilities
                 Thread.CurrentThread.CurrentCulture = culture;
                 Thread.CurrentThread.CurrentUICulture = culture;
 
-                return base.GetControllerInstance(requestContext, controllerType); 
+                return base.GetControllerInstance(requestContext, controllerType);
             }
             catch (Exception ex)
             {
-                LogHelper.Error("Controller Factory: "+ex.Message+" Inner Exception: "+ex.InnerException.Message);
+                LogHelper.Error("Controller Factory: " + ex.Message + " Inner Exception: " + ex.InnerException.Message);
                 return null;
             }
         }

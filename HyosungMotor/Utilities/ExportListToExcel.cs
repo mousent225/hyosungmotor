@@ -28,7 +28,6 @@ namespace HyosungMotor.Utilities
                 excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelworkBook.ActiveSheet;
                 excelSheet.Name = worksheetName;
 
-
                 excelSheet.Cells[1, 1] = ReporType;
                 excelSheet.Cells[1, 2] = "Date : " + DateTime.Now.ToShortDateString();
 
@@ -45,7 +44,6 @@ namespace HyosungMotor.Utilities
                         {
                             excelSheet.Cells[2, i] = dataTable.Columns[i - 1].ColumnName;
                             excelSheet.Cells.Font.Color = System.Drawing.Color.Black;
-
                         }
 
                         excelSheet.Cells[rowcount, i] = datarow[i - 1].ToString();
@@ -60,12 +58,9 @@ namespace HyosungMotor.Utilities
                                     excelCellrange = excelSheet.Range[excelSheet.Cells[rowcount, 1], excelSheet.Cells[rowcount, dataTable.Columns.Count]];
                                     FormattingExcelCells(excelCellrange, "#CCCCFF", System.Drawing.Color.Black, false);
                                 }
-
                             }
                         }
-
                     }
-
                 }
 
                 // now we resize the columns
@@ -75,13 +70,10 @@ namespace HyosungMotor.Utilities
                 border.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
                 border.Weight = 2d;
 
-
                 excelCellrange = excelSheet.Range[excelSheet.Cells[1, 1], excelSheet.Cells[2, dataTable.Columns.Count]];
                 FormattingExcelCells(excelCellrange, "#000099", System.Drawing.Color.White, true);
 
-
                 //now save the workbook and exit Excel
-
 
                 excelworkBook.SaveAs(saveAsLocation); ;
                 excelworkBook.Close();
@@ -99,7 +91,6 @@ namespace HyosungMotor.Utilities
                 excelCellrange = null;
                 excelworkBook = null;
             }
-
         }
 
         /// <summary>
@@ -118,6 +109,5 @@ namespace HyosungMotor.Utilities
                 range.Font.Bold = IsFontbool;
             }
         }
-
     }
 }

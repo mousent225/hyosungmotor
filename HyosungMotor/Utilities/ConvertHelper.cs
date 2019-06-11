@@ -16,6 +16,7 @@ namespace HyosungMotor.Utilities
                 return DateTime.Now;
             }
         }
+
         public static int ToInt32(string number)
         {
             int result;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -33,17 +33,17 @@
 			$('#cc').layout();
 			setHeight();
 		});
-		
+
 		function addItem(){
 			$('#cc').layout('panel','center').append('<p>More Panel Content.</p>');
 			setHeight();
 		}
-		
+
 		function removeItem(){
 			$('#cc').layout('panel','center').find('p:last').remove();
 			setHeight();
 		}
-		
+
 		function setHeight(){
 			var c = $('#cc');
 			var p = c.layout('panel','center');	// get the center panel

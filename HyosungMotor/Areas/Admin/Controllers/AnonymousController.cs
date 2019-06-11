@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using HyosungMotor.Repositories;
+﻿using HyosungMotor.Repositories;
 using HyosungMotor.Utilities;
 using HyosungMotor.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +31,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 return null;
             }
         }
+
         //[AllowAnonymous]
         //public ActionResult UpdatePassword()
         //{
@@ -44,6 +43,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
             var stringIpAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? Request.ServerVariables["REMOTE_ADDR"];
             return stringIpAddress;
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -76,7 +76,6 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 }
                 return Json(new { result = "Error", message = "Login ID & Password is incorrect!" });
                 //ViewBag.ErrorMessage = "Login ID & Password is incorrect!";
-
             }
             catch (Exception ex)
             {
@@ -142,7 +141,6 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 var context = Request.GetOwinContext();
                 var authManager = context.Authentication;
                 authManager.SignOut();
-
             }
             catch (Exception ex)
             {
@@ -158,12 +156,14 @@ namespace HyosungMotor.Areas.Admin.Controllers
         public UserModel ValidateModel(LoginModel model)
         {
             var rep = new UserRepository();
-            
+
             model.Password = ED5Helper.Encrypt(model.Password);
             var res = new UserRepository();
             return res.Login(model);
         }
-        public ViewResult ViewPass() {
+
+        public ViewResult ViewPass()
+        {
             return View();
         }
 
@@ -204,6 +204,7 @@ namespace HyosungMotor.Areas.Admin.Controllers
                 return;
             }
         }
-        #endregion
+
+        #endregion Method - NoAction
     }
 }

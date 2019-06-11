@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.ModelBinding;
+﻿using System.Collections.Generic;
 
 namespace HyosungMotor.Utilities
 {
     public class AppDictionary
     {
         public static Dictionary<string, string> MasterMenu = new Dictionary<string, string>()
-	    {
-	        {"Navigation","16FAAE45-DA0F-4A21-AEE7-FD3376C211A1" }
-	    };
+        {
+            {"Navigation","16FAAE45-DA0F-4A21-AEE7-FD3376C211A1" }
+        };
 
         public static Dictionary<string, string> Language = new Dictionary<string, string>()
         {
@@ -29,7 +25,6 @@ namespace HyosungMotor.Utilities
             //{"Complete","E53CAF11-D60C-4868-9AA0-720B1D1856AC"},
             //{"Postpone","2DCC95C1-4208-46A3-A2D0-8FBC26DFC155"},
             //{"Done","FBDEBBE3-BD73-49C2-8E74-C16634F34D4E"},
-            
         };
 
         public static Dictionary<string, string> UserStatus = new Dictionary<string, string>()

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -13,7 +13,7 @@
 	<h2>CheckBox Selection on DataGrid</h2>
 	<p>Click the checkbox on header to select or unselect all selections.</p>
 	<div style="margin:20px 0;"></div>
-	
+
 	<table id="dg" class="easyui-datagrid" title="CheckBox Selection on DataGrid" style="width:700px;height:250px"
 			data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get'">
 		<thead>
@@ -33,10 +33,9 @@
 		<select onchange="$('#dg').datagrid({singleSelect:(this.value==0)})">
 			<option value="0">Single Row</option>
 			<option value="1">Multiple Rows</option>
-		</select><br/>
-		SelectOnCheck: <input type="checkbox" checked onchange="$('#dg').datagrid({selectOnCheck:$(this).is(':checked')})"><br/>
+		</select><br />
+		SelectOnCheck: <input type="checkbox" checked onchange="$('#dg').datagrid({selectOnCheck:$(this).is(':checked')})"><br />
 		CheckOnSelect: <input type="checkbox" checked onchange="$('#dg').datagrid({checkOnSelect:$(this).is(':checked')})">
 	</div>
-
 </body>
 </html>

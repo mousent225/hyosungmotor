@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace HyosungMotor.Dtos
 {
@@ -11,6 +8,7 @@ namespace HyosungMotor.Dtos
         {
             Results = new List<T>();
         }
+
         public IList<T> Results { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using HyosungMotor.Utilities;
 using HyosungMotor.ViewModels.Common;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace HyosungMotor.Repositories

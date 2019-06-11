@@ -1,5 +1,4 @@
-﻿
-using log4net;
+﻿using log4net;
 
 namespace HyosungMotor.Utilities
 {
@@ -16,14 +15,17 @@ namespace HyosungMotor.Utilities
         {
             logger.Debug(mess);
         }
+
         public static void Error(string mess)
         {
             logger.Error(mess);
         }
+
         public static void Warn(string mess)
         {
             logger.Warn(mess);
         }
+
         public static void Fatal(string mess)
         {
             logger.Fatal(mess);
