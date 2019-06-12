@@ -30,6 +30,6 @@ namespace HyosungMotor.Models
         public int SortOrder { get; set; }
     
         public virtual SysCategories SysCategories { get; set; }
-        public virtual SysDictionnary SysDictionnary { get; set; }
+        public virtual SysDictionnaries SysDictionnaries { get; set; }
     }
 }

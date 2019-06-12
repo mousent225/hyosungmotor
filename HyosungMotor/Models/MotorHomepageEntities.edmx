@@ -17,24 +17,11 @@
           <Property Name="FileType" Type="nvarchar(max)" />
           <Property Name="FileSize" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="BannerKos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
-          <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
-          <Property Name="MasterId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Banners">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
-          <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Image" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
@@ -48,26 +35,23 @@
           <Property Name="HasKo" Type="bit" />
           <Property Name="HasVi" Type="bit" />
         </EntityType>
-        <EntityType Name="BannerVis">
+        <EntityType Name="BannerTranslations">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Heading" Type="nvarchar" MaxLength="255" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="BannerId" Type="int" Nullable="false" />
+          <Property Name="Heading" Type="nvarchar" MaxLength="2550" />
           <Property Name="SubHeading" Type="nvarchar" MaxLength="255" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
-          <Property Name="MasterId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="PostKos">
+        <EntityType Name="Languages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterId" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -92,13 +76,14 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="PublishStatus" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="PostVis">
+        <EntityType Name="PostTranslations">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterId" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
@@ -138,7 +123,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="SysDictionnary">
+        <EntityType Name="SysDictionnaries">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -164,6 +149,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="DictionaryId" Type="int" />
+          <Property Name="System" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="URL" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ParentId" Type="nvarchar" MaxLength="128" />
@@ -236,45 +223,27 @@
           <Property Name="RoleId" Type="varchar" MaxLength="20" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK_BannerKos_Banners_MasterId">
-          <End Role="Banners" Type="Self.Banners" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="BannerKos" Type="Self.BannerKos" Multiplicity="*" />
+        <Association Name="FK_BannerTranslations_Banners">
+          <End Role="Banners" Type="Self.Banners" Multiplicity="1" />
+          <End Role="BannerTranslations" Type="Self.BannerTranslations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Banners">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BannerKos">
-              <PropertyRef Name="MasterId" />
+            <Dependent Role="BannerTranslations">
+              <PropertyRef Name="BannerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BannerVis_Banners_MasterId">
-          <End Role="Banners" Type="Self.Banners" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="BannerVis" Type="Self.BannerVis" Multiplicity="*" />
+        <Association Name="FK_BannerTranslations_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="BannerTranslations" Type="Self.BannerTranslations" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Banners">
+            <Principal Role="Languages">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BannerVis">
-              <PropertyRef Name="MasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostKos_Posts_MasterId">
-          <End Role="Posts" Type="Self.Posts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PostKos" Type="Self.PostKos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostKos">
-              <PropertyRef Name="MasterId" />
+            <Dependent Role="BannerTranslations">
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -292,17 +261,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PostVis_Posts_MasterId">
-          <End Role="Posts" Type="Self.Posts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PostVis" Type="Self.PostVis" Multiplicity="*" />
+        <Association Name="FK_PostTranslations_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="1" />
+          <End Role="PostTranslations" Type="Self.PostTranslations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTranslations_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="PostTranslations" Type="Self.PostTranslations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Posts">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PostVis">
-              <PropertyRef Name="MasterId" />
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="PostId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -319,13 +298,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SysCategoryValues_SysDictionnary_DictionaryId">
-          <End Role="SysDictionnary" Type="Self.SysDictionnary" Multiplicity="0..1" />
+          <End Role="SysDictionnaries" Type="Self.SysDictionnaries" Multiplicity="0..1" />
           <End Role="SysCategoryValues" Type="Self.SysCategoryValues" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SysDictionnary">
+            <Principal Role="SysDictionnaries">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysMenus_SysDictionnaries">
+          <End Role="SysDictionnaries" Type="Self.SysDictionnaries" Multiplicity="0..1" />
+          <End Role="SysMenus" Type="Self.SysMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDictionnaries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysMenus">
               <PropertyRef Name="DictionaryId" />
             </Dependent>
           </ReferentialConstraint>
@@ -371,7 +362,7 @@
           <Parameter Name="pageSize" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
           <Parameter Name="totalRow" Type="int" Mode="InOut" />
-          <Parameter Name="langCode" Type="varchar" Mode="In" />
+          <Parameter Name="languageId" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_BANNER_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="heading" Type="nvarchar" Mode="In" />
@@ -430,47 +421,50 @@
         </Function>
         <EntityContainer Name="MotorHomepageModelStoreContainer">
           <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BannerKos" EntityType="Self.BannerKos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BannerVis" EntityType="Self.BannerVis" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PostKos" EntityType="Self.PostKos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BannerTranslations" EntityType="Self.BannerTranslations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PostVis" EntityType="Self.PostVis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostTranslations" EntityType="Self.PostTranslations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysCategories" EntityType="Self.SysCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysCategoryValues" EntityType="Self.SysCategoryValues" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SysDictionnary" EntityType="Self.SysDictionnary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysDictionnaries" EntityType="Self.SysDictionnaries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysMenus" EntityType="Self.SysMenus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysRoleMapping" EntityType="Self.SysRoleMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysRoles" EntityType="Self.SysRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SysUserRoleMapping" EntityType="Self.SysUserRoleMapping" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BannerKos_Banners_MasterId" Association="Self.FK_BannerKos_Banners_MasterId">
+          <AssociationSet Name="FK_BannerTranslations_Banners" Association="Self.FK_BannerTranslations_Banners">
             <End Role="Banners" EntitySet="Banners" />
-            <End Role="BannerKos" EntitySet="BannerKos" />
+            <End Role="BannerTranslations" EntitySet="BannerTranslations" />
           </AssociationSet>
-          <AssociationSet Name="FK_BannerVis_Banners_MasterId" Association="Self.FK_BannerVis_Banners_MasterId">
-            <End Role="Banners" EntitySet="Banners" />
-            <End Role="BannerVis" EntitySet="BannerVis" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostKos_Posts_MasterId" Association="Self.FK_PostKos_Posts_MasterId">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostKos" EntitySet="PostKos" />
+          <AssociationSet Name="FK_BannerTranslations_Languages" Association="Self.FK_BannerTranslations_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="BannerTranslations" EntitySet="BannerTranslations" />
           </AssociationSet>
           <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="Self.FK_Posts_SysCategories_CategoryId">
             <End Role="SysCategories" EntitySet="SysCategories" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_PostVis_Posts_MasterId" Association="Self.FK_PostVis_Posts_MasterId">
+          <AssociationSet Name="FK_PostTranslations_Languages" Association="Self.FK_PostTranslations_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTranslations_Posts" Association="Self.FK_PostTranslations_Posts">
             <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostVis" EntitySet="PostVis" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
           </AssociationSet>
           <AssociationSet Name="FK_SysCategoryValues_SysCategories_CategoryId" Association="Self.FK_SysCategoryValues_SysCategories_CategoryId">
             <End Role="SysCategories" EntitySet="SysCategories" />
             <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
           </AssociationSet>
           <AssociationSet Name="FK_SysCategoryValues_SysDictionnary_DictionaryId" Association="Self.FK_SysCategoryValues_SysDictionnary_DictionaryId">
-            <End Role="SysDictionnary" EntitySet="SysDictionnary" />
+            <End Role="SysDictionnaries" EntitySet="SysDictionnaries" />
             <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysMenus_SysDictionnaries" Association="Self.FK_SysMenus_SysDictionnaries">
+            <End Role="SysDictionnaries" EntitySet="SysDictionnaries" />
+            <End Role="SysMenus" EntitySet="SysMenus" />
           </AssociationSet>
           <AssociationSet Name="FK_SysRoleMapping_SysRoles" Association="Self.FK_SysRoleMapping_SysRoles">
             <End Role="SysRoles" EntitySet="SysRoles" />
@@ -490,33 +484,17 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MotorHomepageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MotorHomepageEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PostKos" EntityType="MotorHomepageModel.PostKos" />
           <EntitySet Name="Posts" EntityType="MotorHomepageModel.Posts" />
-          <EntitySet Name="PostVis" EntityType="MotorHomepageModel.PostVis" />
           <EntitySet Name="SysCategories" EntityType="MotorHomepageModel.SysCategories" />
           <EntitySet Name="SysCategoryValues" EntityType="MotorHomepageModel.SysCategoryValues" />
-          <EntitySet Name="SysDictionnary" EntityType="MotorHomepageModel.SysDictionnary" />
-          <EntitySet Name="SysMenus" EntityType="MotorHomepageModel.SysMenus" />
           <EntitySet Name="SysRoles" EntityType="MotorHomepageModel.SysRoles" />
           <EntitySet Name="SysUser" EntityType="MotorHomepageModel.SysUser" />
-          <AssociationSet Name="FK_PostKos_Posts_MasterId" Association="MotorHomepageModel.FK_PostKos_Posts_MasterId">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostKos" EntitySet="PostKos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId">
             <End Role="SysCategories" EntitySet="SysCategories" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_PostVis_Posts_MasterId" Association="MotorHomepageModel.FK_PostVis_Posts_MasterId">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostVis" EntitySet="PostVis" />
-          </AssociationSet>
           <AssociationSet Name="FK_SysCategoryValues_SysCategories_CategoryId" Association="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId">
             <End Role="SysCategories" EntitySet="SysCategories" />
-            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SysCategoryValues_SysDictionnary_DictionaryId" Association="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId">
-            <End Role="SysDictionnary" EntitySet="SysDictionnary" />
             <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
           </AssociationSet>
           <EntitySet Name="Attachments" EntityType="MotorHomepageModel.Attachments" />
@@ -554,12 +532,23 @@
             <End Role="SysRoles" EntitySet="SysRoles" />
             <End Role="SysRoleMapping" EntitySet="SysRoleMapping" />
           </AssociationSet>
+          <EntitySet Name="Banners" EntityType="MotorHomepageModel.Banners" />
+          <EntitySet Name="BannerTranslations" EntityType="MotorHomepageModel.BannerTranslations" />
+          <EntitySet Name="Languages" EntityType="MotorHomepageModel.Languages" />
+          <AssociationSet Name="FK_BannerTranslations_Banners" Association="MotorHomepageModel.FK_BannerTranslations_Banners">
+            <End Role="Banners" EntitySet="Banners" />
+            <End Role="BannerTranslations" EntitySet="BannerTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BannerTranslations_Languages" Association="MotorHomepageModel.FK_BannerTranslations_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="BannerTranslations" EntitySet="BannerTranslations" />
+          </AssociationSet>
           <FunctionImport Name="SP_BANNER_GETALL" ReturnType="Collection(MotorHomepageModel.SP_BANNER_GETALL_Result)">
             <Parameter Name="pageIndex" Mode="In" Type="Int32" />
             <Parameter Name="pageSize" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
             <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
-            <Parameter Name="langCode" Mode="In" Type="String" />
+            <Parameter Name="languageId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_BANNER_INSERT">
             <Parameter Name="heading" Mode="In" Type="String" />
@@ -596,30 +585,26 @@
             <Parameter Name="subHeadingVi" Mode="In" Type="String" />
             <Parameter Name="descriptionVi" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Banners" EntityType="MotorHomepageModel.Banners" />
-          <EntitySet Name="BannerKos" EntityType="MotorHomepageModel.BannerKos" />
-          <EntitySet Name="BannerVis" EntityType="MotorHomepageModel.BannerVis" />
-          <AssociationSet Name="FK_BannerKos_Banners_MasterId" Association="MotorHomepageModel.FK_BannerKos_Banners_MasterId">
-            <End Role="Banners" EntitySet="Banners" />
-            <End Role="BannerKos" EntitySet="BannerKos" />
+          <EntitySet Name="PostTranslations" EntityType="MotorHomepageModel.PostTranslations" />
+          <AssociationSet Name="FK_PostTranslations_Languages" Association="MotorHomepageModel.FK_PostTranslations_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
           </AssociationSet>
-          <AssociationSet Name="FK_BannerVis_Banners_MasterId" Association="MotorHomepageModel.FK_BannerVis_Banners_MasterId">
-            <End Role="Banners" EntitySet="Banners" />
-            <End Role="BannerVis" EntitySet="BannerVis" />
+          <AssociationSet Name="FK_PostTranslations_Posts" Association="MotorHomepageModel.FK_PostTranslations_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
+          </AssociationSet>
+          <EntitySet Name="SysDictionnaries" EntityType="MotorHomepageModel.SysDictionnaries" />
+          <EntitySet Name="SysMenus" EntityType="MotorHomepageModel.SysMenus" />
+          <AssociationSet Name="FK_SysCategoryValues_SysDictionnary_DictionaryId" Association="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId">
+            <End Role="SysDictionnaries" EntitySet="SysDictionnaries" />
+            <End Role="SysCategoryValues" EntitySet="SysCategoryValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysMenus_SysDictionnaries" Association="MotorHomepageModel.FK_SysMenus_SysDictionnaries">
+            <End Role="SysDictionnaries" EntitySet="SysDictionnaries" />
+            <End Role="SysMenus" EntitySet="SysMenus" />
           </AssociationSet>
           </EntityContainer>
-        <EntityType Name="PostKos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostKos_Posts_MasterId" FromRole="PostKos" ToRole="Posts" />
-        </EntityType>
         <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="Id" />
@@ -642,21 +627,8 @@
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="PublishStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PostKos" Relationship="MotorHomepageModel.FK_PostKos_Posts_MasterId" FromRole="Posts" ToRole="PostKos" />
           <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="Posts" ToRole="SysCategories" />
-          <NavigationProperty Name="PostVis" Relationship="MotorHomepageModel.FK_PostVis_Posts_MasterId" FromRole="Posts" ToRole="PostVis" />
-        </EntityType>
-        <EntityType Name="PostVis">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostVis_Posts_MasterId" FromRole="PostVis" ToRole="Posts" />
+          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="Posts" ToRole="PostTranslations" />
         </EntityType>
         <EntityType Name="SysCategories">
           <Key>
@@ -695,48 +667,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" FromRole="SysCategoryValues" ToRole="SysCategories" />
-          <NavigationProperty Name="SysDictionnary" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysCategoryValues" ToRole="SysDictionnary" />
-        </EntityType>
-        <EntityType Name="SysDictionnary">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Language1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Language2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Language3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Language4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Language5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
-          <Property Name="ModuleId" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
-          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SysCategoryValues" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysDictionnary" ToRole="SysCategoryValues" />
-        </EntityType>
-        <EntityType Name="SysMenus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="URL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IconCss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="UserCreated" Type="Guid" Nullable="false" />
-          <Property Name="DateDeleted" Type="DateTime" Precision="7" />
-          <Property Name="UserDeleted" Type="Guid" />
-          <Property Name="UserModified" Type="Guid" />
-          <Property Name="DateModified" Type="DateTime" Precision="7" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysDictionnaries" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysCategoryValues" ToRole="SysDictionnaries" />
         </EntityType>
         <EntityType Name="SysRoles">
           <Key>
@@ -777,20 +708,6 @@
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SysUserRoleMapping" Relationship="MotorHomepageModel.FK_SysUserRoleMapping_SysUser" FromRole="SysUser" ToRole="SysUserRoleMapping" />
         </EntityType>
-        <Association Name="FK_PostKos_Posts_MasterId">
-          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MotorHomepageModel.PostKos" Role="PostKos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostKos">
-              <PropertyRef Name="MasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Posts_SysCategories_CategoryId">
           <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -805,20 +722,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PostVis_Posts_MasterId">
-          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MotorHomepageModel.PostVis" Role="PostVis" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostVis">
-              <PropertyRef Name="MasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SysCategoryValues_SysCategories_CategoryId">
           <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="0..1" />
           <End Type="MotorHomepageModel.SysCategoryValues" Role="SysCategoryValues" Multiplicity="*" />
@@ -828,18 +731,6 @@
             </Principal>
             <Dependent Role="SysCategoryValues">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SysCategoryValues_SysDictionnary_DictionaryId">
-          <End Type="MotorHomepageModel.SysDictionnary" Role="SysDictionnary" Multiplicity="0..1" />
-          <End Type="MotorHomepageModel.SysCategoryValues" Role="SysCategoryValues" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SysDictionnary">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SysCategoryValues">
-              <PropertyRef Name="DictionaryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -941,27 +832,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="SP_BANNER_GETALL_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Heading" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="SubHeading" Nullable="true" MaxLength="255" />
-          <Property Type="Boolean" Name="HasKo" Nullable="true" />
-          <Property Type="Boolean" Name="HasVi" Nullable="true" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
-          <Property Type="String" Name="UserCreated" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
-          <Property Type="String" Name="UserModified" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="Int32" Name="PublishStatus" Nullable="false" />
-        </ComplexType>
         <EntityType Name="Banners">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
@@ -974,56 +849,171 @@
           <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="HasKo" Type="Boolean" />
           <Property Name="HasVi" Type="Boolean" />
-          <NavigationProperty Name="BannerKos" Relationship="MotorHomepageModel.FK_BannerKos_Banners_MasterId" FromRole="Banners" ToRole="BannerKos" />
-          <NavigationProperty Name="BannerVis" Relationship="MotorHomepageModel.FK_BannerVis_Banners_MasterId" FromRole="Banners" ToRole="BannerVis" />
-          </EntityType>
-        <EntityType Name="BannerKos">
+          <NavigationProperty Name="BannerTranslations" Relationship="MotorHomepageModel.FK_BannerTranslations_Banners" FromRole="Banners" ToRole="BannerTranslations" />
+        </EntityType>
+        <EntityType Name="BannerTranslations">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="BannerId" Type="Int32" Nullable="false" />
+          <Property Name="Heading" Type="String" MaxLength="2550" FixedLength="false" Unicode="true" />
           <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerKos_Banners_MasterId" FromRole="BannerKos" ToRole="Banners" />
+          <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerTranslations_Banners" FromRole="BannerTranslations" ToRole="Banners" />
+          <NavigationProperty Name="Languages" Relationship="MotorHomepageModel.FK_BannerTranslations_Languages" FromRole="BannerTranslations" ToRole="Languages" />
         </EntityType>
-        <EntityType Name="BannerVis">
+        <EntityType Name="Languages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Heading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SubHeading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerVis_Banners_MasterId" FromRole="BannerVis" ToRole="Banners" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BannerTranslations" Relationship="MotorHomepageModel.FK_BannerTranslations_Languages" FromRole="Languages" ToRole="BannerTranslations" />
+          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="Languages" ToRole="PostTranslations" />
         </EntityType>
-        <Association Name="FK_BannerKos_Banners_MasterId">
-          <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MotorHomepageModel.BannerKos" Role="BannerKos" Multiplicity="*" />
+        <Association Name="FK_BannerTranslations_Banners">
+          <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1" />
+          <End Type="MotorHomepageModel.BannerTranslations" Role="BannerTranslations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Banners">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BannerKos">
-              <PropertyRef Name="MasterId" />
+            <Dependent Role="BannerTranslations">
+              <PropertyRef Name="BannerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BannerVis_Banners_MasterId">
-          <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MotorHomepageModel.BannerVis" Role="BannerVis" Multiplicity="*" />
+        <Association Name="FK_BannerTranslations_Languages">
+          <End Type="MotorHomepageModel.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="MotorHomepageModel.BannerTranslations" Role="BannerTranslations" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Banners">
+            <Principal Role="Languages">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="BannerVis">
-              <PropertyRef Name="MasterId" />
+            <Dependent Role="BannerTranslations">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_BANNER_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Heading" Nullable="true" MaxLength="2550" />
+          <Property Type="String" Name="SubHeading" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="HasKo" Nullable="true" />
+          <Property Type="Boolean" Name="HasVi" Nullable="true" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreated" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserModified" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="PublishStatus" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="PostTranslations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Languages" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="PostTranslations" ToRole="Languages" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="PostTranslations" ToRole="Posts" />
+        </EntityType>
+        <Association Name="FK_PostTranslations_Languages">
+          <End Type="MotorHomepageModel.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTranslations_Posts">
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1" />
+          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SysDictionnaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Language5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysCategoryValues" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" FromRole="SysDictionnaries" ToRole="SysCategoryValues" />
+          <NavigationProperty Name="SysMenus" Relationship="MotorHomepageModel.FK_SysMenus_SysDictionnaries" FromRole="SysDictionnaries" ToRole="SysMenus" />
+        </EntityType>
+        <EntityType Name="SysMenus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="DictionaryId" Type="Int32" />
+          <Property Name="System" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IconCss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserCreated" Type="Guid" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="7" />
+          <Property Name="UserDeleted" Type="Guid" />
+          <Property Name="UserModified" Type="Guid" />
+          <Property Name="DateModified" Type="DateTime" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysDictionnaries" Relationship="MotorHomepageModel.FK_SysMenus_SysDictionnaries" FromRole="SysMenus" ToRole="SysDictionnaries" />
+        </EntityType>
+        <Association Name="FK_SysCategoryValues_SysDictionnary_DictionaryId">
+          <End Type="MotorHomepageModel.SysDictionnaries" Role="SysDictionnaries" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysCategoryValues" Role="SysCategoryValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDictionnaries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysCategoryValues">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysMenus_SysDictionnaries">
+          <End Type="MotorHomepageModel.SysDictionnaries" Role="SysDictionnaries" Multiplicity="0..1" />
+          <End Type="MotorHomepageModel.SysMenus" Role="SysMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysDictionnaries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysMenus">
+              <PropertyRef Name="DictionaryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1033,18 +1023,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MotorHomepageModelStoreContainer" CdmEntityContainer="MotorHomepageEntities">
-          <EntitySetMapping Name="PostKos">
-            <EntityTypeMapping TypeName="MotorHomepageModel.PostKos">
-              <MappingFragment StoreEntitySet="PostKos">
-                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="MotorHomepageModel.Posts">
               <MappingFragment StoreEntitySet="Posts">
@@ -1065,18 +1043,6 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostVis">
-            <EntityTypeMapping TypeName="MotorHomepageModel.PostVis">
-              <MappingFragment StoreEntitySet="PostVis">
-                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1113,48 +1079,6 @@
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="DictionaryId" ColumnName="DictionaryId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SysDictionnary">
-            <EntityTypeMapping TypeName="MotorHomepageModel.SysDictionnary">
-              <MappingFragment StoreEntitySet="SysDictionnary">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
-                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
-                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
-                <ScalarProperty Name="Language5" ColumnName="Language5" />
-                <ScalarProperty Name="Language4" ColumnName="Language4" />
-                <ScalarProperty Name="Language3" ColumnName="Language3" />
-                <ScalarProperty Name="Language2" ColumnName="Language2" />
-                <ScalarProperty Name="Language1" ColumnName="Language1" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SysMenus">
-            <EntityTypeMapping TypeName="MotorHomepageModel.SysMenus">
-              <MappingFragment StoreEntitySet="SysMenus">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
-                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
-                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
-                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="IconCss" ColumnName="IconCss" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1270,6 +1194,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Banners">
+              <MappingFragment StoreEntitySet="Banners">
+                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
+                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerTranslations">
+            <EntityTypeMapping TypeName="MotorHomepageModel.BannerTranslations">
+              <MappingFragment StoreEntitySet="BannerTranslations">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="BannerId" ColumnName="BannerId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Languages">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_BANNER_GETALL" FunctionName="MotorHomepageModel.Store.SP_BANNER_GETALL">
             <ResultMapping>
               <ComplexTypeMapping TypeName="MotorHomepageModel.SP_BANNER_GETALL_Result">
@@ -1289,46 +1252,59 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_BANNER_INSERT" FunctionName="MotorHomepageModel.Store.SP_BANNER_INSERT" />
           <FunctionImportMapping FunctionImportName="SP_BANNER_UPDATE" FunctionName="MotorHomepageModel.Store.SP_BANNER_UPDATE" />
-          <EntitySetMapping Name="Banners">
-            <EntityTypeMapping TypeName="MotorHomepageModel.Banners">
-              <MappingFragment StoreEntitySet="Banners">
-                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
-                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
-                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
-                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+          <EntitySetMapping Name="PostTranslations">
+            <EntityTypeMapping TypeName="MotorHomepageModel.PostTranslations">
+              <MappingFragment StoreEntitySet="PostTranslations">
+                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysDictionnaries">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysDictionnaries">
+              <MappingFragment StoreEntitySet="SysDictionnaries">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DateModified" ColumnName="DateModified" />
                 <ScalarProperty Name="UserModified" ColumnName="UserModified" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
-                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="Language5" ColumnName="Language5" />
+                <ScalarProperty Name="Language4" ColumnName="Language4" />
+                <ScalarProperty Name="Language3" ColumnName="Language3" />
+                <ScalarProperty Name="Language2" ColumnName="Language2" />
+                <ScalarProperty Name="Language1" ColumnName="Language1" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BannerKos">
-            <EntityTypeMapping TypeName="MotorHomepageModel.BannerKos">
-              <MappingFragment StoreEntitySet="BannerKos">
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
-                <ScalarProperty Name="Heading" ColumnName="Heading" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BannerVis">
-            <EntityTypeMapping TypeName="MotorHomepageModel.BannerVis">
-              <MappingFragment StoreEntitySet="BannerVis">
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SubHeading" ColumnName="SubHeading" />
-                <ScalarProperty Name="Heading" ColumnName="Heading" />
+          <EntitySetMapping Name="SysMenus">
+            <EntityTypeMapping TypeName="MotorHomepageModel.SysMenus">
+              <MappingFragment StoreEntitySet="SysMenus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IconCss" ColumnName="IconCss" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="DictionaryId" ColumnName="DictionaryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

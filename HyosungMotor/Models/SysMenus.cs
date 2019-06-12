@@ -15,6 +15,8 @@ namespace HyosungMotor.Models
     public partial class SysMenus
     {
         public string Id { get; set; }
+        public Nullable<int> DictionaryId { get; set; }
+        public Nullable<int> System { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }
         public string ParentId { get; set; }
@@ -28,5 +30,7 @@ namespace HyosungMotor.Models
         public Nullable<System.Guid> UserModified { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
         public bool IsDeleted { get; set; }
+    
+        public virtual SysDictionnaries SysDictionnaries { get; set; }
     }
 }

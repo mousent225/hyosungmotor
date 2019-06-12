@@ -111,9 +111,9 @@
     getLanguage: function (hasKo, hasVi) {
         var $h4 = $("<h4>");
 
-        $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-us"));
-        if (hasKo) $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-kr"));
-        if (hasVi) $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-vn"));
+        $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-us").css({ "margin": "1px" }));
+        if (hasKo) $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-kr").css({ "margin": "1px" }));
+        if (hasVi) $h4.append($("<span>").addClass("flag-icon").addClass("flag-icon-vn").css({ "margin": "1px" }));
 
         return $("<div>").append($h4).html();
     },

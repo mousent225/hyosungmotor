@@ -12,15 +12,17 @@ namespace HyosungMotor.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PostKos
+    public partial class PostTranslations
     {
         public int Id { get; set; }
-        public int MasterId { get; set; }
+        public int LanguageId { get; set; }
+        public int PostId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
         public string ImageCaption { get; set; }
     
+        public virtual Languages Languages { get; set; }
         public virtual Posts Posts { get; set; }
     }
 }

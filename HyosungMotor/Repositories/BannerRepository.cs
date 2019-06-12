@@ -13,12 +13,12 @@ namespace HyosungMotor.Repositories
     {
         private MotorHomepageEntities _db = new MotorHomepageEntities();
 
-        public PagedResult<BannerViewModel> GetAll(int pageIndex, int pageSize, string keyword, string langCode)
+        public PagedResult<BannerViewModel> GetAll(int pageIndex, int pageSize, string keyword, int? langId)
         {
             try
             {
                 var totalRow = new ObjectParameter("totalRow", typeof(int));
-                var list = (from l in _db.SP_BANNER_GETALL(pageIndex, pageSize, keyword, totalRow, langCode)
+                var list = (from l in _db.SP_BANNER_GETALL(pageIndex, pageSize, keyword, totalRow, langId)
                             select new BannerViewModel()
                             {
                                 Id = l.Id,
@@ -53,33 +53,34 @@ namespace HyosungMotor.Repositories
             try
             {
                 var item = (from i in _db.Banners
-                            from ii in _db.BannerKos.Where(x => x.MasterId == i.Id).DefaultIfEmpty()
-                            from iii in _db.BannerVis.Where(x => x.MasterId == i.Id).DefaultIfEmpty()
+                            from ii in _db.BannerTranslations.Where(x => x.BannerId == i.Id && x.LanguageId == 1).DefaultIfEmpty()
+                            from iii in _db.BannerTranslations.Where(x => x.BannerId == i.Id && x.LanguageId == 2).DefaultIfEmpty()
+                            from iiii in _db.BannerTranslations.Where(x => x.BannerId == i.Id && x.LanguageId == 3).DefaultIfEmpty()
                             where i.Id == id
                             select new BannerViewModel
                             {
                                 Id = i.Id,
-                                Heading = i.Heading,
-                                SubHeading = i.SubHeading,
-                                Description = i.Description,
+                                Heading = ii.Heading,
+                                SubHeading = ii.SubHeading,
+                                Description = ii.Description,
                                 Image = i.Image,
                                 Status = i.Status == 0 ? Status.InActice : Status.Active,
                                 PublishStatus = (i.PublishStatus == 0 ? PublishStatus.Draft : (i.PublishStatus == 1 ? PublishStatus.Pending_Review : PublishStatus.Published)),
                                 BannerKo = new BannerKoViewModel
                                 {
-                                    Id = ii.Id,
-                                    MasterId = ii.MasterId,
-                                    Heading = ii.Heading,
-                                    SubHeading = ii.SubHeading,
-                                    Description = ii.Description
-                                },
-                                BannerVi = new BannerViViewModel
-                                {
                                     Id = iii.Id,
-                                    MasterId = iii.MasterId,
+                                    MasterId = iii.BannerId,
                                     Heading = iii.Heading,
                                     SubHeading = iii.SubHeading,
                                     Description = iii.Description
+                                },
+                                BannerVi = new BannerViViewModel
+                                {
+                                    Id = iiii.Id,
+                                    MasterId = iiii.BannerId,
+                                    Heading = iiii.Heading,
+                                    SubHeading = iiii.SubHeading,
+                                    Description = iiii.Description
                                 }
                             }).FirstOrDefault();
 

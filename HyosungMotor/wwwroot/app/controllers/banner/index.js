@@ -29,6 +29,8 @@
             loadData(true);
         });
         $("#btnCreate").on("click", function () {
+            EntKor = { Id: 0, MasterId: 0, Headding: "", SubHeading: "", Description: "" },
+            EntVie = { Id: 0, MasterId: 0, Headding: "", SubHeading: "", Description: "" };
             Ent = { Id: 0, Heading: "", SubHeading: "", Description: "", Status: 1, PublishStatus: 0, BannerKo: EntKor, BannerVi: EntVie };
             resetFormDetail(Ent);
             
@@ -175,6 +177,9 @@
             return false;
         Ent.Status = $("#cbStatus").val();
         Ent.PublishStatus = $("#cbPublish").val();
+
+        if (!common.checkIsNullOrEmpty($("#txtImageUrl"), "Please select Image"))
+            return false;
         Ent.Image = $("#txtImageUrl").val();
 
         EntKor.MasterId = $("#hdfId").val();

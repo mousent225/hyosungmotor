@@ -27,21 +27,20 @@ namespace HyosungMotor.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<PostKos> PostKos { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
-        public virtual DbSet<PostVis> PostVis { get; set; }
         public virtual DbSet<SysCategories> SysCategories { get; set; }
         public virtual DbSet<SysCategoryValues> SysCategoryValues { get; set; }
-        public virtual DbSet<SysDictionnary> SysDictionnary { get; set; }
-        public virtual DbSet<SysMenus> SysMenus { get; set; }
         public virtual DbSet<SysRoles> SysRoles { get; set; }
         public virtual DbSet<SysUser> SysUser { get; set; }
         public virtual DbSet<Attachments> Attachments { get; set; }
         public virtual DbSet<SysUserRoleMapping> SysUserRoleMapping { get; set; }
         public virtual DbSet<SysRoleMapping> SysRoleMapping { get; set; }
         public virtual DbSet<Banners> Banners { get; set; }
-        public virtual DbSet<BannerKos> BannerKos { get; set; }
-        public virtual DbSet<BannerVis> BannerVis { get; set; }
+        public virtual DbSet<BannerTranslations> BannerTranslations { get; set; }
+        public virtual DbSet<Languages> Languages { get; set; }
+        public virtual DbSet<PostTranslations> PostTranslations { get; set; }
+        public virtual DbSet<SysDictionnaries> SysDictionnaries { get; set; }
+        public virtual DbSet<SysMenus> SysMenus { get; set; }
     
         public virtual int SP_SYS_ATTACHMENT_GET(Nullable<int> mODULEID, Nullable<int> mASTERID)
         {
@@ -111,7 +110,7 @@ namespace HyosungMotor.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETMENU_Result>("SP_GETMENU", userParameter);
         }
     
-        public virtual ObjectResult<SP_BANNER_GETALL_Result> SP_BANNER_GETALL(Nullable<int> pageIndex, Nullable<int> pageSize, string keyword, ObjectParameter totalRow, string langCode)
+        public virtual ObjectResult<SP_BANNER_GETALL_Result> SP_BANNER_GETALL(Nullable<int> pageIndex, Nullable<int> pageSize, string keyword, ObjectParameter totalRow, Nullable<int> languageId)
         {
             var pageIndexParameter = pageIndex.HasValue ?
                 new ObjectParameter("pageIndex", pageIndex) :
@@ -125,11 +124,11 @@ namespace HyosungMotor.Models
                 new ObjectParameter("keyword", keyword) :
                 new ObjectParameter("keyword", typeof(string));
     
-            var langCodeParameter = langCode != null ?
-                new ObjectParameter("langCode", langCode) :
-                new ObjectParameter("langCode", typeof(string));
+            var languageIdParameter = languageId.HasValue ?
+                new ObjectParameter("languageId", languageId) :
+                new ObjectParameter("languageId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BANNER_GETALL_Result>("SP_BANNER_GETALL", pageIndexParameter, pageSizeParameter, keywordParameter, totalRow, langCodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BANNER_GETALL_Result>("SP_BANNER_GETALL", pageIndexParameter, pageSizeParameter, keywordParameter, totalRow, languageIdParameter);
         }
     
         public virtual int SP_BANNER_INSERT(string heading, string subHeading, string description, string image, string userCreated, Nullable<int> status, Nullable<int> publishStatus, Nullable<bool> hasKo, string headingKo, string subHeadingKo, string descriptionKo, Nullable<bool> hasVi, string headingVi, string subHeadingVi, string descriptionVi)

@@ -17,14 +17,10 @@ namespace HyosungMotor.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Banners()
         {
-            this.BannerKos = new HashSet<BannerKos>();
-            this.BannerVis = new HashSet<BannerVis>();
+            this.BannerTranslations = new HashSet<BannerTranslations>();
         }
     
         public int Id { get; set; }
-        public string Heading { get; set; }
-        public string SubHeading { get; set; }
-        public string Description { get; set; }
         public string Image { get; set; }
         public string UserCreated { get; set; }
         public System.DateTime DateCreated { get; set; }
@@ -39,8 +35,6 @@ namespace HyosungMotor.Models
         public Nullable<bool> HasVi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BannerKos> BannerKos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BannerVis> BannerVis { get; set; }
+        public virtual ICollection<BannerTranslations> BannerTranslations { get; set; }
     }
 }

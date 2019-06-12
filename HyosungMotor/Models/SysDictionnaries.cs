@@ -12,12 +12,13 @@ namespace HyosungMotor.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SysDictionnary
+    public partial class SysDictionnaries
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SysDictionnary()
+        public SysDictionnaries()
         {
             this.SysCategoryValues = new HashSet<SysCategoryValues>();
+            this.SysMenus = new HashSet<SysMenus>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace HyosungMotor.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SysCategoryValues> SysCategoryValues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SysMenus> SysMenus { get; set; }
     }
 }

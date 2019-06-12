@@ -12,34 +12,20 @@ namespace HyosungMotor.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Posts
+    public partial class Languages
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Posts()
+        public Languages()
         {
+            this.BannerTranslations = new HashSet<BannerTranslations>();
             this.PostTranslations = new HashSet<PostTranslations>();
         }
     
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Content { get; set; }
-        public string Thumbnail { get; set; }
-        public string Image { get; set; }
-        public string ImageCaption { get; set; }
-        public System.DateTime PublishedDate { get; set; }
-        public int CategoryId { get; set; }
-        public bool IsDeleted { get; set; }
-        public Nullable<System.DateTime> DateDeleted { get; set; }
-        public string UserDeleted { get; set; }
-        public string UserCreated { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public string UserModified { get; set; }
-        public Nullable<System.DateTime> DateModified { get; set; }
-        public int Status { get; set; }
-        public int PublishStatus { get; set; }
+        public string Name { get; set; }
     
-        public virtual SysCategories SysCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BannerTranslations> BannerTranslations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostTranslations> PostTranslations { get; set; }
     }

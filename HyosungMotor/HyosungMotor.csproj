@@ -203,16 +203,16 @@
     <Compile Include="Models\Attachments.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BannerKos.cs">
-      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Banners.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BannerVis.cs">
+    <Compile Include="Models\BannerTranslations.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Languages.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MotorHomepageEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -229,13 +229,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MotorHomepageEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PostKos.cs">
-      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Posts.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PostVis.cs">
+    <Compile Include="Models\PostTranslations.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_BANNER_GETALL_Result.cs">
@@ -253,7 +250,7 @@
     <Compile Include="Models\SysCategoryValues.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SysDictionnary.cs">
+    <Compile Include="Models\SysDictionnaries.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SysMenus.cs">
