@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Dtos\PagedResult.cs" />
     <Compile Include="Dtos\PagedResultBase.cs" />
     <Compile Include="Enums\PublishStatus.cs" />
@@ -2930,6 +2931,13 @@
     <Content Include="wwwroot\flexpack\css\flexpack.css" />
     <Content Include="wwwroot\flexpack\css\flexpack.min.css" />
     <Content Include="wwwroot\flexpack\css\theme.css" />
+    <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530611417Ndv.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530612278xXa.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\motor-1.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\motor-2 - nhân nghĩa.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\motor-3-edit-shadow.png" />
+    <Content Include="wwwroot\flexpack\custom-img\motor-3-edit.png" />
+    <Content Include="wwwroot\flexpack\custom-img\motor-3.jpg" />
     <Content Include="wwwroot\flexpack\img\404_bg.jpg" />
     <Content Include="wwwroot\flexpack\img\about_1.jpg" />
     <Content Include="wwwroot\flexpack\img\about_bg.jpg" />
@@ -3348,6 +3356,7 @@
     <Content Include="wwwroot\flexpack\plugins\waypoints\src\shortcuts\inview.js" />
     <Content Include="wwwroot\flexpack\plugins\waypoints\src\shortcuts\sticky.js" />
     <Content Include="wwwroot\flexpack\plugins\waypoints\src\waypoint.js" />
+    <Content Include="wwwroot\images\0738-germany-potsdam-horse-tramway-1907-a-1000-9-300.jpeg" />
     <Content Include="wwwroot\images\banner1.svg" />
     <Content Include="wwwroot\images\banner2.svg" />
     <Content Include="wwwroot\images\banner3.svg" />
@@ -3355,6 +3364,11 @@
     <Content Include="wwwroot\images\favicon.png" />
     <Content Include="wwwroot\images\hyosung-footer.png" />
     <Content Include="wwwroot\images\hyosung-logo.png" />
+    <Content Include="wwwroot\images\hyosung-motor.png" />
+    <Content Include="wwwroot\images\iq-kooperation-adobe-stock-161568122-internet-of-things.jpeg" />
+    <Content Include="wwwroot\images\keyvisual-simobility.jpeg" />
+    <Content Include="wwwroot\images\sic_00017329.jpeg" />
+    <Content Include="wwwroot\images\siem-39l-intelligent-traffic17-01.jpeg" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\site.min.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
@@ -3853,6 +3867,7 @@
     <Content Include="wwwroot\flexpack\plugins\highlightjs\README.md" />
     <Content Include="wwwroot\flexpack\plugins\highlightjs\README.ru.md" />
     <Content Include="wwwroot\flexpack\img\image_2.ai" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
