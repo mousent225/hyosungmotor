@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HyosungMotor.Content.Texts
+
+@{
 	ViewBag.Title = "Home Page";
 	Layout = null;
 }
@@ -7,13 +9,16 @@
 	.card-product {
 		width: 100% !important;
 	}
+
 	.card-img-custom {
 		width: 100%;
 		border-radius: calc(2rem - 25px);
 	}
+
 	.card-blog-custom {
-		margin:0
+		margin: 0
 	}
+
 	.div-overlay {
 		position: absolute;
 		bottom: 0;
@@ -25,6 +30,44 @@
 		overflow: hidden;
 		color: #fff !important;
 		padding: 0 10px;
+	}
+
+	.product-item {
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	.modal-content {
+		position: relative;
+		background-color: #ffffff !important;
+		border: 1px solid #999999;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 2px !important;
+		-webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+		background-clip: padding-box;
+		outline: 0;
+	}
+
+	.modal-header {
+		padding: 15px !important;
+		border-bottom: 1px solid #e5e5e5 !important;
+		min-height: 16.846153846px;
+	}
+
+	.table th, .table td {
+		padding: 5px;
+	}
+
+	.button-tab {
+		width:100%;
+		border-radius:0 !important;
+	}
+	.no-margin {
+		margin:0 !important;
+	}
+	.btn-active {
+		background-color: #505cfd !important;
+		color:white !important;
 	}
 </style>
 
@@ -40,10 +83,16 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
 	<link rel="stylesheet" href="~/wwwroot/flexpack/plugins/flickity/flickity.min.css">
 	<link rel="stylesheet" href="~/wwwroot/flexpack/plugins/fullpagejs/dist/fullpage.min.css">
-
+	<link href="~/wwwroot/assets/aos-master/aos.css" rel="stylesheet" />
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="~/wwwroot/flexpack/css/flexpack-blue.min.css">
+	<link href="~/wwwroot/admin-side/css/custom-css.css" rel="stylesheet" />
 
+	<link href="~/wwwroot/assets/flag-icon-css-master/flag-icon.min.css" rel="stylesheet" />
+
+	@*<link href="~/wwwroot/flexpack/css/flexpack-blue.css" rel="stylesheet" />
+		<link href="~/wwwroot/flexpack/css/flexpack-orange.css" rel="stylesheet" />
+		<link href="~/wwwroot/flexpack/css/flexpack.css" rel="stylesheet" />*@
 	<title>FlexPack - Product Landing Page</title>
 </head>
 <body data-spy="scroll" data-target=".navbar">
@@ -69,34 +118,31 @@
 			<div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
 				<ul class="navbar-nav">
 					<li class="nav-item active">
-						<a class="nav-link" href="#page-top">Home</a>
+						<a class="nav-link" href="#page-top">@rHome.Home</a>
 					</li>
 					@*<li class="nav-item">
 							<a class="nav-link" href="#section-about">About</a>
 						</li>*@
 					<li class="nav-item">
-						<a class="nav-link" href="#section-news">News</a>
+						<a class="nav-link" href="#section-news">@rHome.News</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#section-news-v2">News v2</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#section-product">Products</a>
+						<a class="nav-link" href="#section-product">@rHome.Products</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="#section-contact">Contact</a>
+						<a class="nav-link" href="#section-contact">@rHome.Contact</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#section-inquiry">Inquiry</a>
+						<a class="nav-link" href="#section-inquiry">@rHome.Inquiry</a>
 					</li>
 				</ul>
 
 				<!-- Social icons -->
 				<ul class="list list-inline justify-content-end d-lg-none">
-					<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-					<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="flag-icon flag-icon-us"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="flag-icon flag-icon-kr"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i class="flag-icon flag-icon-vn"></i></a></li>
 				</ul>
 			</div>
 
@@ -105,24 +151,24 @@
 				<li class="list-inline-item">
 
 					<!-- link -->
-					<a href="#">
-						<i class="fab fa-twitter"></i>
+					<a href="#" data-lang="en-US" class="setLang">
+						<i class="flag-icon flag-icon-us"></i>
 					</a>
 
 				</li>
 				<li class="list-inline-item">
 
 					<!-- link -->
-					<a href="#">
-						<i class="fab fa-facebook-square"></i>
+					<a href="#" data-lang="ko-KR" class="setLang">
+						<i class="flag-icon flag-icon-kr"></i>
 					</a>
 
 				</li>
 				<li class="list-inline-item">
 
 					<!-- link -->
-					<a href="#">
-						<i class="fab fa-instagram"></i>
+					<a href="#" data-lang="vi-VN" class="setLang">
+						<i class="flag-icon flag-icon-vn"></i>
 					</a>
 
 				</li>
@@ -150,35 +196,6 @@
 
 	</a>
 
-	<!-- MODALS
-	================================================== -->
-	<div class="modal fade" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="modal-video-header" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-video modal-lg" role="document">
-			<div class="modal-content">
-
-				<!-- Header -->
-				<div class="modal-header">
-
-					<!-- Title -->
-					<h4 class="modal-title" id="modal-video-header">
-						Video Presentation
-					</h4>
-
-					<!-- Close -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-
-				</div>
-				<div class="modal-body">
-
-					<!-- Video -->
-					<video src="~/wwwroot/flexpack/video/1.mp4" class="img-fluid" controls></video>
-
-				</div>
-			</div> <!-- / .modal-content -->
-		</div> <!-- / .modal-dialog -->
-	</div> <!-- / .modal -->
 	<!-- HOME
 	================================================== -->
 	<section class="" id="page-top">
@@ -304,7 +321,7 @@
 	</section> <!-- .section -->
 	<!-- NEWS
 		================================================== -->
-	<section class="section bg-light" id="section-news-v2">
+	<section class="section bg-light" id="section-news">
 		<div class="container">
 			<div class="row justify-content-center text-center">
 				<div class="col-sm-12 col-lg-8 col-xl-6">
@@ -316,7 +333,7 @@
 			</div> <!-- .row -->
 
 			<div class="row justify-content-center">
-				<div class="col-12 col-sm-12 col-md-4">
+				<div class="col-12 col-sm-12 col-md-6" data-aos="zoom-in-right">
 					<div class="card card-blog-custom">
 						<div class="">
 							<!-- background image -->
@@ -345,7 +362,7 @@
 						</div> <!-- .card-img-overlay -->
 					</div>
 				</div>
-				<div class="col-12 col-sm-12 col-md-4">
+				<div class="col-12 col-sm-12 col-md-6" data-aos="zoom-in-left">
 					<div class="card card-blog-custom">
 						<div class="">
 							<!-- background image -->
@@ -374,186 +391,10 @@
 						</div> <!-- .card-img-overlay -->
 					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-4">
-					<div class="card card-blog-custom">
-						<div class="">
-							<!-- background image -->
-							<img class="card-img-custom" src="~/wwwroot/images/sic_00017329.jpeg" />
-						</div>
-						<!-- overlay content -->
-						<div class="">
-							<!-- title -->
-							<!-- category -->
-							<p class="subtitle">
-								<a href="#" class="text-secondary"># New</a>
-							</p>
-
-							<!-- title -->
-							<h3>
-								<a href="javascript:void(0);">FlexPack new features</a>
-							</h3>
-
-							<!-- date -->
-							<p class="blog-slider-item-subtitle text-muted subtitle">April 16, 2018</p>
-							<div class="card-img-overlay-desc">
-								<!-- text -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem architecto assumenda perspiciatis sequi deleniti possimus aspernatur vero accusamus maiores laboriosam iusto, dignissimos ex numquam.</p>
-							</div> <!-- .card-img-overlay-desc -->
-
-						</div> <!-- .card-img-overlay -->
-					</div>
-				</div>
 			</div>
 		</div>
 	</section> <!-- .section -->
 	<!-- END NEWs .section -->
-	<!-- NEWS
-		================================================== -->
-	<section class="section bg-light" id="section-news">
-		<div class="container">
-
-			<div class="row justify-content-center text-center">
-				<div class="col-sm-12 col-lg-8 col-xl-6">
-
-					<!-- title -->
-					<h2>News</h2>
-
-					<!-- subtitle -->
-					<p class="subtitle"># read and learn</p>
-				</div>
-			</div> <!-- .row -->
-			<div class="row justify-content-center">
-
-				<div class="col-12 col-sm-10 col-xl-8">
-
-					<div class="blog-slider">
-
-						<div class="blog-slider-item bg-dark p-3 p-sm-5">
-
-							<div class="container px-0">
-								<div class="row justify-content-between">
-									<div class="col-12 col-sm-12 col-md-6 col-lg-8">
-
-										<!-- image -->
-										<div class="blog-slider-item-img mb-5 mb-md-0">
-											<img src="~/wwwroot/flexpack/img/about_1.jpg" class="img-fluid" alt="...">
-										</div>
-
-									</div>
-									<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-										<!-- category -->
-										<p class="subtitle">
-											<a href="#" class="text-secondary"># App news</a>
-										</p>
-
-										<!-- title -->
-										<h3>
-											<a href="#">FlexPack new features</a>
-										</h3>
-
-										<!-- date -->
-										<p class="blog-slider-item-subtitle text-muted subtitle">April 16, 2018</p>
-
-										<!-- text -->
-										<p class="blog-slider-item-text text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam accusamus, quidem nemo dolore simil.</p>
-
-										<!-- button -->
-										<a href="#" class="link-underline">Continue reading</a>
-
-									</div>
-								</div> <!-- .row -->
-							</div> <!-- .container -->
-
-						</div> <!-- .blog-slider-item -->
-
-						<div class="blog-slider-item bg-dark p-3 p-sm-5">
-
-							<div class="container px-0">
-								<div class="row justify-content-between">
-									<div class="col-12 col-sm-12 col-md-6 col-lg-8">
-
-										<!-- image -->
-										<div class="blog-slider-item-img mb-5 mb-md-0">
-											<img src="~/wwwroot/flexpack/img/img_1.jpg" class="img-fluid" alt="...">
-										</div>
-
-									</div>
-									<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-										<!-- category -->
-										<p class="subtitle">
-											<a href="#" class="text-secondary"># products</a>
-										</p>
-
-										<!-- title -->
-										<h3>
-											<a href="#">New products online</a>
-										</h3>
-
-										<!-- date -->
-										<p class="blog-slider-item-subtitle text-muted subtitle">May 30, 2018</p>
-
-										<!-- text -->
-										<p class="blog-slider-item-text text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam accusamus, quidem nemo dolore simil.</p>
-
-										<!-- button -->
-										<a href="#" class="link-underline">Continue reading</a>
-
-									</div>
-								</div> <!-- .row -->
-							</div> <!-- .container -->
-
-						</div> <!-- .blog-slider-item -->
-
-						<div class="blog-slider-item bg-dark p-3 p-sm-5">
-
-							<div class="container px-0">
-								<div class="row justify-content-between">
-									<div class="col-12 col-sm-12 col-md-6 col-lg-8">
-
-										<!-- image -->
-										<div class="blog-slider-item-img mb-5 mb-md-0">
-											<img src="~/wwwroot/flexpack/img/img_2.jpg" class="img-fluid" alt="...">
-										</div>
-
-									</div>
-									<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-										<!-- category -->
-										<p class="subtitle">
-											<a href="#" class="text-secondary"># business</a>
-										</p>
-
-										<!-- title -->
-										<h3>
-											<a href="#">Startup conference</a>
-										</h3>
-
-										<!-- date -->
-										<p class="blog-slider-item-subtitle text-muted subtitle">June 16, 2018</p>
-
-										<!-- text -->
-										<p class="blog-slider-item-text text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam accusamus, quidem nemo dolore simil.</p>
-
-										<!-- button -->
-										<a href="#" class="link-underline">Continue reading</a>
-
-									</div>
-								</div> <!-- .row -->
-							</div> <!-- .container -->
-
-						</div> <!-- .blog-slider-item -->
-
-					</div> <!-- .blog-slider -->
-
-				</div>
-
-			</div> <!-- .row -->
-
-		</div> <!-- .container -->
-
-	</section> <!-- .section -->
 	<!-- PRODUCT
 	================================================== -->
 	<section class="section section_product" id="section-product">
@@ -563,72 +404,109 @@
 				<div class="col-sm-12 col-lg-8 col-xl-6">
 
 					<!-- title -->
-					<h2>FlexPack collection</h2>
+					<h2>
+						Hyosung Electric Motor
+					</h2>
 
 					<!-- subtitle -->
 					<p class="subtitle"># Find your product</p>
 
 				</div>
 			</div> <!-- .row -->
-			<div class="row align-items-center justify-content-between">
-				<div class="col-sm-12 col-lg-6 col-xl-5">
+			<div class="row align-items-center justify-content-between product-item">
+				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/motor-2 - nhân nghĩa.jpg" />
+					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/Standard motor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
 
 					<!-- title -->
-					<h3>New vision of making business</h3>
+					<h3>
+						Standard Motors
+					</h3>
 
 					<!-- subtitle -->
-					<p class="subtitle"># Two words about FlexPack</p>
+					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum fuga reprehenderit repellat quasi Flexvident incidunt quam pariatur voluptates laudantium magni, doloribus quae officia quaerat, possimus perferendis amet modi, maxime at.</p>
+					<p class="data-content-text">380V</p>
+					<p class="data-content-text">50Hz</p>
+					<p class="data-content-text">IE1, IE2, IE3</p>
 
 					<!-- button -->
-					<button class="btn btn-default mt-3" type="button">About FlexPack</button>
+					<button class="btn btn-default mt-3" type="button" id="btnStandardMotor">Technical Data</button>
 
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5">
+			</div> <!-- .row -->
+			<div class="row align-items-center justify-content-between product-item">
+				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/motor-3.jpg" />
+					<img style="width:67%" src="~/wwwroot/flexpack/custom-img/products/60Hz motor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
 
 					<!-- title -->
-					<h3>New vision of making business</h3>
+					<h3>60Hz Motors</h3>
 
 					<!-- subtitle -->
-					<p class="subtitle"># Two words about FlexPack</p>
+					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum fuga reprehenderit repellat quasi Flexvident incidunt quam pariatur voluptates laudantium magni, doloribus quae officia quaerat, possimus perferendis amet modi, maxime at.</p>
-
+					<p class="data-content-text">380V, 440V</p>
+					<p class="data-content-text">60Hz, KS, JIS Standard</p>
+					<p class="data-content-text">IE3</p>
 					<!-- button -->
-					<button class="btn btn-default mt-3" type="button">About FlexPack</button>
+					<button class="btn btn-default mt-3" type="button">Technical Data</button>
 
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5">
+			</div> <!-- .row -->
+			<div class="row align-items-center justify-content-between product-item">
+				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/motor-1.jpg" />
+					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/geared motor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
 
 					<!-- title -->
-					<h3>New vision of making business</h3>
+					<h3>
+						Geared Motors
+					</h3>
 
 					<!-- subtitle -->
-					<p class="subtitle"># Two words about FlexPack</p>
+					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum fuga reprehenderit repellat quasi Flexvident incidunt quam pariatur voluptates laudantium magni, doloribus quae officia quaerat, possimus perferendis amet modi, maxime at.</p>
-
+					<p class="data-content-text">380V, 440V</p>
+					<p class="data-content-text">60Hz</p>
+					<p class="data-content-text">IE3</p>
 					<!-- button -->
-					<button class="btn btn-default mt-3" type="button">About FlexPack</button>
+					<button id="btnGearMotor" class="btn btn-default mt-3" type="button">Technical Data</button>
+
+				</div>
+			</div> <!-- .row -->
+			<div class="row align-items-center justify-content-between product-item">
+				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
+
+					<!-- image -->
+					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/MV motor.jpg" />
+				</div>
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
+
+					<!-- title -->
+					<h3>
+						MV & HV Motors
+					</h3>
+
+					<!-- subtitle -->
+					<p class="subtitle"># Two words about Motor</p>
+
+					<!-- description -->
+					<p class="data-content-text">Various industries such as Power Plant, Oil & Gas, Petrochemical, Desalination, Ship, Steel, etc.</p>
+					<!-- button -->
+					<button id="btnMvMotor" class="btn btn-default mt-3" type="button">Technical Data</button>
 
 				</div>
 			</div> <!-- .row -->
@@ -645,114 +523,129 @@
 	================================================== -->
 	<section class="section_about bg-light" id="section-contact">
 		<div class="container-fluid px-0">
-			<div class="row no-gutters">
-				<div class="col-12 col-md-6 order-2 order-md-1">
-					<!-- background image -->
-					<div class="bg-cover d-none d-md-block" style="padding:5px; z-index:0">
-						@*<img src="~/wwwroot/flexpack/img/img_1.jpg" alt="...">*@
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.3753031013066!2d106.92021331472151!3d10.705508263426292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317519642435d78b%3A0x92c4dc711d5d8e73!2sHyosung+Motor+Factory!5e0!3m2!1sen!2ssg!4v1560324404922!5m2!1sen!2ssg" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<div class="row">
+				<div class="col-12 col-md-4" data-aos="fade-down">
+
+					<div class="text-center my-4">
+
+						<!-- Icon -->
+						<i class="text-secondary fa fa-map-marker fa-2x"></i>
+
+						<!-- Heading -->
+						<h5 class="mb-3">
+							Hyosung Motor Factory
+						</h5>
+
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
+
 					</div>
 
-					<img src="~/wwwroot/flexpack/img/img_1.jpg" class="img-fluid d-md-none" alt="...">
-
 				</div>
-				<div class="col-12 col-md-6 order-1 order-md-2 bg-light px-3 py-5 p-md-6">
+				<div class="col-12 col-md-4" data-aos="fade-up">
 
-					<!-- heading -->
-					<h3>Legendary classic design,<br>Innovative optic system</h3>
+					<div class="text-center my-4">
 
-					<!-- text -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo maxime voluptatem aliquid earum beatae. Quia, quo asperiores, tempora, autem quasi consequuntur adipisci nemo molestias deleniti accusamus ex unde impedit sunt dolores nesciunt culpa? Sapiente harum, dicta quisquam, dolorum dolorem quibusdam.</p>
+						<!-- Icon -->
+						<i class="text-secondary fa fa-phone fa-2x"></i>
 
-					<p>Pariatur Flexvident magnam obcaecati existe deserunt. Neque enim dicta a praesentium voluptatibus accusantium aspernatur eos asperiores a nemo similique quam architecto voluptatum aliquam.</p>
+						<!-- Heading -->
+						<h5 class="mb-3">
+							LET'S TALK
+						</h5>
 
-					<!-- Button -->
-					<a href="#modal-video" data-toggle="modal" class="btn btn-primary">
-						Play video
-					</a>
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
 
-				</div>
-			</div> <!-- .row -->
-
-			<div class="row no-gutters">
-				<div class="col-12 col-md-6 bg-light px-3 py-5 p-md-6">
-
-					<!-- heading -->
-					<h3>A great choice for professional photography</h3>
-
-					<!-- text -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo maxime voluptatem aliquid earum beatae. Quia, quo asperiores, tempora, autem quasi consequuntur adipisci nemo molestias deleniti accusamus ex unde impedit sunt dolores nesciunt culpa? Sapiente harum, dicta quisquam, dolorum dolorem quibusdam.</p>
-
-					<!-- datas -->
-					<div class="data">
-
-						<!-- icon -->
-						<div class="data-icon">
-							<i data-feather="camera"></i>
-						</div>
-
-						<div class="data-content">
-
-							<!-- title -->
-							<h4 class="data-content-title">Image stabilization</h4>
-
-							<!-- text -->
-							<p class="data-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque perferendis doloribus.</p>
-
-						</div>
-
-					</div> <!-- .data -->
-
-					<div class="data">
-
-						<!-- icon -->
-						<div class="data-icon">
-							<i data-feather="monitor"></i>
-						</div>
-
-						<div class="data-content">
-
-							<!-- title -->
-							<h4 class="data-content-title">4k resolution</h4>
-
-							<!-- text -->
-							<p class="data-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque perferendis doloribus.</p>
-
-						</div>
-
-					</div> <!-- .data -->
-
-					<div class="data">
-
-						<!-- icon -->
-						<div class="data-icon">
-							<i data-feather="battery-charging"></i>
-						</div>
-
-						<div class="data-content">
-
-							<!-- title -->
-							<h4 class="data-content-title">High-powered battery</h4>
-
-							<!-- text -->
-							<p class="data-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque perferendis doloribus.</p>
-
-						</div>
-
-					</div> <!-- .data -->
-
-				</div>
-				<div class="col-12 col-md-6">
-
-					<!-- background image -->
-					<div class="bg-cover" style="padding:5px; z-index:0">
-						@*<img src="~/wwwroot/flexpack/img/img_2.jpg" class="d-none d-md-block" alt="...">*@
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.365277684287!2d106.91101701472158!3d10.706283263412312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f3adc24c825%3A0x4358929b720a7a79!2sHyosung+Vietnam+Co.+Ltd.!5e0!3m2!1sen!2ssg!4v1560324647748!5m2!1sen!2ssg" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
 					</div>
 
-					<img src="~/wwwroot/flexpack/img/img_2.jpg" class="img-fluid d-md-none" alt="...">
+				</div>
+				<div class="col-12 col-md-4" data-aos="fade-down">
 
-				</div> <!-- .row -->
+					<div class="text-center my-4">
+
+						<!-- Icon -->
+						<i class="text-secondary fa fa-envelope fa-2x"></i>
+
+						<!-- Heading -->
+						<h5 class="mb-3">
+							E-MAIL US
+						</h5>
+
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-4" data-aos="fade-down">
+
+					<div class="text-center my-4">
+
+						<!-- Icon -->
+						<i class="text-secondary fa fa-map-marker fa-2x"></i>
+
+						<!-- Heading -->
+						<h5 class="mb-3">
+							Hyosung Motor Ho Chi Minh
+						</h5>
+
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
+
+					</div>
+
+				</div>
+				<div class="col-12 col-md-4" data-aos="fade-up">
+
+					<div class="text-center my-4">
+
+						<!-- Icon -->
+						<i class="text-secondary fa fa-phone fa-2x"></i>
+
+						<!-- Heading -->
+						<h5 class="mb-3">
+							LET'S TALK
+						</h5>
+
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
+
+					</div>
+
+				</div>
+				<div class="col-12 col-md-4" data-aos="fade-down">
+
+					<div class="text-center my-4">
+
+						<!-- Icon -->
+						<i class="text-secondary fa fa-envelope fa-2x"></i>
+
+						<!-- Heading -->
+						<h5 class="mb-3">
+							E-MAIL US
+						</h5>
+
+						<!-- Content -->
+						<p class="mb-0">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
+						</p>
+
+					</div>
+
+				</div>
 			</div>
 		</div> <!-- #section-contact-->
 	</section>
@@ -761,7 +654,7 @@
 	================================================== -->
 	<section class="section_contact " id="section-inquiry">
 		<div class="container-fluid px-0">
-			<div class="row no-gutters">
+			<div class="row no-gutters justify-content-center">
 				<div class="col-12 col-md-6 px-3 py-5 p-sm-6">
 
 					<div class="half-item d-flex flex-column justify-content-center h-100">
@@ -778,6 +671,12 @@
 							<div class="form-group">
 								<label for="contact__form__name" class="sr-only">Full name</label>
 								<input type="text" class="form-control" id="contact__form__name" name="contact__form__name" placeholder="Full name">
+								<div class="invalid-feedback"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="contact__form__email" class="sr-only">Phone Number</label>
+								<input type="tel" class="form-control" id="contact__form__email" name="contact__form__email" placeholder="Phone Number">
 								<div class="invalid-feedback"></div>
 							</div>
 
@@ -802,27 +701,7 @@
 					</div> <!-- .half-item -->
 
 				</div>
-				<div class="col-12 col-md-6 px-3 py-5 p-sm-6 bg-light text-center">
 
-					<div class="half-item d-flex flex-column justify-content-center h-100">
-
-						<!-- heading -->
-						<h2>Hurry up to get 20% discount* <br>in <span class="font-weight-bold">FlexPack Store</span></h2>
-
-						<!-- text -->
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo maxime voluptatem aliquid earum beatae. Quia, quo asperiores, tempora, autem quasi consequuntur adipisci nemo molestias deleniti accusamus ex unde impedit sunt dolores nesciunt culpa? Sapiente harum, dicta quisquam, dolorum dolorem quibusdam.</p>
-
-						<!-- button -->
-						<div class="button">
-							<button class="btn btn-primary" type="button">Purchase now</button>
-						</div>
-
-
-						<p class="pt-5 mb-0">* Offer valid starting 10 July, 2018 through 24 December, 2018</p>
-
-					</div> <!-- .half-item -->
-
-				</div>
 
 			</div> <!-- .row -->
 		</div> <!-- .container-fluid -->
@@ -834,142 +713,21 @@
 
 	<footer class="footer bg-dark">
 		<div class="container">
-			<div class="row py-5">
-				<div class="col-12 col-sm-6 col-md-3 mb-5 mb-sm-0">
-
-					<!-- heading -->
-					<h5 class="footer-title text-light mt-5">About</h5>
-
-					<!-- text -->
-					@*<p class="mb-0">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed consequuntur architecto vel, molestiae adipisci modi incidunt voluptatibus iureic delectus.
-					</p>*@
-
-				</div>
-				<div class="col-12 col-sm-6 col-md-3 mb-5 mb-sm-0">
-
-					<!-- heading -->
-					<h5 class="footer-title text-light mt-0 mt-sm-5">Contact</h5>
-
-					<!-- list -->
-					@*<ul class="list list-footer">
-						<li class="list-item">
-							<a href="#" class="link-underline">737 Fifth Avenue, New York, USA</a>
-						</li>
-						<li class="list-item">
-							<a href="tel:4551251245" class="link-underline">+(455) 125 12 45</a>
-						</li>
-						<li class="list-item">
-							<a href="mailto:admin@propack.com" class="link-underline">admin@propack.com</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="link-underline">flexpack.app</a>
-						</li>
-					</ul>*@
-
-				</div>
-				<div class="col-12 col-sm-6 col-md-3 mb-5 mb-sm-0">
-
-					<!-- heading -->
-					<h5 class="footer-title text-light mt-0 mt-sm-5">Links</h5>
-
-					<!-- list -->
-					@*<ul class="list list-footer">
-						<li class="list-item">
-							<a href="#" class="link-underline">About</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="link-underline">Help & Support</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="link-underline">Partners</a>
-						</li>
-						<li class="list-item">
-							<a href="#" class="link-underline">Privacy Policy</a>
-						</li>
-					</ul>*@
-
-				</div>
-				<div class="col-12 col-sm-6 col-md-3">
-
-					<!-- heading -->
-					<h5 class="footer-title text-light mt-0 mt-sm-5">Subscribe</h5>
-
-					<!-- text -->
-					@*<p>Subscribe to our email newsletter to receive updates and news.</p>*@
-
-					<!-- Newsletter Form -->
-					@*<div id="mc_embed_signup">
-						<div class="newsletter_form validate" action="//themeforest.us16.list-manage.com/subscribe/post-json?u=3c9679e26b601e1a87122b12f&id=e4b9351526&c=?" method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
-							<div id="mc_embed_signup_scroll">
-								<div class="mc-field-group form-group">
-									<label for="mce-EMAIL" class="sr-only">E-mail address</label>
-									<input type="email" value="" name="EMAIL" class="required email form-control newsletter_input" id="mce-EMAIL" placeholder="Email address">
-								</div>
-								<div id="mce-responses" class="clear">
-									<div class="response"></div>
-									<div class="response" id="mce-success-response"></div>
-								</div>
-
-								<div aria-hidden="true" id="mce-hidden-input">
-									<input type="text" name="b_507744bbfd1cc2879036c7780_4523d25e1b" tabindex="-1" value="">
-								</div>
-								<div class="clear">
-									<button type="submit" class="btn btn-outline text-light" id="mc-embedded-subscribe">
-										<i class="far fa-paper-plane"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>*@ 
-					<!-- #mc_embed_signup -->
-
-				</div>
-			</div> <!-- .row -->
 
 			<div class="row footer-copyright py-4">
 				<div class="col-xs-12 col-sm-6">
 
 					<!-- copyright text -->
 					<p class="mb-3 mb-sm-0">COPYRIGHT© 2019 HYOSUNG. ALL RIGHTS RESERVED.</p>
-					
 
-				</div>
-				<div class="col-xs-12 col-sm-6">
-
-					<!-- Social icons -->
-					<ul class="list list-inline text-sm-right">
-						<li class="list-inline-item">
-
-							<!-- link -->
-							<a href="#">
-								<i class="fab fa-twitter"></i>
-							</a>
-
-						</li>
-						<li class="list-inline-item">
-
-							<!-- link -->
-							<a href="#">
-								<i class="fab fa-facebook-square"></i>
-							</a>
-
-						</li>
-						<li class="list-inline-item">
-
-							<!-- link -->
-							<a href="#">
-								<i class="fab fa-instagram"></i>
-							</a>
-
-						</li>
-					</ul>
 
 				</div>
 			</div> <!-- .row -->
 		</div> <!-- .container -->
 	</footer>
-
+	@Html.Partial("~/Views/Home/_StandardMotor.cshtml")
+	@Html.Partial("~/Views/Home/_GearedMotor.cshtml")
+	@Html.Partial("~/Views/Home/_MvMotor.cshtml")
 	<!-- JAVASCRIPT
 	================================================== -->
 	<!-- Global JS -->
@@ -978,7 +736,7 @@
 			crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfwXIv2vgXzFDZRzzRH2VpbvgSzhqCCuU"></script>
+
 
 	<!-- Plugins JS -->
 	<script src="~/wwwroot/flexpack/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
@@ -993,6 +751,22 @@
 
 	<!-- Theme JS -->
 	<script src="~/wwwroot/flexpack/js/theme.min.js"></script>
+
+	<!-- div transform -->
+	<script src="~/wwwroot/assets/aos-master/aos.js"></script>
+
+	<!-- Template and paging -->
+	<script src="~/wwwroot/assets/mustache.js-master/mustache.js"></script>
+	<script src="~/wwwroot/assets/twbs-pagination-master/jquery.twbsPagination.js"></script>
+
+	<script src="~/wwwroot/app/shared/common.js"></script>
+	<script src="~/wwwroot/app/shared/constants.js"></script>
+	<script src="~/wwwroot/client-app/controller/home/index.js"></script>
+	<script>
+		var homeObj = new homeController();
+		homeObj.initialize();
+	</script>
+
 
 </body>
 </html>

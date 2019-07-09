@@ -1,8 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using HyosungMotor.Repositories;
+using System.Web.Mvc;
 
 namespace HyosungMotor.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -22,5 +23,15 @@ namespace HyosungMotor.Controllers
 
             return View();
         }
+
+        #region GET
+        [HttpGet]
+        public JsonResult GetAllPaging(int eff, int page, int pageSize)
+        {
+            var data = (new ProductRepository()).GetAll(page, pageSize, eff, null);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
     }
 }

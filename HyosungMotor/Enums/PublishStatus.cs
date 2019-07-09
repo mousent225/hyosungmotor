@@ -6,7 +6,7 @@ namespace HyosungMotor.Enums
     {
         [Description("Draft")]
         Draft,
-
+        //admin sẽ thấy được trên trang chủ
         [Description("Pending Review")]
         Pending_Review,
 

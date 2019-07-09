@@ -27,8 +27,8 @@ namespace HyosungMotor.Models
         public string Thumbnail { get; set; }
         public string Image { get; set; }
         public string ImageCaption { get; set; }
-        public System.DateTime PublishedDate { get; set; }
-        public int CategoryId { get; set; }
+        public Nullable<System.DateTime> PublishedDate { get; set; }
+        public Nullable<int> CategoryId { get; set; }
         public bool IsDeleted { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
         public string UserDeleted { get; set; }

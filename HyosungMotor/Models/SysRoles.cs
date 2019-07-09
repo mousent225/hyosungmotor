@@ -17,8 +17,8 @@ namespace HyosungMotor.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SysRoles()
         {
-            this.SysUserRoleMapping = new HashSet<SysUserRoleMapping>();
             this.SysRoleMapping = new HashSet<SysRoleMapping>();
+            this.SysUserRoleMapping = new HashSet<SysUserRoleMapping>();
         }
     
         public string RoleId { get; set; }
@@ -35,8 +35,8 @@ namespace HyosungMotor.Models
         public bool IsDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SysUserRoleMapping> SysUserRoleMapping { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SysRoleMapping> SysRoleMapping { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SysUserRoleMapping> SysUserRoleMapping { get; set; }
     }
 }

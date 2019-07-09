@@ -20,6 +20,15 @@ namespace HyosungMotor.Areas.Admin
                 new { action = "Index", id = UrlParameter.Optional },
                 new[] { "HyosungMotor.Areas.Admin.Controllers" }
             );
+
+            context.MapRoute(
+                "Admin_LocalizedDefault",
+                "Admin/{lang}/{controller}/{action}",
+                new { action = "Index" },
+                new { lang = "vi-VN|ko-KR|en-US" },
+                new[] { "HyosungMotor.Areas.Admin.Controllers" }
+            );
         }
+        
     }
 }

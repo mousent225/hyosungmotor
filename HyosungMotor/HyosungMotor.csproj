@@ -180,6 +180,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\MultiLanguageViewEngine.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -191,10 +192,17 @@
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
+    <Compile Include="Content\Texts\rHome.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rHome.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Dtos\PagedResult.cs" />
     <Compile Include="Dtos\PagedResultBase.cs" />
+    <Compile Include="Enums\EnergyEefficiency.cs" />
     <Compile Include="Enums\PublishStatus.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Global.asax.cs">
@@ -208,6 +216,9 @@
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BannerTranslations.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contact.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -236,6 +247,12 @@
     <Compile Include="Models\PostTranslations.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Products.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductTranslations.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_BANNER_GETALL_Result.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
@@ -243,6 +260,9 @@
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_SYS_USER_LOGIN_Result.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_TDSTANDARDMOTOR_GETALL_Result.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SysCategories.cs">
@@ -269,12 +289,16 @@
     <Compile Include="Models\SysUserRoleMapping.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TdStandardMotor.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AuthorizationRepository.cs" />
     <Compile Include="Repositories\BannerRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CommonRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AppDictionary.cs" />
@@ -286,6 +310,7 @@
     <Compile Include="Utilities\EnumExtentions.cs" />
     <Compile Include="Utilities\ExportListToExcel.cs" />
     <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\GlobalHelper.cs" />
     <Compile Include="Utilities\KSAuthorized.cs" />
     <Compile Include="Utilities\KSControllerFactory.cs" />
     <Compile Include="Utilities\LogHelper.cs" />
@@ -303,6 +328,7 @@
     <Compile Include="ViewModels\Common\LoginModel.cs" />
     <Compile Include="ViewModels\Common\MenuModel.cs" />
     <Compile Include="ViewModels\Common\UserModel.cs" />
+    <Compile Include="ViewModels\Product\TdStandardMotorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -336,6 +362,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="wwwroot\assets\aos-master\aos.css" />
+    <Content Include="wwwroot\assets\aos-master\aos.js" />
     <Content Include="wwwroot\assets\bootbox\bootbox.all.min.js" />
     <Content Include="wwwroot\assets\bootbox\bootbox.locales.min.js" />
     <Content Include="wwwroot\assets\bootbox\bootbox.min.js" />
@@ -2918,6 +2946,7 @@
     <Content Include="wwwroot\assets\twbs-pagination-master\tests\index.html" />
     <Content Include="wwwroot\assets\twbs-pagination-master\tests\run-test-jquery-latest.html" />
     <Content Include="wwwroot\assets\twbs-pagination-master\tests\test.js" />
+    <Content Include="wwwroot\client-app\controller\home\index.js" />
     <Content Include="wwwroot\css\site-admin.css" />
     <Content Include="wwwroot\css\site-admin.min.css" />
     <Content Include="wwwroot\css\site.css" />
@@ -2931,13 +2960,19 @@
     <Content Include="wwwroot\flexpack\css\flexpack.css" />
     <Content Include="wwwroot\flexpack\css\flexpack.min.css" />
     <Content Include="wwwroot\flexpack\css\theme.css" />
+    <Content Include="wwwroot\flexpack\custom-img\certifications\atex.jfif" />
+    <Content Include="wwwroot\flexpack\custom-img\certifications\gost-r.jfif" />
+    <Content Include="wwwroot\flexpack\custom-img\certifications\images.jfif" />
+    <Content Include="wwwroot\flexpack\custom-img\certifications\kgs.jfif" />
+    <Content Include="wwwroot\flexpack\custom-img\certifications\ul-sa.jfif" />
     <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530611417Ndv.jpg" />
     <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530612278xXa.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\motor-1.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\motor-2 - nhân nghĩa.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\motor-3-edit-shadow.png" />
-    <Content Include="wwwroot\flexpack\custom-img\motor-3-edit.png" />
-    <Content Include="wwwroot\flexpack\custom-img\motor-3.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\60Hz motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\Explosion proof MV motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\geared motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\MV motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\Standard motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\Standard MV motor.jpg" />
     <Content Include="wwwroot\flexpack\img\404_bg.jpg" />
     <Content Include="wwwroot\flexpack\img\about_1.jpg" />
     <Content Include="wwwroot\flexpack\img\about_bg.jpg" />
@@ -3868,12 +3903,17 @@
     <Content Include="wwwroot\flexpack\plugins\highlightjs\README.ru.md" />
     <Content Include="wwwroot\flexpack\img\image_2.ai" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Home\_StandardMotor.cshtml" />
+    <Content Include="Views\Home\_GearedMotor.cshtml" />
+    <Content Include="Views\Home\_MvMotor.cshtml" />
+    <Content Include="wwwroot\resource\file\MVmotor catalogue.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Common\" />
     <Folder Include="Areas\Admin\Views\Upload\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Common\" />
     <Folder Include="wwwroot\assets\material-admin\js\core\cache\" />
     <Folder Include="wwwroot\assets\mustache.js-master\test\spec\" />
@@ -3893,6 +3933,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Texts\rHome.ko-KR.resx" />
+    <EmbeddedResource Include="Content\Texts\rHome.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>rHome.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Texts\rHome.vi-VN.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

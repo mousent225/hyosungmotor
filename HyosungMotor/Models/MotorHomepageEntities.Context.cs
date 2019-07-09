@@ -27,20 +27,24 @@ namespace HyosungMotor.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Posts> Posts { get; set; }
-        public virtual DbSet<SysCategories> SysCategories { get; set; }
-        public virtual DbSet<SysCategoryValues> SysCategoryValues { get; set; }
-        public virtual DbSet<SysRoles> SysRoles { get; set; }
-        public virtual DbSet<SysUser> SysUser { get; set; }
         public virtual DbSet<Attachments> Attachments { get; set; }
-        public virtual DbSet<SysUserRoleMapping> SysUserRoleMapping { get; set; }
-        public virtual DbSet<SysRoleMapping> SysRoleMapping { get; set; }
         public virtual DbSet<Banners> Banners { get; set; }
         public virtual DbSet<BannerTranslations> BannerTranslations { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
+        public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<PostTranslations> PostTranslations { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductTranslations> ProductTranslations { get; set; }
+        public virtual DbSet<SysCategories> SysCategories { get; set; }
+        public virtual DbSet<SysCategoryValues> SysCategoryValues { get; set; }
         public virtual DbSet<SysDictionnaries> SysDictionnaries { get; set; }
         public virtual DbSet<SysMenus> SysMenus { get; set; }
+        public virtual DbSet<SysRoleMapping> SysRoleMapping { get; set; }
+        public virtual DbSet<SysRoles> SysRoles { get; set; }
+        public virtual DbSet<SysUser> SysUser { get; set; }
+        public virtual DbSet<SysUserRoleMapping> SysUserRoleMapping { get; set; }
+        public virtual DbSet<TdStandardMotor> TdStandardMotor { get; set; }
     
         public virtual int SP_SYS_ATTACHMENT_GET(Nullable<int> mODULEID, Nullable<int> mASTERID)
         {
@@ -263,6 +267,27 @@ namespace HyosungMotor.Models
                 new ObjectParameter("descriptionVi", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_BANNER_UPDATE", idParameter, headingParameter, subHeadingParameter, descriptionParameter, imageParameter, userCreatedParameter, statusParameter, publishStatusParameter, hasKoParameter, headingKoParameter, subHeadingKoParameter, descriptionKoParameter, hasViParameter, headingViParameter, subHeadingViParameter, descriptionViParameter);
+        }
+    
+        public virtual ObjectResult<SP_TDSTANDARDMOTOR_GETALL_Result> SP_TDSTANDARDMOTOR_GETALL(Nullable<int> pageIndex, Nullable<int> pageSize, Nullable<int> efficiency, ObjectParameter totalRow, Nullable<int> languageId)
+        {
+            var pageIndexParameter = pageIndex.HasValue ?
+                new ObjectParameter("pageIndex", pageIndex) :
+                new ObjectParameter("pageIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var efficiencyParameter = efficiency.HasValue ?
+                new ObjectParameter("efficiency", efficiency) :
+                new ObjectParameter("efficiency", typeof(int));
+    
+            var languageIdParameter = languageId.HasValue ?
+                new ObjectParameter("languageId", languageId) :
+                new ObjectParameter("languageId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TDSTANDARDMOTOR_GETALL_Result>("SP_TDSTANDARDMOTOR_GETALL", pageIndexParameter, pageSizeParameter, efficiencyParameter, totalRow, languageIdParameter);
         }
     }
 }

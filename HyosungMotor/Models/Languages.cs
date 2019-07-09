@@ -19,6 +19,7 @@ namespace HyosungMotor.Models
         {
             this.BannerTranslations = new HashSet<BannerTranslations>();
             this.PostTranslations = new HashSet<PostTranslations>();
+            this.ProductTranslations = new HashSet<ProductTranslations>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace HyosungMotor.Models
         public virtual ICollection<BannerTranslations> BannerTranslations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostTranslations> PostTranslations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductTranslations> ProductTranslations { get; set; }
     }
 }
