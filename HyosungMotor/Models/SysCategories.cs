@@ -17,8 +17,8 @@ namespace HyosungMotor.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SysCategories()
         {
-            this.Posts = new HashSet<Posts>();
             this.SysCategoryValues = new HashSet<SysCategoryValues>();
+            this.Posts = new HashSet<Posts>();
         }
     
         public int Id { get; set; }
@@ -34,8 +34,8 @@ namespace HyosungMotor.Models
         public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Posts> Posts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SysCategoryValues> SysCategoryValues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Posts> Posts { get; set; }
     }
 }

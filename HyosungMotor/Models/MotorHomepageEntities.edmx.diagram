@@ -10,8 +10,6 @@
         <EntityTypeShape EntityType="MotorHomepageModel.BannerTranslations" Width="1.5" PointX="3" PointY="2.875" />
         <EntityTypeShape EntityType="MotorHomepageModel.Contact" Width="1.5" PointX="5.75" PointY="10.875" />
         <EntityTypeShape EntityType="MotorHomepageModel.Languages" Width="1.5" PointX="0.75" PointY="7.25" />
-        <EntityTypeShape EntityType="MotorHomepageModel.Posts" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MotorHomepageModel.PostTranslations" Width="1.5" PointX="3" PointY="6.75" />
         <EntityTypeShape EntityType="MotorHomepageModel.Products" Width="1.5" PointX="3.75" PointY="10.75" />
         <EntityTypeShape EntityType="MotorHomepageModel.ProductTranslations" Width="1.5" PointX="6" PointY="6.75" />
         <EntityTypeShape EntityType="MotorHomepageModel.SysCategories" Width="1.5" PointX="1.5" PointY="16.5" />
@@ -25,10 +23,7 @@
         <EntityTypeShape EntityType="MotorHomepageModel.TdStandardMotor" Width="1.5" PointX="5.75" PointY="13.875" />
         <AssociationConnector Association="MotorHomepageModel.FK_BannerTranslations_Banners" />
         <AssociationConnector Association="MotorHomepageModel.FK_BannerTranslations_Languages" />
-        <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Languages" />
         <AssociationConnector Association="MotorHomepageModel.FK_ProductTranslations_Languages" />
-        <AssociationConnector Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" />
-        <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Posts" />
         <AssociationConnector Association="MotorHomepageModel.FK_ProductTranslations_Products" />
         <AssociationConnector Association="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" />
         <AssociationConnector Association="MotorHomepageModel.FK_SysCategoryValues_SysDictionnary_DictionaryId" />
@@ -36,6 +31,11 @@
         <AssociationConnector Association="MotorHomepageModel.FK_SysRoleMapping_SysRoles" />
         <AssociationConnector Association="MotorHomepageModel.FK_SysUserRoleMapping_SysRoles" />
         <AssociationConnector Association="MotorHomepageModel.FK_SysUserRoleMapping_SysUser" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Posts" Width="1.5" PointX="3.75" PointY="18" />
+        <AssociationConnector Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" />
+        <EntityTypeShape EntityType="MotorHomepageModel.PostTranslations" Width="1.5" PointX="8" PointY="14.5" />
+        <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Languages" />
+        <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Posts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

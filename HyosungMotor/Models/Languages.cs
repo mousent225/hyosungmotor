@@ -18,18 +18,19 @@ namespace HyosungMotor.Models
         public Languages()
         {
             this.BannerTranslations = new HashSet<BannerTranslations>();
-            this.PostTranslations = new HashSet<PostTranslations>();
             this.ProductTranslations = new HashSet<ProductTranslations>();
+            this.PostTranslations = new HashSet<PostTranslations>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BannerTranslations> BannerTranslations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PostTranslations> PostTranslations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductTranslations> ProductTranslations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostTranslations> PostTranslations { get; set; }
     }
 }

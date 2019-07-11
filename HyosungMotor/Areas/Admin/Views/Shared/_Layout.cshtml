@@ -494,6 +494,8 @@
 	<script src="~/wwwroot/assets/bootbox/bootbox.locales.min.js"></script>
 	<script src="~/wwwroot/assets/bootbox/bootbox.min.js"></script>
 
+	<script src="~/wwwroot/assets/ckeditor/ckeditor.js"></script>
+
 	<script src="~/wwwroot/assets/mustache.js-master/mustache.js"></script>
 	<script src="~/wwwroot/assets/twbs-pagination-master/jquery.twbsPagination.js"></script>
 
@@ -521,6 +523,21 @@
 
 	<script src="~/wwwroot/assets/jquery-easyui-1.7.5/jquery.easyui.min.js"></script>
 	<script src="~/wwwroot/admin-side/js/custom.js"></script>
+	<script src="~/CKFinderScripts/ckfinder.js"></script>
+	<script type="text/javascript">
+		// Include this file AFTER both jQuery and bootstrap are loaded.
+		$.fn.modal.Constructor.prototype.enforceFocus = function () {
+			modal_this = this
+			$(document).on('focusin.modal', function (e) {
+				if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+					&& !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+					&& !$(e.target.parentNode).hasClass('cke_dialog_ui_input_textarea')
+					&& !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+					modal_this.$element.focus()
+				}
+			})
+		};
+	</script>
 
 	@RenderSection("Scripts", required: false)
 	<!-- END JAVASCRIPT -->

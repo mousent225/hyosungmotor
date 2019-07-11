@@ -332,65 +332,7 @@
 				</div>
 			</div> <!-- .row -->
 
-			<div class="row justify-content-center">
-				<div class="col-12 col-sm-12 col-md-6" data-aos="zoom-in-right">
-					<div class="card card-blog-custom">
-						<div class="">
-							<!-- background image -->
-							<img class="card-img-custom" src="~/wwwroot/images/0738-germany-potsdam-horse-tramway-1907-a-1000-9-300.jpeg" />
-						</div>
-						<!-- overlay content -->
-						<div class="">
-							<!-- title -->
-							<!-- category -->
-							<p class="subtitle">
-								<a href="#" class="text-secondary"># New</a>
-							</p>
-
-							<!-- title -->
-							<h3>
-								<a href="javascript:void(0);">FlexPack new features</a>
-							</h3>
-
-							<!-- date -->
-							<p class="blog-slider-item-subtitle text-muted subtitle">April 16, 2018</p>
-							<div class="card-img-overlay-desc">
-								<!-- text -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem architecto assumenda perspiciatis sequi deleniti possimus aspernatur vero accusamus maiores laboriosam iusto, dignissimos ex numquam.</p>
-							</div> <!-- .card-img-overlay-desc -->
-
-						</div> <!-- .card-img-overlay -->
-					</div>
-				</div>
-				<div class="col-12 col-sm-12 col-md-6" data-aos="zoom-in-left">
-					<div class="card card-blog-custom">
-						<div class="">
-							<!-- background image -->
-							<img class="card-img-custom" src="~/wwwroot/images/siem-39l-intelligent-traffic17-01.jpeg" />
-						</div>
-						<!-- overlay content -->
-						<div class="">
-							<!-- title -->
-							<!-- category -->
-							<p class="subtitle">
-								<a href="#" class="text-secondary"># New</a>
-							</p>
-
-							<!-- title -->
-							<h3>
-								<a href="javascript:void(0);">FlexPack new features</a>
-							</h3>
-
-							<!-- date -->
-							<p class="blog-slider-item-subtitle text-muted subtitle">April 16, 2018</p>
-							<div class="card-img-overlay-desc">
-								<!-- text -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem architecto assumenda perspiciatis sequi deleniti possimus aspernatur vero accusamus maiores laboriosam iusto, dignissimos ex numquam.</p>
-							</div> <!-- .card-img-overlay-desc -->
-
-						</div> <!-- .card-img-overlay -->
-					</div>
-				</div>
+			<div class="row justify-content-center" id="divContentNews">
 			</div>
 		</div>
 	</section> <!-- .section -->
@@ -458,7 +400,7 @@
 					<p class="data-content-text">60Hz, KS, JIS Standard</p>
 					<p class="data-content-text">IE3</p>
 					<!-- button -->
-					<button class="btn btn-default mt-3" type="button">Technical Data</button>
+					<button class="btn btn-default mt-3" type="button" id="btn60HzMotor">Technical Data</button>
 
 				</div>
 			</div> <!-- .row -->
@@ -725,9 +667,47 @@
 			</div> <!-- .row -->
 		</div> <!-- .container -->
 	</footer>
+
+	<script id="tmlContentNews" type="x-tmpl-mustache">
+
+		<div class="col-12 col-sm-12 col-md-6" data-aos="zoom-in-right">
+			<div class="card card-blog-custom">
+				<div class="">
+					<!-- background image -->
+					<img class="card-img-custom" src="{{Thumbnail}}" />
+				</div>
+				<!-- overlay content -->
+				<div class="">
+					<!-- title -->
+					<!-- category -->
+					<p class="subtitle">
+						<a href="#" class="text-secondary"># New</a>
+					</p>
+
+					<!-- title -->
+					<h3>
+						<a href="javascript:void(0);" data-id="{{Id}}" class="btnNewsTitle">{{Title}}</a>
+					</h3>
+
+					<!-- date -->
+					<p class="blog-slider-item-subtitle text-muted subtitle">{{DateCreated}}</p>
+					<div class="card-img-overlay-desc">
+						<!-- text -->
+						{{Description}}
+					</div> <!-- .card-img-overlay-desc -->
+
+				</div> <!-- .card-img-overlay -->
+			</div>
+		</div>
+
+	</script>
+
+
 	@Html.Partial("~/Views/Home/_StandardMotor.cshtml")
+	@Html.Partial("~/Views/Home/_60HzMotor.cshtml")
 	@Html.Partial("~/Views/Home/_GearedMotor.cshtml")
 	@Html.Partial("~/Views/Home/_MvMotor.cshtml")
+	@Html.Partial("~/Views/Home/_News.cshtml")
 	<!-- JAVASCRIPT
 	================================================== -->
 	<!-- Global JS -->

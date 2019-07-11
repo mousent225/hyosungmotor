@@ -1,0 +1,87 @@
+﻿<div class="modal fade" id="md60HzMotor" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-video modal-lg" role="document">
+		<div class="modal-content">
+			<!-- Header -->
+			<div class="modal-header">
+				<!-- Title -->
+				<h2 style="margin:0">
+					60Hz Motor
+				</h2>
+				<!-- Close -->
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="pagination">
+
+							<li class="page-item active"><a href="#" class="page-link efficiency60Hz" data-id="2">IE3</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- Video -->
+				<div class="row">
+
+					<div class="col-lg-12">
+						<table class="table table-bordered table-responsive table-hover table-striped" style="border:none">
+							<thead>
+								<tr class="text-center">
+									<th class="text-center"><h6 class="mb-0">#</h6></th>
+									<th class="text-center"><h6 class="mb-0">kW</h6></th>
+									<th class="text-center"><h6 class="mb-0">RPM(P)</h6></th>
+									<th class="text-center"><h6 class="mb-0">Voltage</h6></th>
+									<th class="text-center"><h6 class="mb-0">Hz</h6></th>
+									<th class="text-center"><h6 class="mb-0">Frame</h6></th>
+									<th class="text-center"><h6 class="mb-0">Efficiency</h6></th>
+									<th class="text-center" colspan="2"><h6 class="mb-0">Data Sheet</h6></th>
+									<th class="text-center" colspan="2"><h6 class="mb-0">Outline</h6></th>
+								</tr>
+							</thead>
+							<tbody id="tbody60HzMotor"></tbody>
+						</table> <!-- .table -->
+						<div class="row no-margin">
+							<div class="col-md-3 col-xs-5">
+								<div class="dataTables_info form" id="datatable-checkbox_info" role="status" aria-live="polite">
+									<div class="form-group">
+										<select id="ddlShowPage60Hz" class="form-control">
+											<option value="10" selected="selected">10</option>
+											<option value="20">20</option>
+											<option value="30">30</option>
+											<option value="50">50</option>
+										</select>
+										<label for="ddlShowPage">Items/page, Total items: <strong id="lblTotalRecord60Hz"></strong></label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2 col-xs-1"></div>
+							<div class="col-md-7 col-xs-6">
+								<div class="dataTables_paginate paging_simple_numbers text-right" id="datatable-checkbox_paginate">
+									<ul id="paginationUl60Hz"></ul>
+								</div>
+							</div>
+						</div>
+					</div><!--end .col -->
+				</div><!--end .row -->
+			</div>
+		</div> <!-- / .modal-content -->
+	</div> <!-- / .modal-dialog -->
+</div> <!-- / .modal -->
+
+<script id="tmlTb60HzMotor" type="x-tmpl-mustache">
+	
+	<tr>
+		<td class="text-center">{{{Sequence}}}</td>
+		<td class="text-center">{{{Kw}}}</td>
+		<td class="text-center">{{Rpm}}</td>
+		<td class="text-center">{{{Voltage}}}</td>
+		<td class="text-center">{{Hz}}</td>
+		<td class="text-center">{{Frame}}</td>
+		<td class="text-center">{{Efficiency}}</td>
+		<td class="text-center">{{DataSheet1}}</td>
+		<td class="text-center">{{DataSheet2}}</td>
+		<td class="text-center">{{OutLine1}}</td>
+		<td class="text-center">{{OutLine1}}</td>
+	</tr>
+</script>

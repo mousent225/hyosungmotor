@@ -62,18 +62,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Code" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="Thumbnail" Type="nvarchar" MaxLength="255" />
           <Property Name="Image" Type="nvarchar" MaxLength="255" />
-          <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
           <Property Name="PublishedDate" Type="datetime" />
           <Property Name="CategoryId" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
@@ -85,6 +82,8 @@
           <Property Name="DateModified" Type="datetime" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="PublishStatus" Type="int" Nullable="false" />
+          <Property Name="HasKo" Type="bit" />
+          <Property Name="HasVi" Type="bit" />
         </EntityType>
         <EntityType Name="PostTranslations">
           <Key>
@@ -95,7 +94,7 @@
           <Property Name="PostId" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Content" Type="ntext" />
           <Property Name="ImageCaption" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Products">
@@ -478,6 +477,60 @@
         <Function Name="SP_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_POST_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="totalRow" Type="int" Mode="InOut" />
+          <Parameter Name="languageId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_POST_GETTOP2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="languageCode" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_POST_GETTOP2_DETAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="languageCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_POST_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="content" Type="ntext" Mode="In" />
+          <Parameter Name="thumbnail" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="nvarchar" Mode="In" />
+          <Parameter Name="imageCaption" Type="nvarchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="sublishStatus" Type="int" Mode="In" />
+          <Parameter Name="titleKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="contentKor" Type="ntext" Mode="In" />
+          <Parameter Name="imageCaptionKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="titleVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="contentVi" Type="ntext" Mode="In" />
+          <Parameter Name="imageCaptionVi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_POST_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="content" Type="ntext" Mode="In" />
+          <Parameter Name="thumbnail" Type="nvarchar" Mode="In" />
+          <Parameter Name="image" Type="nvarchar" Mode="In" />
+          <Parameter Name="imageCaption" Type="nvarchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="sublishStatus" Type="int" Mode="In" />
+          <Parameter Name="titleKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="contentKor" Type="ntext" Mode="In" />
+          <Parameter Name="imageCaptionKor" Type="nvarchar" Mode="In" />
+          <Parameter Name="titleVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="descriptionVi" Type="nvarchar" Mode="In" />
+          <Parameter Name="contentVi" Type="ntext" Mode="In" />
+          <Parameter Name="imageCaptionVi" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="SP_SYS_ATTACHMENT_GET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MODULEID" Type="int" Mode="In" />
           <Parameter Name="MASTERID" Type="int" Mode="In" />
@@ -494,6 +547,13 @@
           <Parameter Name="USERID" Type="varchar" Mode="In" />
           <Parameter Name="PASSWORD" Type="nvarchar" Mode="In" />
           <Parameter Name="SYSTEM" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_TD60HZMOTOR_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="efficiency" Type="int" Mode="In" />
+          <Parameter Name="totalRow" Type="int" Mode="InOut" />
+          <Parameter Name="languageId" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_TDSTANDARDMOTOR_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pageIndex" Type="int" Mode="In" />
@@ -653,8 +713,6 @@
           <EntitySet Name="BannerTranslations" EntityType="MotorHomepageModel.BannerTranslations" />
           <EntitySet Name="Contact" EntityType="MotorHomepageModel.Contact" />
           <EntitySet Name="Languages" EntityType="MotorHomepageModel.Languages" />
-          <EntitySet Name="Posts" EntityType="MotorHomepageModel.Posts" />
-          <EntitySet Name="PostTranslations" EntityType="MotorHomepageModel.PostTranslations" />
           <EntitySet Name="Products" EntityType="MotorHomepageModel.Products" />
           <EntitySet Name="ProductTranslations" EntityType="MotorHomepageModel.ProductTranslations" />
           <EntitySet Name="SysCategories" EntityType="MotorHomepageModel.SysCategories" />
@@ -674,21 +732,9 @@
             <End Role="Languages" EntitySet="Languages" />
             <End Role="BannerTranslations" EntitySet="BannerTranslations" />
           </AssociationSet>
-          <AssociationSet Name="FK_PostTranslations_Languages" Association="MotorHomepageModel.FK_PostTranslations_Languages">
-            <End Role="Languages" EntitySet="Languages" />
-            <End Role="PostTranslations" EntitySet="PostTranslations" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductTranslations_Languages" Association="MotorHomepageModel.FK_ProductTranslations_Languages">
             <End Role="Languages" EntitySet="Languages" />
             <End Role="ProductTranslations" EntitySet="ProductTranslations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId">
-            <End Role="SysCategories" EntitySet="SysCategories" />
-            <End Role="Posts" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostTranslations_Posts" Association="MotorHomepageModel.FK_PostTranslations_Posts">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostTranslations" EntitySet="PostTranslations" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductTranslations_Products" Association="MotorHomepageModel.FK_ProductTranslations_Products">
             <End Role="Products" EntitySet="Products" />
@@ -718,6 +764,81 @@
             <End Role="SysUser" EntitySet="SysUser" />
             <End Role="SysUserRoleMapping" EntitySet="SysUserRoleMapping" />
           </AssociationSet>
+          <FunctionImport Name="SP_POST_GETALL" ReturnType="Collection(MotorHomepageModel.SP_POST_GETALL_Result)">
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+            <Parameter Name="languageId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Posts" EntityType="MotorHomepageModel.Posts" />
+          <AssociationSet Name="FK_Posts_SysCategories_CategoryId" Association="MotorHomepageModel.FK_Posts_SysCategories_CategoryId">
+            <End Role="SysCategories" EntitySet="SysCategories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <FunctionImport Name="SP_POST_GETTOP2" ReturnType="Collection(MotorHomepageModel.SP_POST_GETTOP2_Result)">
+            <Parameter Name="languageCode" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="PostTranslations" EntityType="MotorHomepageModel.PostTranslations" />
+          <AssociationSet Name="FK_PostTranslations_Languages" Association="MotorHomepageModel.FK_PostTranslations_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTranslations_Posts" Association="MotorHomepageModel.FK_PostTranslations_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="PostTranslations" EntitySet="PostTranslations" />
+          </AssociationSet>
+          <FunctionImport Name="SP_POST_INSERT">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="content" Mode="In" Type="String" />
+            <Parameter Name="thumbnail" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="imageCaption" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="sublishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="titleKor" Mode="In" Type="String" />
+            <Parameter Name="descriptionKor" Mode="In" Type="String" />
+            <Parameter Name="contentKor" Mode="In" Type="String" />
+            <Parameter Name="imageCaptionKor" Mode="In" Type="String" />
+            <Parameter Name="titleVi" Mode="In" Type="String" />
+            <Parameter Name="descriptionVi" Mode="In" Type="String" />
+            <Parameter Name="contentVi" Mode="In" Type="String" />
+            <Parameter Name="imageCaptionVi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_POST_UPDATE">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="content" Mode="In" Type="String" />
+            <Parameter Name="thumbnail" Mode="In" Type="String" />
+            <Parameter Name="image" Mode="In" Type="String" />
+            <Parameter Name="imageCaption" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="sublishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="titleKor" Mode="In" Type="String" />
+            <Parameter Name="descriptionKor" Mode="In" Type="String" />
+            <Parameter Name="contentKor" Mode="In" Type="String" />
+            <Parameter Name="imageCaptionKor" Mode="In" Type="String" />
+            <Parameter Name="titleVi" Mode="In" Type="String" />
+            <Parameter Name="descriptionVi" Mode="In" Type="String" />
+            <Parameter Name="contentVi" Mode="In" Type="String" />
+            <Parameter Name="imageCaptionVi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_POST_GETTOP2_DETAIL" ReturnType="Collection(MotorHomepageModel.SP_POST_GETTOP2_DETAIL_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="languageCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TD60HZMOTOR_GETALL" ReturnType="Collection(MotorHomepageModel.SP_TD60HZMOTOR_GETALL_Result)">
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="efficiency" Mode="In" Type="Int32" />
+            <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+            <Parameter Name="languageId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SP_SYS_USER_LOGIN_Result">
           <Property Type="String" Name="UserId" Nullable="false" MaxLength="20" />
@@ -831,47 +952,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BannerTranslations" Relationship="MotorHomepageModel.FK_BannerTranslations_Languages" FromRole="Languages" ToRole="BannerTranslations" />
-          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="Languages" ToRole="PostTranslations" />
           <NavigationProperty Name="ProductTranslations" Relationship="MotorHomepageModel.FK_ProductTranslations_Languages" FromRole="Languages" ToRole="ProductTranslations" />
-        </EntityType>
-        <EntityType Name="Posts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Thumbnail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PublishedDate" Type="DateTime" Precision="3" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
-          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="PublishStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="Posts" ToRole="SysCategories" />
-          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="Posts" ToRole="PostTranslations" />
-        </EntityType>
-        <EntityType Name="PostTranslations">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LanguageId" Type="Int32" Nullable="false" />
-          <Property Name="PostId" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Languages" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="PostTranslations" ToRole="Languages" />
-          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="PostTranslations" ToRole="Posts" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="Languages" ToRole="PostTranslations" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -917,8 +1000,8 @@
           <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="SysCategories" ToRole="Posts" />
           <NavigationProperty Name="SysCategoryValues" Relationship="MotorHomepageModel.FK_SysCategoryValues_SysCategories_CategoryId" FromRole="SysCategories" ToRole="SysCategoryValues" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="SysCategories" ToRole="Posts" />
         </EntityType>
         <EntityType Name="SysCategoryValues">
           <Key>
@@ -1090,18 +1173,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PostTranslations_Languages">
-          <End Type="MotorHomepageModel.Languages" Role="Languages" Multiplicity="1" />
-          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Languages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostTranslations">
-              <PropertyRef Name="LanguageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductTranslations_Languages">
           <End Type="MotorHomepageModel.Languages" Role="Languages" Multiplicity="0..1" />
           <End Type="MotorHomepageModel.ProductTranslations" Role="ProductTranslations" Multiplicity="*" />
@@ -1111,32 +1182,6 @@
             </Principal>
             <Dependent Role="ProductTranslations">
               <PropertyRef Name="LanguageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Posts_SysCategories_CategoryId">
-          <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SysCategories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Posts">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostTranslations_Posts">
-          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1" />
-          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostTranslations">
-              <PropertyRef Name="PostId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1224,6 +1269,125 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_POST_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Content" Nullable="true" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserModified" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="PublishStatus" Nullable="false" />
+          <Property Type="Boolean" Name="HasKo" Nullable="true" />
+          <Property Type="Boolean" Name="HasVi" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Thumbnail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="3" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PublishStatus" Type="Int32" Nullable="false" />
+          <Property Name="HasKo" Type="Boolean" />
+          <Property Name="HasVi" Type="Boolean" />
+          <NavigationProperty Name="SysCategories" Relationship="MotorHomepageModel.FK_Posts_SysCategories_CategoryId" FromRole="Posts" ToRole="SysCategories" />
+          <NavigationProperty Name="PostTranslations" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="Posts" ToRole="PostTranslations" />
+        </EntityType>
+        <Association Name="FK_Posts_SysCategories_CategoryId">
+          <End Type="MotorHomepageModel.SysCategories" Role="SysCategories" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_POST_GETTOP2_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Thumbnail" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <EntityType Name="PostTranslations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCaption" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Languages" Relationship="MotorHomepageModel.FK_PostTranslations_Languages" FromRole="PostTranslations" ToRole="Languages" />
+          <NavigationProperty Name="Posts" Relationship="MotorHomepageModel.FK_PostTranslations_Posts" FromRole="PostTranslations" ToRole="Posts" />
+        </EntityType>
+        <Association Name="FK_PostTranslations_Languages">
+          <End Type="MotorHomepageModel.Languages" Role="Languages" Multiplicity="1" />
+          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTranslations_Posts">
+          <End Type="MotorHomepageModel.Posts" Role="Posts" Multiplicity="1" />
+          <End Type="MotorHomepageModel.PostTranslations" Role="PostTranslations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostTranslations">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_POST_GETTOP2_DETAIL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Thumbnail" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Content" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="SP_TD60HZMOTOR_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="kw" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rpm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="voltage" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="hz" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Frame" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Efficiency" Nullable="true" />
+          <Property Type="String" Name="DataSheet1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DataSheet2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Outline1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OutLine2" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1359,44 +1523,8 @@
           <EntitySetMapping Name="Languages">
             <EntityTypeMapping TypeName="MotorHomepageModel.Languages">
               <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="MotorHomepageModel.Posts">
-              <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
-                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
-                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
-                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostTranslations">
-            <EntityTypeMapping TypeName="MotorHomepageModel.PostTranslations">
-              <MappingFragment StoreEntitySet="PostTranslations">
-                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="PostId" ColumnName="PostId" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1589,6 +1717,103 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_POST_GETALL" FunctionName="MotorHomepageModel.Store.SP_POST_GETALL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_POST_GETALL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
+                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="HasVi" ColumnName="HasVi" />
+                <ScalarProperty Name="HasKo" ColumnName="HasKo" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_POST_GETTOP2" FunctionName="MotorHomepageModel.Store.SP_POST_GETTOP2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_POST_GETTOP2_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="PostTranslations">
+            <EntityTypeMapping TypeName="MotorHomepageModel.PostTranslations">
+              <MappingFragment StoreEntitySet="PostTranslations">
+                <ScalarProperty Name="ImageCaption" ColumnName="ImageCaption" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_POST_INSERT" FunctionName="MotorHomepageModel.Store.SP_POST_INSERT" />
+          <FunctionImportMapping FunctionImportName="SP_POST_UPDATE" FunctionName="MotorHomepageModel.Store.SP_POST_UPDATE" />
+          <FunctionImportMapping FunctionImportName="SP_POST_GETTOP2_DETAIL" FunctionName="MotorHomepageModel.Store.SP_POST_GETTOP2_DETAIL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_POST_GETTOP2_DETAIL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TD60HZMOTOR_GETALL" FunctionName="MotorHomepageModel.Store.SP_TD60HZMOTOR_GETALL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_TD60HZMOTOR_GETALL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="kw" ColumnName="kw" />
+                <ScalarProperty Name="rpm" ColumnName="rpm" />
+                <ScalarProperty Name="voltage" ColumnName="voltage" />
+                <ScalarProperty Name="hz" ColumnName="hz" />
+                <ScalarProperty Name="Frame" ColumnName="Frame" />
+                <ScalarProperty Name="Efficiency" ColumnName="Efficiency" />
+                <ScalarProperty Name="DataSheet1" ColumnName="DataSheet1" />
+                <ScalarProperty Name="DataSheet2" ColumnName="DataSheet2" />
+                <ScalarProperty Name="Outline1" ColumnName="Outline1" />
+                <ScalarProperty Name="OutLine2" ColumnName="OutLine2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

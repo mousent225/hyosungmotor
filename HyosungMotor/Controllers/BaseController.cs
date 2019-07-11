@@ -16,12 +16,12 @@ namespace HyosungMotor.Controllers
             string cultureOnUrl = filterContext.RouteData.Values.ContainsKey("lang") ? filterContext.RouteData.Values["lang"].ToString() : GlobalHelper.DefaultCulture;
             string culture = (cultureOnCookie == string.Empty) ? (filterContext.RouteData.Values["lang"].ToString()) : cultureOnCookie;
 
-            if (cultureOnUrl != culture)
-            {
-                filterContext.HttpContext.Response.RedirectToRoute("LocalizedDefault",
-                    new { lang = culture, controller = filterContext.RouteData.Values["controller"], action = filterContext.RouteData.Values["action"] });
-                return;
-            }
+            //if (cultureOnUrl != culture)
+            //{
+            //    filterContext.HttpContext.Response.RedirectToRoute("LocalizedDefault",
+            //        new { lang = culture, controller = filterContext.RouteData.Values["controller"], action = filterContext.RouteData.Values["action"] });
+            //    return;
+            //}
 
             SetCurrentCultureOnThread(culture);
 
