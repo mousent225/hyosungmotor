@@ -1,5 +1,6 @@
 ﻿using HyosungMotor.Repositories;
 using HyosungMotor.Utilities;
+using HyosungMotor.ViewModels.Inquiries;
 using System.Security.Claims;
 using System.Web.Mvc;
 
@@ -53,6 +54,13 @@ namespace HyosungMotor.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        [HttpPost]
+        public JsonResult SaveInquiries(InquiriesViewModel model)
+        {
+            var mess = (new InquiriesRepository()).Insert(model);
+
+            return Json(new { Message = mess });
+        }
 
     }
 }

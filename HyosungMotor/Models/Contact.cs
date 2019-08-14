@@ -15,9 +15,20 @@ namespace HyosungMotor.Models
     public partial class Contact
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public string AddressURL { get; set; }
+        public Nullable<int> Seq { get; set; }
+        public string UserCreated { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public string UserModified { get; set; }
+        public Nullable<System.DateTime> DateModified { get; set; }
+        public int Status { get; set; }
+        public int PublishStatus { get; set; }
+        public bool IsDeleted { get; set; }
+        public Nullable<System.DateTime> DateDeleted { get; set; }
+        public string UserDeleted { get; set; }
     }
 }

@@ -146,6 +146,12 @@
             }
         });
     },
+    getFoot: function (foot, compareValue) {
+        if (foot === compareValue)
+            return "...";
+        else
+            return "<a href='" + foot + "' target='_blank'> " + compareValue + "</a>";
+    },
     getStatus: function (status) {
         if (status === 1)
             return "<span class='badge' style='background-color: #4caf50'>Active</span>";
@@ -212,11 +218,19 @@
     },
     checkIsNullOrEmpty: function ($element, mess) {
         if ($element.val() === "") {
-            common.notify("Hyosung Motor", mess, "gray error");
+            Swal.fire({ title: 'Ooop!', text: mess, type: 'error' });
             $element.focus();
             return false;
         }
         return true;
+    },
+    validateEmail: function (email) {
+        var emailReg = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        return emailReg.test(email);
+    },
+    validatePhoneNumber: function (phoneNumber) {
+        var emailReg = new RegExp(/^[0-9-+]+$/);
+        return emailReg.test(phoneNumber);
     }
 };
 

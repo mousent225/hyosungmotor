@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="MotorHomepageModel.Attachments" Width="1.5" PointX="5.75" PointY="2.875" />
         <EntityTypeShape EntityType="MotorHomepageModel.Banners" Width="1.5" PointX="0.75" PointY="10.625" />
         <EntityTypeShape EntityType="MotorHomepageModel.BannerTranslations" Width="1.5" PointX="3" PointY="2.875" />
-        <EntityTypeShape EntityType="MotorHomepageModel.Contact" Width="1.5" PointX="5.75" PointY="10.875" />
         <EntityTypeShape EntityType="MotorHomepageModel.Languages" Width="1.5" PointX="0.75" PointY="7.25" />
         <EntityTypeShape EntityType="MotorHomepageModel.Products" Width="1.5" PointX="3.75" PointY="10.75" />
         <EntityTypeShape EntityType="MotorHomepageModel.ProductTranslations" Width="1.5" PointX="6" PointY="6.75" />
@@ -36,6 +35,8 @@
         <EntityTypeShape EntityType="MotorHomepageModel.PostTranslations" Width="1.5" PointX="8" PointY="14.5" />
         <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Languages" />
         <AssociationConnector Association="MotorHomepageModel.FK_PostTranslations_Posts" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Contact" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MotorHomepageModel.Inquiries" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

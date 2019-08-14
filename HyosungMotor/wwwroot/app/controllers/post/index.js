@@ -216,16 +216,19 @@ var postController = function () {
         $("#txtImageUrl").val(ent.Image);
         $("#txtThumbnailUrl").val(ent.Thumbnail);
         $("#txtContent").val(ent.Content);
+        CKEDITOR.instances['txtContent'].setData(ent.Content);
 
         $("#txtTitleKor").val(ent.PostKo.Title);
         $("#txtDescriptionKor").val(ent.PostKo.Description);
         $("#txtCaptionKor").val(ent.PostKo.ImageCaption);
         $("#hdfKorId").val(ent.PostKo.Id);
+        CKEDITOR.instances['txtContentKor'].setData(ent.PostKo.Content);
 
         $("#txtTitleVi").val(ent.PostVi.Title);
-        $("#txtDescriptionVi").val(ent.PostKo.Description);
-        $("#txtCaptionVi").val(ent.PostKo.ImageCaption);
+        $("#txtDescriptionVi").val(ent.PostVi.Description);
+        $("#txtCaptionVi").val(ent.PostVi.ImageCaption);
         $("#hdfViId").val(ent.PostVi.Id);
+        CKEDITOR.instances['txtContentVie'].setData(ent.PostVi.Content);
 
         $("[name='detail-value']").trigger("change");
     }
@@ -350,5 +353,7 @@ var postController = function () {
         CKFinder.setupCKEditor(editorKor);
         CKFinder.setupCKEditor(editorVi);
     }
+    
+
     //-----------------------end-----------------------------
 }

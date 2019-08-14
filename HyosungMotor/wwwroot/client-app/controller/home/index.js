@@ -5,6 +5,7 @@
         loadData();
         loadDataFor60HzMotor();
         loadDataNews();
+
     };
 
     var registerEvents = function () {
@@ -26,6 +27,7 @@
                     $("#txtNewsTitle").html(response.Title);
                     $("#txtNewsContent").html(response.Content);
                     $("#mdNews").modal("show");
+                    $("#txtNewsPublishDate").html(common.dateTimeFormatJson(response.DateCreated));
                 },
                 error: function (status) {
                     common.notify("Hyosung Motor", 'Has an error in delete progress', 'error');
@@ -79,6 +81,56 @@
             common.createCookie("LangForMultiLanguage", lang);
             location.reload(true);
         });
+
+        $("#btnInquiries").on("click", function (e) {
+            e.preventDefault();
+            var modelInquiries = { FullName: $("#contact__form__name").val().trim(), PhoneNumber: $("#contact__form__phonenumber").val().trim(), Email: $("#contact__form__email").val().trim(), Message: $("#contact__form__message").val().trim() };
+            if (!common.checkIsNullOrEmpty($("#contact__form__name"), "Please input into field: Full Name"))
+                return false;
+
+            if (!common.checkIsNullOrEmpty($("#contact__form__phone"), "Please input into field: Phone Number"))
+                return false;
+            if (!common.validatePhoneNumber(modelInquiries.PhoneNumber)) {
+                $("#contact__form__phone").focus();
+
+                Swal.fire({ title: 'Ooop!', text: 'Phone number is not correct format!', type: 'error' });
+                return false;
+            }
+            if (!common.checkIsNullOrEmpty($("#contact__form__email"), "Please input into field: Email")) 
+                return false;
+            
+            if (!common.validateEmail(modelInquiries.Email)) {
+                $("#contact__form__email").focus();
+                Swal.fire({ title: 'Ooop!', text: 'Email is not correct format!', type: 'error' });
+                return false;
+            }
+            //get data
+            $.ajax({
+                type: "POST",
+                url: "/Home/SaveInquiries",
+                data: JSON.stringify({ model: modelInquiries }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                    common.startLoading();
+                },
+                success: function (response) {
+                    $("#mdDetail").modal("hide");
+                    Swal.fire({ title: 'Congratulations on your successful registration', text: 'Please check the mailbox for more information', type: 'success' });
+                },
+                error: function () {
+                    common.notify("Hyosung Motor", 'Has an error in progress', 'gray error');
+                    common.stopLoading();
+                }
+            });
+        });
+        $("body").on("click", ".modal-scrollable", function (e) {
+            
+            var $modal = $(this).find(".modal");
+            if (e.target === $modal[0]) 
+                $modal.modal("hide");
+            return true;
+        });
     };
     //-----------------------------------------------------------Begin: gen data for grid view 60HzMotor
     function loadDataFor60HzMotor(isPageChange) {
@@ -115,10 +167,10 @@
                         Voltage: item.Voltage,
                         Hz: item.Hz,
                         Frame: item.Frame,
-                        DataSheet1: item.DataSheet1,
-                        DataSheet2: item.DataSheet2,
-                        OutLine1: item.OutLine1,
-                        OutLine2: item.OutLine2,
+                        DataSheet1: common.getFoot(item.DataSheet1, "Foot"),
+                        DataSheet2: common.getFoot(item.DataSheet2, "Flange"),
+                        OutLine1: common.getFoot(item.OutLine1, "Foot"),
+                        OutLine2: common.getFoot(item.OutLine2, "Flange"),
 
                         Efficiency: "IE" + (item.Efficiency + 1)
                     });
@@ -192,10 +244,10 @@
                         Voltage: item.Voltage,
                         Hz: item.Hz,
                         Frame: item.Frame,
-                        DataSheet1: item.DataSheet1,
-                        DataSheet2: item.DataSheet2,
-                        OutLine1: item.OutLine1,
-                        OutLine2: item.OutLine2,
+                        DataSheet1: common.getFoot(item.DataSheet1, "Foot"),
+                        DataSheet2: common.getFoot(item.DataSheet2, "Flange"),
+                        OutLine1: common.getFoot(item.OutLine1, "Foot"),
+                        OutLine2: common.getFoot(item.OutLine2, "Flange"),
 
                         Efficiency: "IE" + (item.Efficiency + 1)
                     });
@@ -245,7 +297,8 @@
             data: { langCode: common.readCookie("LangForMultiLanguage") },
             dataType: "json",
             success: function (response) {
-
+                response = checkMaxLength(response);
+                //response = checkMaxLengthDescription(response);
                 $.each(response, function (i, item) {
                     render += Mustache.render(template, {
                         Id: item.Id,
@@ -266,6 +319,34 @@
                 common.notify("Motor Homepage Admin", "Cant loading data", "gray error");
             }
         });
+    }
+
+    function checkMaxLength(array) {
+        var space = "";
+        var len = Math.abs(array[0].Title.length - array[1].Title.length);
+        for (var i = 0; i < len; i++) {
+            space += " &nbsp; ";
+        }
+        if (array[0].Title.length < array[1].Title.length)
+            array[0].Title = array[0].Title + space;
+        else 
+            array[1].Title = array[1].Title + space;
+        return array;
+    }
+
+    function checkMaxLengthDescription(array) {
+        var space = "";
+        var len = Math.abs(array[0].Description.length - array[1].Description.length);
+        for (var i = 0; i < len; i++) {
+            space += " &nbsp; ";
+        }
+        if (array[0].Description.length < array[1].Description.length)
+            array[0].Description = array[0].Description + space;
+        else
+            array[1].Description = array[1].Description + space;
+        console.log(array[0].Description.length);
+        console.log(array[1].Description.length);
+        return array;
     }
     //-----------------------------------------------------------End: gen data for News
 };

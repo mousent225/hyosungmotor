@@ -30,7 +30,6 @@ namespace HyosungMotor.Models
         public virtual DbSet<Attachments> Attachments { get; set; }
         public virtual DbSet<Banners> Banners { get; set; }
         public virtual DbSet<BannerTranslations> BannerTranslations { get; set; }
-        public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductTranslations> ProductTranslations { get; set; }
@@ -45,6 +44,8 @@ namespace HyosungMotor.Models
         public virtual DbSet<TdStandardMotor> TdStandardMotor { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<PostTranslations> PostTranslations { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<Inquiries> Inquiries { get; set; }
     
         public virtual int SP_SYS_ATTACHMENT_GET(Nullable<int> mODULEID, Nullable<int> mASTERID)
         {
@@ -506,6 +507,147 @@ namespace HyosungMotor.Models
                 new ObjectParameter("languageId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TD60HZMOTOR_GETALL_Result>("SP_TD60HZMOTOR_GETALL", pageIndexParameter, pageSizeParameter, efficiencyParameter, totalRow, languageIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_CONTACT_GETALL_Result> SP_CONTACT_GETALL(Nullable<int> pageIndex, Nullable<int> pageSize, string keyword, ObjectParameter totalRow)
+        {
+            var pageIndexParameter = pageIndex.HasValue ?
+                new ObjectParameter("pageIndex", pageIndex) :
+                new ObjectParameter("pageIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("keyword", keyword) :
+                new ObjectParameter("keyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CONTACT_GETALL_Result>("SP_CONTACT_GETALL", pageIndexParameter, pageSizeParameter, keywordParameter, totalRow);
+        }
+    
+        public virtual int SP_CONTACT_INSERT(string name, string address, string addressUrl, string email, string phoneNumber, string userCreated, Nullable<int> status, Nullable<int> publishStatus, Nullable<int> seq)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("address", address) :
+                new ObjectParameter("address", typeof(string));
+    
+            var addressUrlParameter = addressUrl != null ?
+                new ObjectParameter("addressUrl", addressUrl) :
+                new ObjectParameter("addressUrl", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("phoneNumber", phoneNumber) :
+                new ObjectParameter("phoneNumber", typeof(string));
+    
+            var userCreatedParameter = userCreated != null ?
+                new ObjectParameter("userCreated", userCreated) :
+                new ObjectParameter("userCreated", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var publishStatusParameter = publishStatus.HasValue ?
+                new ObjectParameter("publishStatus", publishStatus) :
+                new ObjectParameter("publishStatus", typeof(int));
+    
+            var seqParameter = seq.HasValue ?
+                new ObjectParameter("seq", seq) :
+                new ObjectParameter("seq", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CONTACT_INSERT", nameParameter, addressParameter, addressUrlParameter, emailParameter, phoneNumberParameter, userCreatedParameter, statusParameter, publishStatusParameter, seqParameter);
+        }
+    
+        public virtual int SP_CONTACT_UPDATE(Nullable<int> id, string name, string address, string addressUrl, string email, string phoneNumber, string userCreated, Nullable<int> status, Nullable<int> publishStatus, Nullable<int> seq)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("address", address) :
+                new ObjectParameter("address", typeof(string));
+    
+            var addressUrlParameter = addressUrl != null ?
+                new ObjectParameter("addressUrl", addressUrl) :
+                new ObjectParameter("addressUrl", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("phoneNumber", phoneNumber) :
+                new ObjectParameter("phoneNumber", typeof(string));
+    
+            var userCreatedParameter = userCreated != null ?
+                new ObjectParameter("userCreated", userCreated) :
+                new ObjectParameter("userCreated", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var publishStatusParameter = publishStatus.HasValue ?
+                new ObjectParameter("publishStatus", publishStatus) :
+                new ObjectParameter("publishStatus", typeof(int));
+    
+            var seqParameter = seq.HasValue ?
+                new ObjectParameter("seq", seq) :
+                new ObjectParameter("seq", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CONTACT_UPDATE", idParameter, nameParameter, addressParameter, addressUrlParameter, emailParameter, phoneNumberParameter, userCreatedParameter, statusParameter, publishStatusParameter, seqParameter);
+        }
+    
+        public virtual ObjectResult<SP_INQUIRIES_GETALL_Result> SP_INQUIRIES_GETALL(Nullable<int> pageIndex, Nullable<int> pageSize, string keyword, ObjectParameter totalRow)
+        {
+            var pageIndexParameter = pageIndex.HasValue ?
+                new ObjectParameter("pageIndex", pageIndex) :
+                new ObjectParameter("pageIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("keyword", keyword) :
+                new ObjectParameter("keyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_INQUIRIES_GETALL_Result>("SP_INQUIRIES_GETALL", pageIndexParameter, pageSizeParameter, keywordParameter, totalRow);
+        }
+    
+        public virtual int SP_INQUIRIES_INSERT(string fullName, string phoneNumber, string email, string message)
+        {
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("fullName", fullName) :
+                new ObjectParameter("fullName", typeof(string));
+    
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("phoneNumber", phoneNumber) :
+                new ObjectParameter("phoneNumber", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("message", message) :
+                new ObjectParameter("message", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INQUIRIES_INSERT", fullNameParameter, phoneNumberParameter, emailParameter, messageParameter);
         }
     }
 }

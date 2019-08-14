@@ -368,59 +368,6 @@ var blog = (function() {
 })();
 
 
-/*** Modal ***/
-
-var Modal = (function() {
-	
-	// Variables
-	// =========
-
-	var $modal = $('.modal');
-
-	// Methods
-	// =======
-
-	function startVideo(video) {
-		video.play();
-
-		console.log('Video started');
-	}
-	function pauseVideo(video) {
-		video.pause();
-
-		console.log('Video paused');
-	}
-
-	// Events
-	// ======
-
-	$modal.on({
-		'shown.bs.modal': function() {
-			var $this = $(this);
-
-			if ( $this.find('.modal-dialog-video').length ) {
-				var video = $(this).find('video');
-
-				if ( video.length ) {
-					startVideo(video.get(0));
-				}
-			}
-		},
-		'hide.bs.modal': function() {
-			var $this = $(this);
-
-			if ( $this.find('.modal-dialog-video').length ) {
-				var video = $(this).find('video');
-
-				if ( video.length ) {
-					pauseVideo(video.get(0));
-				}
-			}	
-		}
-	});
-
-})();
-
 
 /*** Smooth scroll to anchor ***/
 

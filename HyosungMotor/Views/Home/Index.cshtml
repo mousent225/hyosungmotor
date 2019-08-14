@@ -59,15 +59,23 @@
 	}
 
 	.button-tab {
-		width:100%;
-		border-radius:0 !important;
+		width: 100%;
+		border-radius: 0 !important;
 	}
+
 	.no-margin {
-		margin:0 !important;
+		margin: 0 !important;
 	}
+
 	.btn-active {
 		background-color: #505cfd !important;
-		color:white !important;
+		color: white !important;
+	}
+	.row-eq-height {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
 	}
 </style>
 
@@ -85,18 +93,21 @@
 	<link rel="stylesheet" href="~/wwwroot/flexpack/plugins/fullpagejs/dist/fullpage.min.css">
 	<link href="~/wwwroot/assets/aos-master/aos.css" rel="stylesheet" />
 	<!-- Theme CSS -->
-	<link rel="stylesheet" href="~/wwwroot/flexpack/css/flexpack-blue.min.css">
+	@*<link rel="stylesheet" href="~/wwwroot/flexpack/css/flexpack-blue.min.css">*@
+	<link href="~/wwwroot/flexpack/css/flexpack-blue.css" rel="stylesheet" />
 	<link href="~/wwwroot/admin-side/css/custom-css.css" rel="stylesheet" />
 
 	<link href="~/wwwroot/assets/flag-icon-css-master/flag-icon.min.css" rel="stylesheet" />
 
-	@*<link href="~/wwwroot/flexpack/css/flexpack-blue.css" rel="stylesheet" />
-		<link href="~/wwwroot/flexpack/css/flexpack-orange.css" rel="stylesheet" />
-		<link href="~/wwwroot/flexpack/css/flexpack.css" rel="stylesheet" />*@
+	<link href="~/wwwroot/assets/modalonly/bootstrap-modal.css" rel="stylesheet" />
+	<link href="~/wwwroot/assets/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+
 	<title>FlexPack - Product Landing Page</title>
 </head>
-<body data-spy="scroll" data-target=".navbar">
+<body data-spy="scroll" data-target=".navbar" style="overflow-x:hidden">
 
+	<!-- Freeown-Alert -->
+	<div id="freeow-tr" class="freeow freeow-top-right"></div>
 	<!-- NAVBAR
 	================================================== -->
 	<!-- NAVBAR
@@ -105,7 +116,7 @@
 		<div class="container">
 
 			<!-- Navbar: Brand -->
-			<a class="navbar-brand" href="product.html">
+			<a class="navbar-brand nav-link" href="#page-top">
 				<img src="~/wwwroot/images/hyosung-motor.png" style="width: 330px" />
 			</a>
 
@@ -121,8 +132,8 @@
 						<a class="nav-link" href="#page-top">@rHome.Home</a>
 					</li>
 					@*<li class="nav-item">
-			<a class="nav-link" href="#section-about">About</a>
-		</li>*@
+							<a class="nav-link" href="#section-about">About</a>
+						</li>*@
 					<li class="nav-item">
 						<a class="nav-link" href="#section-news">@rHome.News</a>
 					</li>
@@ -210,26 +221,27 @@
 				<!-- background image -->
 				<div class="bg-cover">
 					@*<img src="~/wwwroot/flexpack/img/slider_1.jpg" alt="...">*@
-					<img src="~/wwwroot/flexpack/custom-img/mixed-gears-1530611417Ndv.jpg" />
+					@*<img src="~/wwwroot/flexpack/custom-img/banner/z1466577791929_d8605e0886e28f9ffecc20f69e3c2a2c.jpg" />*@
+					<img src="~/wwwroot/flexpack/custom-img/products/motor 1-2.png" />
 				</div>
 				<!-- background light overlay -->
 				<div class="bg-overlay-light"></div>
 				<div class="container">
-					<div class="row">
-						<div class="col-12 col-lg-6">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-lg-6">
 							<!-- content -->
 							<div class="bg-slider-item-content">
 
 								<!-- Heading -->
 								<h1 class="mt-3">
-									Powerful and Easy to Use Flexible Package
+									Reliability 1st Induction Electric Motor
 								</h1>
 
 								<!-- subtitle -->
-								<p class="subtitle"># Build your own project</p>
+								<p class="subtitle"># Make your machine better</p>
 								<!-- Subheading -->
 								<p>
-									FlexPack is a package of components for easy construction of your website. Use ready-made pages or add new sections and create your own design.
+									Hyosung Electric Motor has the robust structure with high quality materials such as durable bearings and higher cooling capacity. Hyosung Electric Motor can improve the reliability of rotating machines and also save the maintenance cost
 								</p>
 								@*<!-- button -->
 									<a href="https://themeforest.net/user/gaminy/portfolio" class="btn btn-default mx-2" target="_blank">Purchase now</a>
@@ -238,12 +250,7 @@
 							</div> <!-- .content -->
 						</div>
 						<div class="col-md-12 col-lg-6">
-
-							<!-- image -->
-							@*<img src=""~/wwwroot/flexpack/img/image_home.png" class="img-fluid" alt="...">*@
-							@*<img src="~/wwwroot/flexpack/custom-img/motor-1.jpg" />*@
-							@*<img src="~/wwwroot/flexpack/custom-img/motor-3.jpg" />*@
-							@*<img style="opacity:0.6" src="~/wwwroot/flexpack/custom-img/motor-3-edit-shadow.png" />*@
+							<img src="~/wwwroot/flexpack/custom-img/products/motor 1 - 4.png" class="img-fluid" />
 						</div>
 					</div> <!-- .row -->
 				</div> <!-- .container -->
@@ -253,33 +260,36 @@
 				<!-- background image -->
 				<div class="bg-cover">
 					@*<img src="~/wwwroot/flexpack/img/slider_2.jpg" alt="...">*@
-					<img src="~/wwwroot/flexpack/custom-img/mixed-gears-1530612278xXa.jpg" />
+					<img src="~/wwwroot/flexpack/custom-img/products/motor 3-2.png" />
 				</div>
 				<!-- background light overlay -->
 				<div class="bg-overlay-light"></div>
 
 				<div class="container">
-					<div class="row">
-						<div class="col-12 col-lg-6">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-lg-6">
 							<!-- content -->
 							<div class="bg-slider-item-content">
 
 								<!-- Heading -->
 								<h1 class="mt-3">
-									Several landing pages ready to use
+									Reliability 1st Induction Electric Motor
 								</h1>
 
 								<!-- subtitle -->
-								<p class="subtitle"># Use ready-made pages</p>
+								<p class="subtitle"># Make your machine better</p>
 								<!-- Subheading -->
 								<p>
-									FlexPack is a package of components for easy construction of your website. Use ready-made pages or add new sections and create your own design.
+									Hyosung Electric Motor has the robust structure with high quality materials such as durable bearings and higher cooling capacity. Hyosung Electric Motor can improve the reliability of rotating machines and also save the maintenance cost
 								</p>
 								@*<!-- button -->
 									<a href="https://themeforest.net/user/gaminy/portfolio" class="btn btn-default mx-2" target="_blank">Purchase now</a>
 									<!-- button -->
 									<a href="#section-demos" class="btn btn-secondary mx-2">Explore demos</a>*@
 							</div> <!-- .content -->
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<img src="~/wwwroot/flexpack/custom-img/products/motor 3-3.png" class="img-fluid" />
 						</div>
 					</div> <!-- .row -->
 				</div> <!-- .container -->
@@ -288,33 +298,74 @@
 			<div class="bg-slider-item">
 				<!-- background image -->
 				<div class="bg-cover">
-					<img src="~/wwwroot/flexpack/img/slider_3.jpg" alt="...">
+					<img src="~/wwwroot/flexpack/custom-img/products/motor 2-2.png" />
 				</div>
 				<!-- background light overlay -->
 				<div class="bg-overlay-light"></div>
 
 				<div class="container">
-					<div class="row">
-						<div class="col-12 col-lg-6">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-lg-6">
 							<!-- content -->
 							<div class="bg-slider-item-content">
 
 								<!-- Heading -->
 								<h1 class="mt-3">
-									Different navbars and footer designed
+									Reliability 1st Induction Electric Motor
 								</h1>
 
 								<!-- subtitle -->
-								<p class="subtitle"># Choose what you like</p>
+								<p class="subtitle"># Make your machine better</p>
 								<!-- Subheading -->
 								<p>
-									FlexPack is a package of components for easy construction of your website. Use ready-made pages or add new sections and create your own design.
+									Hyosung Electric Motor has the robust structure with high quality materials such as durable bearings and higher cooling capacity. Hyosung Electric Motor can improve the reliability of rotating machines and also save the maintenance cost
 								</p>
 								@*<!-- button -->
 									<a href="https://themeforest.net/user/gaminy/portfolio" class="btn btn-default mx-2" target="_blank">Purchase now</a>
 									<!-- button -->
 									<a href="#section-demos" class="btn btn-secondary mx-2">Explore demos</a>*@
 							</div> <!-- .content -->
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<img src="~/wwwroot/flexpack/custom-img/products/motor 2-4.png" class="img-fluid" />
+						</div>
+					</div> <!-- .row -->
+				</div> <!-- .container -->
+			</div> <!-- .bg-slider-item -->
+			<!-- slider item -->
+			<div class="bg-slider-item">
+				<!-- background image -->
+				<div class="bg-cover">
+					<img src="~/wwwroot/flexpack/custom-img/products/motor 1-2.png" />
+				</div>
+				<!-- background light overlay -->
+				<div class="bg-overlay-light"></div>
+
+				<div class="container">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-lg-6">
+							<!-- content -->
+							<div class="bg-slider-item-content">
+
+								<!-- Heading -->
+								<h1 class="mt-3">
+									Reliability 1st Induction Electric Motor
+								</h1>
+
+								<!-- subtitle -->
+								<p class="subtitle"># Make your machine better</p>
+								<!-- Subheading -->
+								<p>
+									Hyosung Electric Motor has the robust structure with high quality materials such as durable bearings and higher cooling capacity. Hyosung Electric Motor can improve the reliability of rotating machines and also save the maintenance cost
+								</p>
+								@*<!-- button -->
+									<a href="https://themeforest.net/user/gaminy/portfolio" class="btn btn-default mx-2" target="_blank">Purchase now</a>
+									<!-- button -->
+									<a href="#section-demos" class="btn btn-secondary mx-2">Explore demos</a>*@
+							</div> <!-- .content -->
+						</div>
+						<div class="col-md-12 col-lg-6">
+							<img src="~/wwwroot/flexpack/custom-img/products/motor 4-4.png" class="img-fluid" />
 						</div>
 					</div> <!-- .row -->
 				</div> <!-- .container -->
@@ -359,20 +410,18 @@
 				</div>
 			</div> <!-- .row -->
 			<div class="row align-items-center justify-content-between product-item">
-				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
+				<div class="col-sm-12 col-lg-6 col-xl-5 text-center " data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/Standard motor.jpg" />
+					<img style="width:65%" src="~/wwwroot/flexpack/custom-img/products/standardmotor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small">
 
 					<!-- title -->
 					<h3>
 						Standard Motors
 					</h3>
 
-					<!-- subtitle -->
-					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
 					<p class="data-content-text">380V</p>
@@ -385,18 +434,15 @@
 				</div>
 			</div> <!-- .row -->
 			<div class="row align-items-center justify-content-between product-item">
-				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
+				<div class="col-sm-12 col-lg-6 col-xl-5 text-center " data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:67%" src="~/wwwroot/flexpack/custom-img/products/60Hz motor.jpg" />
+					<img style="width:65%" src="~/wwwroot/flexpack/custom-img/products/60hzmotor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small">
 
 					<!-- title -->
 					<h3>60Hz Motors</h3>
-
-					<!-- subtitle -->
-					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
 					<p class="data-content-text">380V, 440V</p>
@@ -405,23 +451,22 @@
 					<!-- button -->
 					<button class="btn btn-default mt-3" type="button" id="btn60HzMotor">Technical Data</button>
 
+
 				</div>
 			</div> <!-- .row -->
 			<div class="row align-items-center justify-content-between product-item">
-				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
+				<div class="col-sm-12 col-lg-6 col-xl-5 text-center " data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/geared motor.jpg" />
+					<img style="width:65%" src="~/wwwroot/flexpack/custom-img/products/gearmotor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small">
 
 					<!-- title -->
 					<h3>
 						Geared Motors
 					</h3>
 
-					<!-- subtitle -->
-					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
 					<p class="data-content-text">380V, 440V</p>
@@ -433,20 +478,18 @@
 				</div>
 			</div> <!-- .row -->
 			<div class="row align-items-center justify-content-between product-item">
-				<div class="col-sm-12 col-lg-6 col-xl-5" data-aos="flip-left">
+				<div class="col-sm-12 col-lg-6 col-xl-5 text-center " data-aos="flip-left">
 
 					<!-- image -->
-					<img style="width:100%" src="~/wwwroot/flexpack/custom-img/products/MV motor.jpg" />
+					<img style="width:65%" src="~/wwwroot/flexpack/custom-img/products/MV motor.jpg" />
 				</div>
-				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small" data-aos="flip-right">
+				<div class="col-sm-12 col-lg-6 col-xl-5 mt-5 mt-md-0 text-center-small">
 
 					<!-- title -->
 					<h3>
 						MV & HV Motors
 					</h3>
 
-					<!-- subtitle -->
-					<p class="subtitle"># Two words about Motor</p>
 
 					<!-- description -->
 					<p class="data-content-text">Various industries such as Power Plant, Oil & Gas, Petrochemical, Desalination, Ship, Steel, etc.</p>
@@ -466,130 +509,70 @@
 
 	<!-- CONTACT
 	================================================== -->
-	<section class="section_about bg-light" id="section-contact">
-		<div class="container-fluid px-0">
-			<div class="row">
-				<div class="col-12 col-md-4" data-aos="fade-down">
+	<section class="section section_about bg-light" id="section-contact">
+		<div class="container">
+			<div class="row justify-content-center text-center">
+				<div class="col-sm-12 col-lg-8 col-xl-6">
 
-					<div class="text-center my-4">
+					<!-- title -->
+					<h2>
+						Contact
+					</h2>
 
-						<!-- Icon -->
-						<i class="text-secondary fa fa-map-marker fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							Hyosung Motor Factory
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
-					</div>
+					<!-- subtitle -->
+					@*<p class="subtitle"># Find your product</p>*@
 
 				</div>
-				<div class="col-12 col-md-4" data-aos="fade-up">
-
-					<div class="text-center my-4">
-
-						<!-- Icon -->
-						<i class="text-secondary fa fa-phone fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							LET'S TALK
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
+			</div> <!-- .row -->
+			<div class="container-fluid px-0" id="divContact">
+				<div class="row">
+					<div class="col-12 col-md-4" data-aos="fade-down">
+						<div class="text-center my-4">
+							<!-- Heading -->
+							<h5 class="mb-3">
+								Hyosung Vietnam Motor Sales Team
+							</h5>
+							<!-- Content -->
+							<p class="mb-0">
+								<span style="font-weight:bold"> Phone:</span> (+84) 028 3823 8759 – <span style="font-weight:bold">Ext:</span> 179
+							</p>
+							<a class="mb-0" href="mailto:duong52180858@hyosung.com" target="_top" style="color:#337ab7"><span style="font-weight:bold">Email: </span>duong52180858@hyosung.com</a><br />
+							<a class="mb-0" href="https://goo.gl/maps/vGFRjBN79gMsKjxCA" target="_blank"><span style="font-weight:bold">Office Address:</span>  Vincom Center I Le Thanh Ton Street I District 01 I HCMC </a>
+						</div>
 					</div>
-
-				</div>
-				<div class="col-12 col-md-4" data-aos="fade-down">
-
-					<div class="text-center my-4">
-
-						<!-- Icon -->
-						<i class="text-secondary fa fa-envelope fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							E-MAIL US
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
+					<div class="col-12 col-md-4" data-aos="fade-up">
+						<div class="text-center my-4">
+							<!-- Heading -->
+							<h5 class="mb-3">
+								Hyosung Vietnam Motor Factory
+							</h5>
+							<!-- Content -->
+							<p class="mb-0">
+								<span style="font-weight:bold"> Phone:</span> (+84) 061-3566-250 <span style="font-weight:bold"> – Ext:</span> 785 1031
+							</p>
+							<a class="mb-0" href="mailto:lan52150047@hyosung.com" target="_top" style="color:#337ab7">
+								<span style="font-weight:bold">Email: </span>lan52150047@hyosung.com
+							</a><br />
+							<a class="mb-0" href="https://goo.gl/maps/hbDVVyNGUA1ye1jt7" target="_blank">
+								<span style="font-weight:bold">Office Address:</span>  N3 street, Nhon Trach Industrial Zone 5, Nhon Trach Dst., Dong Nai
+							</a>
+						</div>
 					</div>
-
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-md-4" data-aos="fade-down">
-
-					<div class="text-center my-4">
-
-						<!-- Icon -->
-						<i class="text-secondary fa fa-map-marker fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							Hyosung Motor Ho Chi Minh
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
+					<div class="col-12 col-md-4" data-aos="fade-down">
+						<div class="text-center my-4">
+							<!-- Heading -->
+							<h5 class="mb-3">
+								Job & Career
+							</h5>
+							<!-- subtitle -->
+							<p class="mb-0">
+								Join in Hyosung Vietnam Motor Sales Team!!
+							</p>
+							<a class="mb-0" href="mailto:seankim@hyosung.com" target="_top" style="color:#337ab7">
+								<span style="font-weight:bold">Email: </span>seankim@hyosung.com
+							</a>
+						</div>
 					</div>
-
-				</div>
-				<div class="col-12 col-md-4" data-aos="fade-up">
-
-					<div class="text-center my-4">
-
-						<!-- Icon -->
-						<i class="text-secondary fa fa-phone fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							LET'S TALK
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
-					</div>
-
-				</div>
-				<div class="col-12 col-md-4" data-aos="fade-down">
-
-					<div class="text-center my-4">
-
-						<!-- Icon -->
-						<i class="text-secondary fa fa-envelope fa-2x"></i>
-
-						<!-- Heading -->
-						<h5 class="mb-3">
-							E-MAIL US
-						</h5>
-
-						<!-- Content -->
-						<p class="mb-0">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, consequuntur quis accusantium exercitationem adipisci vitae eaque labore.
-						</p>
-
-					</div>
-
 				</div>
 			</div>
 		</div> <!-- #section-contact-->
@@ -597,59 +580,65 @@
 
 	<!-- INQUIRY
 	================================================== -->
-	<section class="section_contact " id="section-inquiry">
-		<div class="container-fluid px-0">
-			<div class="row no-gutters justify-content-center">
-				<div class="col-12 col-md-6 px-3 py-5 p-sm-6">
+	<section class="section section_contact " id="section-inquiry">
+		<div class="container">
+			<div class="container-fluid px-0">
+				<div class="row justify-content-center text-center">
+					<div class="col-sm-12 col-lg-8 col-xl-6">
 
-					<div class="half-item d-flex flex-column justify-content-center h-100">
-
-						<!-- title -->
-						<h2>Get in touch</h2>
+						<h2>Inquires</h2>
 
 						<!-- text -->
-						<p>Don't hesistate to contact us if you have any questions about our products. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem facilis possimus quo cum delectus.</p>
+						<p class="subtitle">Don't hesistate to contact us if you have any questions about our products.</p>
+					</div>
+				</div> <!-- .row -->
+				<div class="row no-gutters justify-content-center">
+					<div class="col-12 col-md-6 px-3 py-5 p-sm-6">
 
-						<!-- Contact form -->
-						<form class="contact_form" id="contact_form">
+						<div class="half-item d-flex flex-column justify-content-center">
 
-							<div class="form-group">
-								<label for="contact__form__name" class="sr-only">Full name</label>
-								<input type="text" class="form-control" id="contact__form__name" name="contact__form__name" placeholder="Full name">
-								<div class="invalid-feedback"></div>
-							</div>
+							<!-- title -->
+							<!-- Contact form -->
+							<form class="contact_form" id="contact_form">
 
-							<div class="form-group">
-								<label for="contact__form__email" class="sr-only">Phone Number</label>
-								<input type="tel" class="form-control" id="contact__form__email" name="contact__form__email" placeholder="Phone Number">
-								<div class="invalid-feedback"></div>
-							</div>
+								<div class="form-group">
+									<label for="contact__form__name" class="sr-only">Full name</label>
+									<input type="text" class="form-control" id="contact__form__name" name="contact__form__name" placeholder="Full name">
+									<div class="invalid-feedback"></div>
+								</div>
 
-							<div class="form-group">
-								<label for="contact__form__email" class="sr-only">E-mail address</label>
-								<input type="email" class="form-control" id="contact__form__email" name="contact__form__email" placeholder="E-mail address">
-								<div class="invalid-feedback"></div>
-							</div>
+								<div class="form-group">
+									<label for="contact__form__email" class="sr-only">Phone Number</label>
+									<input type="tel" class="form-control" id="contact__form__phonenumber" name="contact__form__phone" placeholder="Phone Number">
+									<div class="invalid-feedback"></div>
+								</div>
 
-							<div class="form-group">
-								<label for="contact__form__message" class="sr-only">Message</label>
-								<textarea class="form-control" id="contact__form__message" name="contact__form__message" rows="3" placeholder="Message"></textarea>
-								<div class="invalid-feedback"></div>
-							</div>
+								<div class="form-group">
+									<label for="contact__form__email" class="sr-only">E-mail address</label>
+									<input type="email" class="form-control" id="contact__form__email" name="contact__form__email" placeholder="E-mail address">
+									<div class="invalid-feedback"></div>
+								</div>
 
-							<button type="submit" class="btn btn-primary">
-								Send message
-							</button>
+								<div class="form-group">
+									<label for="contact__form__message" class="sr-only">Message</label>
+									<textarea class="form-control" id="contact__form__message" name="contact__form__message" rows="3" placeholder="Message"></textarea>
+									<div class="invalid-feedback"></div>
+								</div>
 
-						</form>
+								<button type="button" id="btnInquiries" class="btn btn-primary">
+									Send message
+								</button>
 
-					</div> <!-- .half-item -->
+							</form>
 
-				</div>
+						</div> <!-- .half-item -->
+
+					</div>
 
 
-			</div> <!-- .row -->
-		</div> <!-- .container-fluid -->
+				</div> <!-- .row -->
+			</div> <!-- .container-fluid -->
+		</div>
 	</section> <!-- .section-contact -->
 	<!-- FOOTER
 	================================================== -->
@@ -683,20 +672,27 @@
 				<div class="">
 					<!-- title -->
 					<!-- category -->
-					<p class="subtitle">
-						<a href="#" class="text-secondary"># New</a>
-					</p>
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-6">
+							<p class="subtitle">
+								<a href="#" class="text-secondary"># New</a>
+							</p>
+						</div>
+						<div class="col-12 col-sm-12 col-md-6 text-right">
+							<!-- date -->
+							<p class="blog-slider-item-subtitle text-muted subtitle">{{DateCreated}}</p>
+						</div>
+					</div>
 
 					<!-- title -->
 					<h3>
-						<a href="javascript:void(0);" data-id="{{Id}}" class="btnNewsTitle">{{Title}}</a>
+						<a href="javascript:void(0);" data-id="{{Id}}" class="btnNewsTitle">{{{Title}}}</a>
 					</h3>
 
-					<!-- date -->
-					<p class="blog-slider-item-subtitle text-muted subtitle">{{DateCreated}}</p>
+
 					<div class="card-img-overlay-desc">
 						<!-- text -->
-						{{Description}}
+						{{{Description}}}
 					</div> <!-- .card-img-overlay-desc -->
 
 				</div> <!-- .card-img-overlay -->
@@ -704,7 +700,67 @@
 		</div>
 
 	</script>
+	<script id="tmlContact" type="x-tmpl-mustache">
+		<div class="row">
+			<div class="col-12 col-md-4" data-aos="fade-down">
 
+				<div class="text-center my-4">
+
+					<!-- Icon -->
+					<i class="text-secondary fa fa-map-marker fa-2x"></i>
+
+					<!-- Heading -->
+					<h5 class="mb-3">
+						{{Name}}
+					</h5>
+
+					<!-- Content -->
+					<a class="mb-0" href="{{AddressURL}}">{{Address}}</a>
+
+				</div>
+
+			</div>
+			<div class="col-12 col-md-4" data-aos="fade-up">
+
+				<div class="text-center my-4">
+
+					<!-- Icon -->
+					<i class="text-secondary fa fa-phone fa-2x"></i>
+
+					<!-- Heading -->
+					<h5 class="mb-3">
+						LET'S TALK
+					</h5>
+
+					<!-- Content -->
+					<p class="mb-0">
+						{{PhoneNumber}}
+					</p>
+
+				</div>
+
+			</div>
+			<div class="col-12 col-md-4" data-aos="fade-down">
+
+				<div class="text-center my-4">
+
+					<!-- Icon -->
+					<i class="text-secondary fa fa-envelope fa-2x"></i>
+
+					<!-- Heading -->
+					<h5 class="mb-3">
+						E-MAIL US
+					</h5>
+
+					<!-- Content -->
+					<a class="mb-0" href="mailto:{{Email}}" target="_top" style="color:#337ab7"> {{Email}}</a>
+
+				</div>
+
+			</div>
+		</div>
+
+	</script>
 
 	@Html.Partial("~/Views/Home/_StandardMotor.cshtml")
 	@Html.Partial("~/Views/Home/_60HzMotor.cshtml")
@@ -714,26 +770,29 @@
 	<!-- JAVASCRIPT
 	================================================== -->
 	<!-- Global JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+	
+	@*<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>*@
+	@*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>*@
+	<script src="~/wwwroot/flexpack/plugins/popper/popper.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
 
-
+	<script src="~/wwwroot/assets/modalonly/bootstrap-modalmanager.js"></script>
+	<script src="~/wwwroot/assets/modalonly/bootstrap-modal.js"></script>
+	@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+		<script src="~/Scripts/bootstrap.min.js"></script>
+	*@
 	<!-- Plugins JS -->
 	<script src="~/wwwroot/flexpack/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
 	<script src="~/wwwroot/flexpack/plugins/flickity/flickity.pkgd.min.js"></script>
 	<script src="~/wwwroot/flexpack/plugins/feather/feather.min.js"></script>
-	<script src="~/wwwroot/flexpack/plugins/contact/contact.js"></script>
-	<script src="~/wwwroot/flexpack/plugins/countTo/jquery.countTo.js"></script>
-	<script src="~/wwwroot/flexpack/plugins/countdown/jquery.countdown.min.js"></script>
 	<script src="~/wwwroot/flexpack/plugins/parallax/parallax.min.js"></script>
 	<script src="~/wwwroot/flexpack/plugins/fullpagejs/vendors/scrolloverflow.min.js"></script>
 	<script src="~/wwwroot/flexpack/plugins/fullpagejs/dist/fullpage.min.js"></script>
 
 	<!-- Theme JS -->
-	<script src="~/wwwroot/flexpack/js/theme.min.js"></script>
+	@*<script src="~/wwwroot/flexpack/js/theme.min.js"></script>*@
+	<script src="~/wwwroot/flexpack/js/flexpack.js"></script>
 
 	<!-- div transform -->
 	<script src="~/wwwroot/assets/aos-master/aos.js"></script>
@@ -741,6 +800,11 @@
 	<!-- Template and paging -->
 	<script src="~/wwwroot/assets/mustache.js-master/mustache.js"></script>
 	<script src="~/wwwroot/assets/twbs-pagination-master/jquery.twbsPagination.js"></script>
+
+
+	<script src="~/wwwroot/assets/sweetalert2/dist/sweetalert2.all.min.js"></script>
+	<script src="~/wwwroot/assets/sweetalert2/dist/promise.min.js"></script>
+
 
 	<script src="~/wwwroot/app/shared/common.js"></script>
 	<script src="~/wwwroot/app/shared/constants.js"></script>

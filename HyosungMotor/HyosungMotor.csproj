@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -290,7 +292,9 @@
     <Compile Include="Areas\Admin\Controllers\AnonymousController.cs" />
     <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InquiriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
     <Compile Include="Content\Texts\rHome.Designer.cs">
@@ -299,6 +303,7 @@
       <DependentUpon>rHome.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Dtos\PagedResult.cs" />
@@ -323,6 +328,9 @@
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Inquiries.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Languages.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
@@ -357,7 +365,13 @@
     <Compile Include="Models\SP_BANNER_GETALL_Result.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_CONTACT_GETALL_Result.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_GETMENU_Result.cs">
+      <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_INQUIRIES_GETALL_Result.cs">
       <DependentUpon>MotorHomepageEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_POST_GETALL_Result.cs">
@@ -410,6 +424,8 @@
     <Compile Include="Repositories\BannerRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Repositories\InquiriesRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
@@ -442,6 +458,8 @@
     <Compile Include="ViewModels\Common\LoginModel.cs" />
     <Compile Include="ViewModels\Common\MenuModel.cs" />
     <Compile Include="ViewModels\Common\UserModel.cs" />
+    <Compile Include="ViewModels\Contact\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Inquiries\InquiriesViewModel.cs" />
     <Compile Include="ViewModels\Post\PostKoViewModel.cs" />
     <Compile Include="ViewModels\Post\PostTransViewModel.cs" />
     <Compile Include="ViewModels\Post\PostViewModel.cs" />
@@ -1113,6 +1131,8 @@
     <Content Include="wwwroot\admin-side\css\custom-css.css" />
     <Content Include="wwwroot\admin-side\js\custom.js" />
     <Content Include="wwwroot\app\controllers\banner\index.js" />
+    <Content Include="wwwroot\app\controllers\contact\index.js" />
+    <Content Include="wwwroot\app\controllers\inquiries\index.js" />
     <Content Include="wwwroot\app\controllers\login\index.js" />
     <Content Include="wwwroot\app\controllers\post\index.js" />
     <Content Include="wwwroot\app\shared\common.js" />
@@ -4598,6 +4618,9 @@
     <Content Include="wwwroot\assets\material-admin\less\libs\fullcalendar\license.txt" />
     <Content Include="wwwroot\assets\material-admin\less\libs\multi-select\LICENSE.txt" />
     <Content Include="wwwroot\assets\material-admin\less\libs\wizard\MIT-LICENSE.txt" />
+    <Content Include="wwwroot\assets\modalonly\bootstrap-modal.css" />
+    <Content Include="wwwroot\assets\modalonly\bootstrap-modal.js" />
+    <Content Include="wwwroot\assets\modalonly\bootstrap-modalmanager.js" />
     <Content Include="wwwroot\assets\mustache.js-master\.gitignore" />
     <Content Include="wwwroot\assets\mustache.js-master\.gitmodules" />
     <Content Include="wwwroot\assets\mustache.js-master\mustache.js" />
@@ -4735,6 +4758,75 @@
     <Content Include="wwwroot\assets\mustache.js-master\test\_files\whitespace.txt" />
     <Content Include="wwwroot\assets\mustache.js-master\test\_files\zero_view.js" />
     <Content Include="wwwroot\assets\mustache.js-master\test\_files\zero_view.txt" />
+    <Content Include="wwwroot\assets\sweetalert2\bin\postinstall.js" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\promise.min.js" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.all.js" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.all.min.js" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.css" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.js" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.min.css" />
+    <Content Include="wwwroot\assets\sweetalert2\dist\sweetalert2.min.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\constants.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\enhancers\withNoNewKeyword.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\globalState.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\buttons-handlers.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\close.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\enable-disable-elements.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\getInput.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\hideLoading.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\keydown-handler.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\popup-click-handler.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\progress-steps.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\show-reset-validation-error.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\update.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\instanceMethods\_main.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\privateMethods.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\privateProps.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\argsToParams.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\dom.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\fire.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\mixin.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\queue.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\showLoading.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\staticMethods\timer.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\SweetAlert.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\sweetalert2.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\aria.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\classes.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\defaultInputValidators.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\DismissReason.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\animationEndEvent.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\domUtils.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\getters.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\index.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\init.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\inputUtils.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\measureScrollbar.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\parseHtmlToContainer.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\render.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderActions.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderCloseButton.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderContainer.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderContent.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderFooter.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderHeader.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderIcon.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderImage.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderInput.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderPopup.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderProgressSteps.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\dom\renderers\renderTitle.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\ieFix.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\iosFix.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\isNodeEnv.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\openPopup.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\params.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\scrollbarFix.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\setParameters.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\Timer.js" />
+    <Content Include="wwwroot\assets\sweetalert2\src\utils\utils.js" />
     <Content Include="wwwroot\assets\twbs-pagination-master\.gitignore" />
     <Content Include="wwwroot\assets\twbs-pagination-master\examples\bootstrap-v3.html" />
     <Content Include="wwwroot\assets\twbs-pagination-master\examples\index.html" />
@@ -4758,19 +4850,37 @@
     <Content Include="wwwroot\flexpack\css\flexpack.css" />
     <Content Include="wwwroot\flexpack\css\flexpack.min.css" />
     <Content Include="wwwroot\flexpack\css\theme.css" />
+    <Content Include="wwwroot\flexpack\custom-img\banner\z1466577787820_b52cc005353efa6a84c94121379cf5c4.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\banner\z1466577791929_d8605e0886e28f9ffecc20f69e3c2a2c.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\banner\z1466577795661_e1321cdf52cff9d0159870e6fe2418e9.jpg" />
     <Content Include="wwwroot\flexpack\custom-img\certifications\atex.jfif" />
     <Content Include="wwwroot\flexpack\custom-img\certifications\gost-r.jfif" />
     <Content Include="wwwroot\flexpack\custom-img\certifications\images.jfif" />
     <Content Include="wwwroot\flexpack\custom-img\certifications\kgs.jfif" />
     <Content Include="wwwroot\flexpack\custom-img\certifications\ul-sa.jfif" />
+    <Content Include="wwwroot\flexpack\custom-img\check.PNG" />
     <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530611417Ndv.jpg" />
     <Content Include="wwwroot\flexpack\custom-img\mixed-gears-1530612278xXa.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\products\60Hz motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\60hzmotor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 1 - 4.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 2-4.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 3-3.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 4-1.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 4-2.png" />
     <Content Include="wwwroot\flexpack\custom-img\products\Explosion proof MV motor.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\products\geared motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\gearmotor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 1 - 1.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 1 - 3.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 1-2.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 2-1.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 2-2.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 3-1.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 3-2.png" />
+    <Content Include="wwwroot\flexpack\custom-img\products\motor 4-4.png" />
     <Content Include="wwwroot\flexpack\custom-img\products\MV motor.jpg" />
-    <Content Include="wwwroot\flexpack\custom-img\products\Standard motor.jpg" />
     <Content Include="wwwroot\flexpack\custom-img\products\Standard MV motor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\standardmotor.jpg" />
+    <Content Include="wwwroot\flexpack\custom-img\products\기어드_FN.JPG" />
     <Content Include="wwwroot\flexpack\img\404_bg.jpg" />
     <Content Include="wwwroot\flexpack\img\about_1.jpg" />
     <Content Include="wwwroot\flexpack\img\about_bg.jpg" />
@@ -5198,6 +5308,7 @@
     <Content Include="wwwroot\images\hyosung-footer.png" />
     <Content Include="wwwroot\images\hyosung-logo.png" />
     <Content Include="wwwroot\images\hyosung-motor.png" />
+    <Content Include="wwwroot\images\ico-download.svg" />
     <Content Include="wwwroot\images\iq-kooperation-adobe-stock-161568122-internet-of-things.jpeg" />
     <Content Include="wwwroot\images\keyvisual-simobility.jpeg" />
     <Content Include="wwwroot\images\sic_00017329.jpeg" />
@@ -5290,6 +5401,10 @@
     <Content Include="CKFinderScripts\lang\bs.json" />
     <Content Include="CKFinderScripts\lang\bg.json" />
     <Content Include="CKFinderScripts\lang\az.json" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\_AddEditModal.cshtml" />
+    <Content Include="Areas\Admin\Views\Inquiries\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -5797,6 +5912,178 @@
     <Content Include="wwwroot\resource\file\products\Geared motor outline drawing\3.7_D%2823Fr 3.7kW 60%29.pdf" />
     <Content Include="wwwroot\resource\file\products\Geared motor outline drawing\3.7_E%2827Fr 3.7kW 75~90%29.pdf" />
     <Content Include="Views\Home\_60HzMotor.cshtml" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\0.75kW_2P_220_380V_50Hz_IE1_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\1.1kW_2P_220_380V_50Hz_IE1_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\1.5kW_2P_220_380V_50Hz_IE1_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\11kW_2P_380V_50Hz_IE1_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\15kW_2P_380V_50Hz_IE1_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\18.5kW_2P_380V_50Hz_IE1_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\2.2kW_2P_220_380V_50Hz_IE1_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\22kW_2P_380V_50Hz_IE1_180M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\3kW_2P_380V_50Hz_IE1_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\4kW_2P_380V_50Hz_IE1_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\5.5kW_2P_380V_50Hz_IE1_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_2P_Foot_Data sheet\7.5kW_2P_380V_50Hz_IE1_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\0.75kW_4P_220_380V_50Hz_IE1_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\1.1kW_4P_220_380V_50Hz_IE1_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\1.5kW_4P_220_380V_50Hz_IE1_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\11kW_4P_380V_50Hz_IE1_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\15kW_4P_380V_50Hz_IE1_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\18.5kW_4P_380V_50Hz_IE1_180M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\2.2kW_4P_220_380V_50Hz_IE1_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\22kW_4P_380V_50Hz_IE1_180L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\3kW_4P_380V_50Hz_IE1_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\4kW_4P_380V_50Hz_IE1_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\5.5kW_4P_380V_50Hz_IE1_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_4P_Foot_Data sheet\7.5kW_4P_380V_50Hz_IE1_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\0.75kW_6P_220_380V_50Hz_IE1_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\1.1kW_6P_220_380V_50Hz_IE1_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\1.5kW_6P_220_380V_50Hz_IE1_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\11kW_6P_380V_50Hz_IE1_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\15kW_6P_380V_50Hz_IE1_180L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\2.2kW_6P_220_380V_50Hz_IE1_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\3kW_6P_380V_50Hz_IE1_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\4kW_6P_380V_50Hz_IE1_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\5.5kW_6P_380V_50Hz_IE1_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE1_6P_Foot_Data sheet\7.5kW_6P_380V_50Hz_IE1_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\0.75kW_2P_220_380V_50Hz_IE2_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\1.1kW_2P_220_380V_50Hz_IE2_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\1.5kW_2P_220_380V_50Hz_IE2_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\11kW_2P_380V_50Hz_IE2_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\15kW_2P_380V_50Hz_IE2_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\18.5kW_2P_380V_50Hz_IE2_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\2.2kW_2P_220_380V_50Hz_IE2_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\22kW_2P_380V_50Hz_IE2_180M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\3.7kW_2P_380V_50Hz_IE2_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\3kW_2P_380V_50Hz_IE2_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\4kW_2P_380V_50Hz_IE2_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\5.5kW_2P_380V_50Hz_IE2_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_2P_Foot_Data sheet\7.5kW_2P_380V_50Hz_IE2_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\0.75kW_4P_220_380V_50Hz_IE2_80M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\1.1kW_4P_220_380V_50Hz_IE2_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\1.5kW_4P_220_380V_50Hz_IE2_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\11kW_4P_380V_50Hz_IE2_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\15kW_4P_380V_50Hz_IE2_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\18.5kW_4P_380V_50Hz_IE2_180M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\2.2kW_4P_220_380V_50Hz_IE2_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\22kW_4P_380V_50Hz_IE2_180L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\3.7kW_4P_380V_50Hz_IE2_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\3kW_4P_380V_50Hz_IE2_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\4kW_4P_380V_50Hz_IE2_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\5.5kW_4P_380V_50Hz_IE2_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_4P_Foot_Data sheet\7.5kW_4P_380V_50Hz_IE2_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\0.75kW_6P_220_380V_50Hz_IE2_90S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\1.1kW_6P_220_380V_50Hz_IE2_90L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\1.5kW_6P_220_380V_50Hz_IE2_100L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\11kW_6P_380V_50Hz_IE2_160L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\15kW_6P_380V_50Hz_IE2_180L_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\2.2kW_6P_220_380V_50Hz_IE2_112M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\3.7kW_6P_380V_50Hz_IE2_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\3kW_6P_380V_50Hz_IE2_132S_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\4kW_6P_380V_50Hz_IE2_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\5.5kW_6P_380V_50Hz_IE2_132M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\Standard motor_IE2_6P_Foot_Data sheet\7.5kW_6P_380V_50Hz_IE2_160M_B3_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\0.75kW_2P_220_380V_50Hz_IE1_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\1.1kW_2P_220_380V_50Hz_IE1_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\1.5kW_2P_220_380V_50Hz_IE1_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\11kW_2P_380V_50Hz_IE1_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\15kW_2P_380V_50Hz_IE1_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\18.5kW_2P_380V_50Hz_IE1_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\2.2kW_2P_220_380V_50Hz_IE1_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\22kW_2P_380V_50Hz_IE1_180M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\3kW_2P_380V_50Hz_IE1_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\4kW_2P_380V_50Hz_IE1_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\5.5kW_2P_380V_50Hz_IE1_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_2P_B5_Data sheet\7.5kW_2P_380V_50Hz_IE1_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\0.75kW_4P_220_380V_50Hz_IE1_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\1.1kW_4P_220_380V_50Hz_IE1_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\1.5kW_4P_220_380V_50Hz_IE1_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\11kW_4P_380V_50Hz_IE1_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\15kW_4P_380V_50Hz_IE1_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\18.5kW_4P_380V_50Hz_IE1_180M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\2.2kW_4P_220_380V_50Hz_IE1_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\22kW_4P_380V_50Hz_IE1_180L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\3kW_4P_380V_50Hz_IE1_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\4kW_4P_380V_50Hz_IE1_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\5.5kW_4P_380V_50Hz_IE1_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_4P_B5_Data sheet\7.5kW_4P_380V_50Hz_IE1_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\0.75kW_6P_220_380V_50Hz_IE1_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\1.1kW_6P_220_380V_50Hz_IE1_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\1.5kW_6P_220_380V_50Hz_IE1_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\11kW_6P_380V_50Hz_IE1_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\15kW_6P_380V_50Hz_IE1_180L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\2.2kW_6P_220_380V_50Hz_IE1_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\3kW_6P_380V_50Hz_IE1_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\4kW_6P_380V_50Hz_IE1_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\5.5kW_6P_380V_50Hz_IE1_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE1_6P_B5_Data sheet\7.5kW_6P_380V_50Hz_IE1_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\0.75kW_2P_220_380V_50Hz_IE2_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\1.1kW_2P_220_380V_50Hz_IE2_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\1.5kW_2P_220_380V_50Hz_IE2_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\11kW_2P_380V_50Hz_IE2_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\15kW_2P_380V_50Hz_IE2_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\18.5kW_2P_380V_50Hz_IE2_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\2.2kW_2P_220_380V_50Hz_IE2_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\22kW_2P_380V_50Hz_IE2_180M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\3kW_2P_380V_50Hz_IE2_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\4kW_2P_380V_50Hz_IE2_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\5.5kW_2P_380V_50Hz_IE2_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_2P_B5_Data sheet\7.5kW_2P_380V_50Hz_IE2_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\0.75kW_4P_220_380V_50Hz_IE2_80M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\1.1kW_4P_220_380V_50Hz_IE2_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\1.5kW_4P_220_380V_50Hz_IE2_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\11kW_4P_380V_50Hz_IE2_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\15kW_4P_380V_50Hz_IE2_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\18.5kW_4P_380V_50Hz_IE2_180M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\2.2kW_4P_220_380V_50Hz_IE2_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\22kW_4P_380V_50Hz_IE2_180L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\3kW_4P_380V_50Hz_IE2_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\4kW_4P_380V_50Hz_IE2_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\5.5kW_4P_380V_50Hz_IE2_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_4P_B5_data sheet\7.5kW_4P_380V_50Hz_IE2_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\0.75kW_6P_220_380V_50Hz_IE2_90S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\1.1kW_6P_220_380V_50Hz_IE2_90L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\1.5kW_6P_220_380V_50Hz_IE2_100L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\11kW_6P_380V_50Hz_IE2_160L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\15kW_6P_380V_50Hz_IE2_180L_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\2.2kW_6P_220_380V_50Hz_IE2_112M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\3kW_6P_380V_50Hz_IE2_132S_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\4kW_6P_380V_50Hz_IE2_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\5.5kW_6P_380V_50Hz_IE2_132M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\products\Data sheet\IE2_6P_B5_Data sheet\7.5kW_6P_380V_50Hz_IE2_160M_B5_DS.pdf" />
+    <Content Include="wwwroot\resource\file\Hyosung MV motor brochure.pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_100L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_112M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_132M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_132S.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_160L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_160M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_180L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_180M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_80M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_90L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B3%28Foot%29_Outline drawing\Hyosung_B3_90S.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_100L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_112M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_132M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_132S.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_160L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_160M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_180L.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_180M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_80M.Pdf" />
+    <Content Include="wwwroot\resource\file\products\Hyosung_B5%28Flange%29_Outline drawing\Hyosung_B5_90L.Pdf" />
+    <Content Include="wwwroot\assets\sweetalert2\CHANGELOG.md" />
+    <Content Include="wwwroot\assets\sweetalert2\LICENSE" />
+    <Content Include="wwwroot\assets\sweetalert2\package.json" />
+    <Content Include="wwwroot\assets\sweetalert2\README.md" />
+    <Content Include="wwwroot\assets\sweetalert2\src\animations.scss" />
+    <Content Include="wwwroot\assets\sweetalert2\src\mixins.scss" />
+    <Content Include="wwwroot\assets\sweetalert2\src\sweetalert2.scss" />
+    <Content Include="wwwroot\assets\sweetalert2\src\toasts.scss" />
+    <Content Include="wwwroot\assets\sweetalert2\src\variables.scss" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5824,6 +6111,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -5837,11 +6125,15 @@
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.18.6\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\assets\sweetalert2\sweetalert2.d.ts" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

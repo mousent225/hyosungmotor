@@ -51,10 +51,32 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="30" />
           <Property Name="Email" Type="nvarchar" MaxLength="200" />
           <Property Name="Address" Type="nvarchar" MaxLength="300" />
-          <Property Name="AddressURL" Type="varchar" MaxLength="200" />
+          <Property Name="AddressURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="Seq" Type="int" />
+          <Property Name="UserCreated" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserModified" Type="varchar" MaxLength="20" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PublishStatus" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="UserDeleted" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Inquiries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Message" Type="ntext" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Languages">
           <Key>
@@ -269,10 +291,10 @@
           <Property Name="hz" Type="varchar" MaxLength="50" />
           <Property Name="Frame" Type="varchar" MaxLength="50" />
           <Property Name="Efficiency" Type="int" />
-          <Property Name="DataSheet1" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DataSheet2" Type="varchar" MaxLength="50" />
-          <Property Name="Outline1" Type="varchar" MaxLength="50" />
-          <Property Name="OutLine2" Type="varchar" MaxLength="50" />
+          <Property Name="DataSheet1" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DataSheet2" Type="nvarchar" MaxLength="200" />
+          <Property Name="Outline1" Type="nvarchar" MaxLength="200" />
+          <Property Name="OutLine2" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_BannerTranslations_Banners">
           <End Role="Banners" Type="Self.Banners" Multiplicity="1" />
@@ -474,8 +496,49 @@
           <Parameter Name="subHeadingVi" Type="nvarchar" Mode="In" />
           <Parameter Name="descriptionVi" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SP_CONTACT_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="totalRow" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SP_CONTACT_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="addressUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="publishStatus" Type="int" Mode="In" />
+          <Parameter Name="seq" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_CONTACT_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="addressUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="userCreated" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="publishStatus" Type="int" Mode="In" />
+          <Parameter Name="seq" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_GETMENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_INQUIRIES_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="totalRow" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SP_INQUIRIES_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="message" Type="ntext" Mode="In" />
         </Function>
         <Function Name="SP_POST_GETALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pageIndex" Type="int" Mode="In" />
@@ -567,6 +630,7 @@
           <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BannerTranslations" EntityType="Self.BannerTranslations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inquiries" EntityType="Self.Inquiries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostTranslations" EntityType="Self.PostTranslations" Schema="dbo" store:Type="Tables" />
@@ -711,7 +775,6 @@
           <EntitySet Name="Attachments" EntityType="MotorHomepageModel.Attachments" />
           <EntitySet Name="Banners" EntityType="MotorHomepageModel.Banners" />
           <EntitySet Name="BannerTranslations" EntityType="MotorHomepageModel.BannerTranslations" />
-          <EntitySet Name="Contact" EntityType="MotorHomepageModel.Contact" />
           <EntitySet Name="Languages" EntityType="MotorHomepageModel.Languages" />
           <EntitySet Name="Products" EntityType="MotorHomepageModel.Products" />
           <EntitySet Name="ProductTranslations" EntityType="MotorHomepageModel.ProductTranslations" />
@@ -839,6 +902,49 @@
             <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
             <Parameter Name="languageId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Contact" EntityType="MotorHomepageModel.Contact" />
+          <FunctionImport Name="SP_CONTACT_GETALL" ReturnType="Collection(MotorHomepageModel.SP_CONTACT_GETALL_Result)">
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CONTACT_INSERT">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="addressUrl" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="phoneNumber" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="publishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="seq" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CONTACT_UPDATE">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="addressUrl" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="phoneNumber" Mode="In" Type="String" />
+            <Parameter Name="userCreated" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="publishStatus" Mode="In" Type="Int32" />
+            <Parameter Name="seq" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INQUIRIES_GETALL" ReturnType="Collection(MotorHomepageModel.SP_INQUIRIES_GETALL_Result)">
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INQUIRIES_INSERT">
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="phoneNumber" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="message" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Inquiries" EntityType="MotorHomepageModel.Inquiries" />
           </EntityContainer>
         <ComplexType Name="SP_SYS_USER_LOGIN_Result">
           <Property Type="String" Name="UserId" Nullable="false" MaxLength="20" />
@@ -934,16 +1040,6 @@
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Banners" Relationship="MotorHomepageModel.FK_BannerTranslations_Banners" FromRole="BannerTranslations" ToRole="Banners" />
           <NavigationProperty Name="Languages" Relationship="MotorHomepageModel.FK_BannerTranslations_Languages" FromRole="BannerTranslations" ToRole="Languages" />
-        </EntityType>
-        <EntityType Name="Contact">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="AddressURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Languages">
           <Key>
@@ -1144,10 +1240,10 @@
           <Property Name="hz" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Frame" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Efficiency" Type="Int32" />
-          <Property Name="DataSheet1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DataSheet2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Outline1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OutLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataSheet1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DataSheet2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Outline1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OutLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BannerTranslations_Banners">
           <End Type="MotorHomepageModel.Banners" Role="Banners" Multiplicity="1" />
@@ -1388,6 +1484,61 @@
           <Property Type="String" Name="Outline1" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="OutLine2" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="AddressURL" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Seq" Type="Int32" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserModified" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="PublishStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="UserDeleted" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="SP_CONTACT_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="AddressURL" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserCreated" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserModified" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="PublishStatus" Nullable="false" />
+          <Property Type="Int32" Name="SEQ" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_INQUIRIES_GETALL_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <EntityType Name="Inquiries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1505,17 +1656,6 @@
                 <ScalarProperty Name="Heading" ColumnName="Heading" />
                 <ScalarProperty Name="BannerId" ColumnName="BannerId" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contact">
-            <EntityTypeMapping TypeName="MotorHomepageModel.Contact">
-              <MappingFragment StoreEntitySet="Contact">
-                <ScalarProperty Name="AddressURL" ColumnName="AddressURL" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1814,6 +1954,74 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Contact">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="UserDeleted" ColumnName="UserDeleted" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="AddressURL" ColumnName="AddressURL" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CONTACT_GETALL" FunctionName="MotorHomepageModel.Store.SP_CONTACT_GETALL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_CONTACT_GETALL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AddressURL" ColumnName="AddressURL" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="UserModified" ColumnName="UserModified" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PublishStatus" ColumnName="PublishStatus" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CONTACT_INSERT" FunctionName="MotorHomepageModel.Store.SP_CONTACT_INSERT" />
+          <FunctionImportMapping FunctionImportName="SP_CONTACT_UPDATE" FunctionName="MotorHomepageModel.Store.SP_CONTACT_UPDATE" />
+          <FunctionImportMapping FunctionImportName="SP_INQUIRIES_GETALL" FunctionName="MotorHomepageModel.Store.SP_INQUIRIES_GETALL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MotorHomepageModel.SP_INQUIRIES_GETALL_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_INQUIRIES_INSERT" FunctionName="MotorHomepageModel.Store.SP_INQUIRIES_INSERT" />
+          <EntitySetMapping Name="Inquiries">
+            <EntityTypeMapping TypeName="MotorHomepageModel.Inquiries">
+              <MappingFragment StoreEntitySet="Inquiries">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
